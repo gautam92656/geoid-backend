@@ -1,0 +1,13 @@
+model Faq {
+  id        Int       @id @default(autoincrement())
+  question  String    @db.VarChar(500)
+  answer    String
+  sortOrder Int       @default(0) @map("sort_order")
+  isActive  Boolean   @default(true) @map("is_active")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  @@map("faqs")
+}

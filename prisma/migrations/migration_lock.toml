@@ -1,0 +1,3 @@
+# Please read the docs: https://www.prisma.io/docs/guides/migrate/developing-with-prisma-migrate
+
+provider = "postgresql"

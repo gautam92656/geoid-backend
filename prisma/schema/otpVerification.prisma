@@ -1,0 +1,22 @@
+model OtpVerification {
+  id      Int     @id @default(autoincrement())
+  email   String  @db.VarChar(255)
+  otpCode String  @map("otp_code") @db.VarChar(6)
+  otpType OtpType @map("otp_type")
+  isUsed  Boolean @default(false) @map("is_used")
+
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([email])
+  @@index([otpCode])
+  @@index([expiresAt])
+  @@index([email, otpType, isUsed])
+  @@map("otp_verifications")
+}
+
+enum OtpType {
+  register
+  forgot_password
+}
