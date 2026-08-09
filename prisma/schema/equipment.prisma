@@ -1,0 +1,34 @@
+model Equipment {
+  id                             Int       @id @default(autoincrement())
+  userId                         Int       @map("user_id")
+  equipmentTypeId                Int       @map("equipment_type_id")
+  equipmentNo                    String?   @map("equipment_no") @db.VarChar(100)
+  equipmentName                  String?   @map("equipment_name") @db.VarChar(200)
+  suppliers                      String[]  @default([])
+  mounting                       String?   @db.VarChar(200)
+  driveWeight                    String?   @map("drive_weight") @db.VarChar(100)
+  drop                           String?   @db.VarChar(100)
+  manufacturer                   String?   @db.VarChar(200)
+  model                          String?   @db.VarChar(200)
+  energyTransferRatio            String?   @map("energy_transfer_ratio") @db.VarChar(50)
+  hammerEfficiencyCorrection     String?   @map("hammer_efficiency_correction") @db.VarChar(50)
+  netAreaRatio                   String?   @map("net_area_ratio") @db.VarChar(50)
+  tipArea                        String?   @map("tip_area") @db.VarChar(50)
+  frictionRatio                  String?   @map("friction_ratio") @db.VarChar(50)
+  porePressureTransducerLocation String?   @map("pore_pressure_transducer_location")
+  frictionReducerType            String?   @map("friction_reducer_type") @db.VarChar(200)
+  frictionReducer                String?   @map("friction_reducer") @db.VarChar(200)
+  calibratedBy                   String?   @map("calibrated_by") @db.VarChar(200)
+  dateOfCalibration              DateTime? @map("date_of_calibration") @db.Date
+  bucketWidth                    String?   @map("bucket_width") @db.VarChar(100)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user          User          @relation(fields: [userId], references: [id])
+  equipmentType EquipmentType @relation(fields: [equipmentTypeId], references: [id])
+  logs          Log[]
+
+  @@map("equipment")
+}

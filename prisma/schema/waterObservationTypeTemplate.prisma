@@ -1,0 +1,19 @@
+/// Common Water Observations type catalog defaults.
+/// Users get a per-log-configuration copy in `user_water_observation_types`.
+model WaterObservationTypeTemplate {
+  id           Int     @id @default(autoincrement())
+  moduleSlug   String  @map("module_slug") @db.VarChar(100)
+  optionKey    String  @map("option_key") @db.VarChar(100)
+  name         String  @db.VarChar(200)
+  tablogsAlias String? @map("tablogs_alias") @db.VarChar(100)
+  graphic      String? @db.VarChar(255)
+  depthRequired Boolean @default(true) @map("depth_required")
+  sortOrder    Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "water_obs_type_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "water_obs_type_tpl_module_sort_idx")
+  @@map("water_observation_type_templates")
+}

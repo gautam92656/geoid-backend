@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Soil",
+    "value": "soil",
+    "sortOrder": 1
+  },
+  {
+    "label": "Rock",
+    "value": "rock",
+    "sortOrder": 2
+  },
+  {
+    "label": "Non-Soil",
+    "value": "non-soil",
+    "sortOrder": 3
+  }
+]

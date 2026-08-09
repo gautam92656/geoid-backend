@@ -11,6 +11,9 @@ export function toUserDTO(user: User): UserDTO {
     phoneNumber: user.phoneNumber,
     termsAndConditions: user.termsAndConditions,
     isEmailVerified: user.isEmailVerified,
+    role: user.role,
+    companyName: user.companyName ?? null,
+    companyLogoUrl: user.companyLogoUrl ?? null,
     createdAt: user.createdAt.toISOString(),
     updatedAt: user.updatedAt.toISOString(),
   }

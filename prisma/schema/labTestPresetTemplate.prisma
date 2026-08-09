@@ -1,0 +1,17 @@
+/// Common Lab Test Presets catalog defaults (usually empty — users add their own).
+/// Users get a per-log-configuration copy in `user_lab_test_presets`.
+model LabTestPresetTemplate {
+  id             Int      @id @default(autoincrement())
+  moduleSlug     String   @map("module_slug") @db.VarChar(100)
+  optionKey      String   @map("option_key") @db.VarChar(100)
+  name           String   @db.VarChar(200)
+  labTestTypeIds String[] @default([]) @map("lab_test_type_ids")
+  sortOrder      Int      @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "lab_test_preset_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "lab_test_preset_tpl_module_sort_idx")
+  @@map("lab_test_preset_templates")
+}

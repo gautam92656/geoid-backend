@@ -12,6 +12,7 @@ import {
   changePasswordSchema,
   signUpSchema,
   verifyOtpSchema,
+  updateProfileSchema,
 } from "./auth.validation"
 
 export async function signUp(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -92,5 +93,17 @@ export async function changePassword(req: Request, res: Response, next: NextFunc
 
   const userId = (req as AuthedRequest).user!.sub
   const result = await authService.changePassword(userId, value, res.locals.lang)
+  successResponse(res, result, result.message, HTTP_STATUS.OK)
+}
+
+export async function updateProfile(req: Request, res: Response, next: NextFunction): Promise<void> {
+  const { error, value } = updateProfileSchema.validate(req.body, { abortEarly: false })
+  if (error) {
+    next(new ValidationError(error.details.map((d) => d.message).join("; ")))
+    return
+  }
+
+  const userId = (req as AuthedRequest).user!.sub
+  const result = await authService.updateProfile(userId, value, res.locals.lang)
   successResponse(res, result, result.message, HTTP_STATUS.OK)
 }

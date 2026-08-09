@@ -2,6 +2,7 @@ import Joi from "joi"
 import {
   USER_NAME_MAX_LENGTH,
   USER_EMAIL_MAX_LENGTH,
+  USER_COMPANY_LOGO_URL_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
   OTP_CODE_LENGTH,
 } from "../../../../shared/constants"
@@ -116,3 +117,12 @@ export const changePasswordSchema = Joi.object({
     "any.required": "Confirm password is required",
   }),
 })
+
+export const updateProfileSchema = Joi.object({
+  companyLogoUrl: Joi.string()
+    .trim()
+    .max(USER_COMPANY_LOGO_URL_MAX_LENGTH)
+    .allow("", null)
+    .optional(),
+  companyName: Joi.string().trim().max(USER_NAME_MAX_LENGTH).allow("", null).optional(),
+}).min(1)

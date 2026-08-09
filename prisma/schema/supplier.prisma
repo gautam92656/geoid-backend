@@ -1,0 +1,46 @@
+enum SupplierStatus {
+  active
+  inactive
+
+  @@map("supplier_status")
+}
+
+enum SupplierType {
+  Laboratory
+  Equipment
+
+  @@map("supplier_type")
+}
+
+enum SupplierRelationship {
+  InternalSupplier @map("Internal supplier")
+  ExternalSupplier @map("External supplier")
+
+  @@map("supplier_relationship")
+}
+
+model Supplier {
+  id                   Int                   @id @default(autoincrement())
+  userId               Int                   @map("user_id")
+  businessName         String                @map("business_name") @db.VarChar(200)
+  supplierType         SupplierType          @map("supplier_type")
+  supplierRelationship SupplierRelationship? @map("supplier_relationship")
+  supplierExternalId   String?               @map("supplier_external_id") @db.VarChar(100)
+  labTestTypes         String[]              @default([]) @map("lab_test_types")
+  firstName            String?               @map("first_name") @db.VarChar(50)
+  lastName             String?               @map("last_name") @db.VarChar(50)
+  address              String?
+  email                String?               @db.VarChar(255)
+  phone                String?               @db.VarChar(20)
+  abn                  String?               @db.VarChar(20)
+  status               SupplierStatus        @default(active)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id])
+  logs Log[]
+
+  @@map("suppliers")
+}

@@ -1,0 +1,19 @@
+/// Common Core Logging defect-type catalog defaults.
+/// Users get a per-log-configuration copy in `user_core_defect_types`.
+model CoreDefectTypeTemplate {
+  id                  Int     @id @default(autoincrement())
+  moduleSlug          String  @map("module_slug") @db.VarChar(100)
+  optionKey           String  @map("option_key") @db.VarChar(100)
+  name                String  @db.VarChar(200)
+  code                String? @db.VarChar(100)
+  graphic             String? @db.VarChar(255)
+  defaultSampleTypeId String? @map("default_sample_type_id") @db.VarChar(100)
+  sortOrder           Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "core_defect_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "core_defect_tpl_module_sort_idx")
+  @@map("core_defect_type_templates")
+}

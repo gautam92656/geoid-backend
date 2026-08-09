@@ -1,0 +1,62 @@
+[
+  {
+    "id": "auger",
+    "name": "Auger",
+    "tablogsAlias": "auger",
+    "logKind": "bore",
+    "graphic": "graphic01.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  },
+  {
+    "id": "washbore",
+    "name": "Washbore",
+    "tablogsAlias": "washbore",
+    "logKind": "bore",
+    "graphic": "graphic02.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  },
+  {
+    "id": "coring",
+    "name": "Coring",
+    "tablogsAlias": "coring",
+    "logKind": "core",
+    "graphic": "graphic03.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  },
+  {
+    "id": "nmlc",
+    "name": "NMLC Coring",
+    "tablogsAlias": "nmlc-coring",
+    "logKind": "core",
+    "graphic": "graphic04.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  },
+  {
+    "id": "hq",
+    "name": "HQ Coring",
+    "tablogsAlias": "hq-coring",
+    "logKind": "core",
+    "graphic": "graphic05.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  },
+  {
+    "id": "direct-push",
+    "name": "Direct Push",
+    "tablogsAlias": "direct-push",
+    "logKind": "bore",
+    "graphic": "graphic06.jpg",
+    "enableRecoveryField": false,
+    "enableWindowedWindowless": false,
+    "waterAdded": false
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "joint",
+    "name": "Joint",
+    "code": "J",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "core-loss",
+    "name": "Core Loss",
+    "code": "CL",
+    "graphic": "coreloss.png",
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "sheared-zone",
+    "name": "Sheared Zone",
+    "code": "SZ",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "sheared-seam",
+    "name": "Sheared Seam",
+    "code": "SS",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "crushed-seam",
+    "name": "Crushed Seam",
+    "code": "CS",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "infilled-seam",
+    "name": "Infilled Seam",
+    "code": "IS",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "ex-weathered-seam",
+    "name": "EX Weathered Seam",
+    "code": "EWS",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "parting",
+    "name": "Parting",
+    "code": "P",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "joint-set",
+    "name": "Joint set",
+    "code": "JS",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  },
+  {
+    "id": "sheared",
+    "name": "Sheared",
+    "code": "SH",
+    "graphic": null,
+    "defaultSampleTypeId": null
+  }
+]

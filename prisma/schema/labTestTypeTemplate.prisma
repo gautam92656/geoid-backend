@@ -1,0 +1,22 @@
+/// Common Lab Test Types catalog defaults.
+/// Users get a per-log-configuration copy in `user_lab_test_types`.
+model LabTestTypeTemplate {
+  id                   Int     @id @default(autoincrement())
+  moduleSlug           String  @map("module_slug") @db.VarChar(100)
+  optionKey            String  @map("option_key") @db.VarChar(100)
+  name                 String  @db.VarChar(200)
+  graphic              String? @db.VarChar(255)
+  externalAlias        String? @map("external_alias") @db.VarChar(200)
+  aliasTable           String? @map("alias_table") @db.VarChar(200)
+  addAsSelectedDataPlot Boolean @default(false) @map("add_as_selected_data_plot")
+  active               Boolean @default(true)
+  labTestResultFields  Json    @default("[]") @map("lab_test_result_fields")
+  sortOrder            Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "lab_test_type_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "lab_test_type_tpl_module_sort_idx")
+  @@map("lab_test_type_templates")
+}

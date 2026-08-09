@@ -1,0 +1,15 @@
+/// Common Insitu unit-setting catalog defaults.
+model InsituUnitSettingTemplate {
+  id         Int    @id @default(autoincrement())
+  moduleSlug String @map("module_slug") @db.VarChar(100)
+  optionKey  String @map("option_key") @db.VarChar(100)
+  name       String @db.VarChar(200)
+  sortOrder  Int    @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "insitu_unit_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "insitu_unit_tpl_module_sort_idx")
+  @@map("insitu_unit_setting_templates")
+}

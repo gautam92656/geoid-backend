@@ -1,0 +1,35 @@
+enum EquipmentTypeStatus {
+  active
+  inactive
+
+  @@map("equipment_type_status")
+}
+
+model EquipmentFieldDefinition {
+  id        Int    @id @default(autoincrement())
+  key       String @unique @db.VarChar(50)
+  label     String @db.VarChar(100)
+  sortOrder Int    @default(0) @map("sort_order")
+
+  @@map("equipment_field_definitions")
+}
+
+model EquipmentType {
+  id          Int                 @id @default(autoincrement())
+  userId      Int                 @map("user_id")
+  name        String              @db.VarChar(100)
+  description String              @default("")
+  status      EquipmentTypeStatus @default(active)
+  isDefault   Boolean             @default(false) @map("is_default")
+  fieldConfig Json                @map("field_config")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user      User        @relation(fields: [userId], references: [id])
+  equipment Equipment[]
+
+  @@unique([userId, name])
+  @@map("equipment_types")
+}

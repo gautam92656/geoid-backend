@@ -1,0 +1,29 @@
+/// Common Insitu testing-type catalog defaults (SPT, CPT, …).
+/// Users get a per-log-configuration copy in `user_insitu_test_types`.
+model InsituTestTypeTemplate {
+  id                         Int      @id @default(autoincrement())
+  moduleSlug                 String   @map("module_slug") @db.VarChar(100)
+  optionKey                  String   @map("option_key") @db.VarChar(100)
+  name                       String   @db.VarChar(200)
+  active                     Boolean  @default(true)
+  graphic                    String?  @db.VarChar(255)
+  enableSegregatedGraphic    Boolean  @default(false) @map("enable_segregated_graphic")
+  topGraphic                 String?  @map("top_graphic") @db.VarChar(255)
+  bottomGraphic              String?  @map("bottom_graphic") @db.VarChar(255)
+  depthFrequencyEnabled      Boolean  @default(false) @map("depth_frequency_enabled")
+  depthFrequency             String?  @map("depth_frequency") @db.VarChar(100)
+  enableSampleLogging        Boolean  @default(false) @map("enable_sample_logging")
+  enableSubsurfaceLogging    Boolean  @default(false) @map("enable_subsurface_logging")
+  defaultSampleTypeId        String?  @map("default_sample_type_id") @db.VarChar(100)
+  enableAutoSampleDescription Boolean @default(false) @map("enable_auto_sample_description")
+  /// Tablogs-aligned test settings (intervals, other toggles, unit fields).
+  settings                   Json     @default("{}")
+  sortOrder                  Int      @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "insitu_type_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "insitu_type_tpl_module_sort_idx")
+  @@map("insitu_test_type_templates")
+}

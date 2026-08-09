@@ -1,0 +1,42 @@
+[
+  {
+    "id": "spt-sample",
+    "name": "SPT Sample",
+    "graphic": "graphic_03.png"
+  },
+  {
+    "id": "bulk-disturbed",
+    "name": "Bulk Disturbed",
+    "graphic": "graphic_02.png"
+  },
+  {
+    "id": "grab-sample",
+    "name": "Grab Sample",
+    "graphic": "graphic_02.png"
+  },
+  {
+    "id": "soil-sample",
+    "name": "Soil Sample",
+    "graphic": "graphic_00.png"
+  },
+  {
+    "id": "u50",
+    "name": "U50",
+    "graphic": "graphic_08.png"
+  },
+  {
+    "id": "u75",
+    "name": "U75",
+    "graphic": "graphic_08.png"
+  },
+  {
+    "id": "acid-sulfate",
+    "name": "Acid Sulfate",
+    "graphic": "graphic_01.png"
+  },
+  {
+    "id": "mod-cal-sample",
+    "name": "Mod Cal Sample",
+    "graphic": "graphic_05.png"
+  }
+]

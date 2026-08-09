@@ -1,0 +1,92 @@
+[
+  {
+    "id": "pale-brown",
+    "name": "pale brown",
+    "color": "#cea475",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "white",
+    "name": "white",
+    "color": "#ffffff",
+    "textColor": "#000000"
+  },
+  {
+    "id": "pale-grey",
+    "name": "pale grey",
+    "color": "#d3d3d3",
+    "textColor": "#000000"
+  },
+  {
+    "id": "brown-to-orange-brown",
+    "name": "brown to orange brown",
+    "color": "#c46a2b",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "brown-to-dark-brown",
+    "name": "brown to dark brown",
+    "color": "#5d4037",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "brown-grey",
+    "name": "brown-grey",
+    "color": "#8d7b6a",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "brown",
+    "name": "Brown",
+    "color": "#795548",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "yellow",
+    "name": "Yellow",
+    "color": "#ffeb3b",
+    "textColor": "#000000"
+  },
+  {
+    "id": "orange",
+    "name": "Orange",
+    "color": "#ff9800",
+    "textColor": "#000000"
+  },
+  {
+    "id": "grey",
+    "name": "Grey",
+    "color": "#7f7f7f",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "black",
+    "name": "Black",
+    "color": "#000000",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "red",
+    "name": "Red",
+    "color": "#f44336",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "grey-brown",
+    "name": "Grey-Brown",
+    "color": "#6d5c4d",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "dark-brown",
+    "name": "dark brown",
+    "color": "#3e2723",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": "to",
+    "name": "to",
+    "color": "#9e9e9e",
+    "textColor": "#000000"
+  }
+]

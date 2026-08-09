@@ -1,0 +1,26 @@
+enum ClientStatus {
+  active
+  inactive
+
+  @@map("client_status")
+}
+
+model Client {
+  id             Int          @id @default(autoincrement())
+  userId         Int          @map("user_id")
+  companyName    String       @map("company_name") @db.VarChar(200)
+  companyContact String?      @map("company_contact") @db.VarChar(200)
+  email          String?      @db.VarChar(255)
+  phone          String?      @db.VarChar(20)
+  externalId     String?      @map("external_id") @db.VarChar(100)
+  status         ClientStatus @default(active)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user     User      @relation(fields: [userId], references: [id])
+  projects Project[]
+
+  @@map("clients")
+}

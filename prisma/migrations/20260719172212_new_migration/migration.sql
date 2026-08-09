@@ -1,0 +1,3 @@
+-- No-op: this migration originally altered log_configuration_field_options before the table
+-- existed (wrong timestamp order). Those changes are applied in
+-- 20260719200000_add_log_configuration_field_options for fresh databases.

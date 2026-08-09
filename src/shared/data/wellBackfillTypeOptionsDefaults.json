@@ -1,0 +1,38 @@
+[
+  {
+    "id": "blank",
+    "name": "Blank",
+    "tablogsAlias": null,
+    "graphic": "01.png"
+  },
+  {
+    "id": "backfill",
+    "name": "Backfill",
+    "tablogsAlias": null,
+    "graphic": "10.png"
+  },
+  {
+    "id": "bentonite",
+    "name": "Bentonite",
+    "tablogsAlias": null,
+    "graphic": "21.png"
+  },
+  {
+    "id": "filter-pack",
+    "name": "Filter Pack",
+    "tablogsAlias": null,
+    "graphic": "31.png"
+  },
+  {
+    "id": "concrete-cement",
+    "name": "Concrete Cement",
+    "tablogsAlias": null,
+    "graphic": "41.png"
+  },
+  {
+    "id": "concrete-cement-grout",
+    "name": "Concrete Cement Grout",
+    "tablogsAlias": null,
+    "graphic": "42.png"
+  }
+]

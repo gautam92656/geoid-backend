@@ -1,0 +1,33 @@
+/// Per-configuration module customizations (adopted from common templates or fully custom).
+/// Common templates live in `modules` and are shared by all users.
+/// Each user log configuration owns its own module copies — Environmental ≠ Rev2.
+model UserModule {
+  id                 Int     @id @default(autoincrement())
+  userId             Int     @map("user_id")
+  logConfigurationId Int     @map("log_configuration_id")
+  /// Common template slug this customization is based on.
+  sourceSlug         String? @map("source_slug") @db.VarChar(100)
+  slug               String  @db.VarChar(100)
+  title              String  @db.VarChar(200)
+  description        String
+  tags               Json    @default("[]")
+  filterCategories   String[] @map("filter_categories")
+  /// Configuration-scoped StoredModuleSettings JSON.
+  settings           Json?
+  isAvailable        Boolean @default(true) @map("is_available")
+  sortOrder          Int     @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, slug], map: "user_modules_config_slug_key")
+  /// Multiple NULLs allowed for fully custom modules (PostgreSQL UNIQUE semantics).
+  @@unique([logConfigurationId, sourceSlug], map: "user_modules_config_source_key")
+  @@index([userId, logConfigurationId], map: "user_modules_user_config_idx")
+  @@index([logConfigurationId, isAvailable, sortOrder], map: "user_modules_config_avail_idx")
+  @@map("user_modules")
+}

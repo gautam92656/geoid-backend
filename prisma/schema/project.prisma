@@ -1,0 +1,67 @@
+enum ProjectStatus {
+  draft
+  to_do
+  in_planning
+  scheduled
+  onsite_works
+  onsite_works_completed
+  lab_testing
+  reporting
+  complete
+  in_progress
+  completed
+
+  @@map("project_status")
+}
+
+model Project {
+  id               Int           @id @default(autoincrement())
+  userId           Int           @map("user_id")
+  projectNo        String        @map("project_no") @db.VarChar(50)
+  name             String        @db.VarChar(200)
+  address          String?       @db.VarChar(500)
+  status           ProjectStatus @default(to_do)
+  brief            String?
+  assignee         String?       @db.VarChar(100)
+  logConfigId      String?       @map("log_config_id") @db.VarChar(100)
+  clientId         Int?          @map("client_id")
+  office           String?       @db.VarChar(200)
+  startDate        DateTime?     @map("start_date") @db.Date
+  endDate          DateTime?     @map("end_date") @db.Date
+  coordinateSystem String?       @map("coordinate_system") @db.VarChar(100)
+  latitude         String?       @db.VarChar(50)
+  longitude        String?       @db.VarChar(50)
+  easting          String?       @db.VarChar(50)
+  northing         String?       @db.VarChar(50)
+  utmZone          String?       @map("utm_zone") @db.VarChar(50)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  archivedAt DateTime? @map("archived_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user          User                   @relation(fields: [userId], references: [id])
+  client        Client?                @relation(fields: [clientId], references: [id])
+  logs          Log[]
+  subsurfaceLayers LogSubsurfaceLayer[]
+  insituTests      LogInsituTest[]
+  remarks          LogRemark[]
+  statusHistory ProjectStatusHistory[]
+
+  @@unique([userId, projectNo])
+  @@map("projects")
+}
+
+model ProjectStatusHistory {
+  id        Int           @id @default(autoincrement())
+  projectId Int           @map("project_id")
+  userId    Int           @map("user_id")
+  status    ProjectStatus
+  createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@index([projectId, createdAt])
+  @@map("project_status_history")
+}

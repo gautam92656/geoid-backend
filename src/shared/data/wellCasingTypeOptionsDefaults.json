@@ -1,0 +1,18 @@
+[
+  {
+    "id": "surface-casing",
+    "name": "Surface Casing",
+    "tablogsAlias": "Surface Casing",
+    "type": "surface",
+    "graphic": "graphic_02.png",
+    "allowNegativeDepth": false
+  },
+  {
+    "id": "regular-casing",
+    "name": "Regular Casing",
+    "tablogsAlias": "Regular Casing",
+    "type": "regular",
+    "graphic": "graphic_01.png",
+    "allowNegativeDepth": false
+  }
+]

@@ -12,5 +12,6 @@ router.post("/resend-otp", asyncHandler(authController.resendOtp))
 router.post("/forgot-password", asyncHandler(authController.forgotPassword))
 router.post("/reset-password", asyncHandler(authController.resetPassword))
 router.post("/change-password", requireAuth, asyncHandler(authController.changePassword))
+router.patch("/profile", requireAuth, asyncHandler(authController.updateProfile))
 
 export default router

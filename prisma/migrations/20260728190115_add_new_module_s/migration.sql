@@ -1,0 +1,4 @@
+-- Intentionally empty.
+-- Index renames that previously lived here ran before the indexes were created
+-- (see 20260728200000 / 20260728210000). Those migrations now create indexes
+-- with the final Prisma names, so no rename step is needed.

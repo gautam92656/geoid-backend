@@ -1,0 +1,23 @@
+/// Per-configuration customized workflow + classification codes for a module template.
+model UserWorkflow {
+  id                         Int     @id @default(autoincrement())
+  userId                     Int     @map("user_id")
+  logConfigurationId         Int     @map("log_configuration_id")
+  moduleSlug                 String  @map("module_slug") @db.VarChar(100)
+  name                       String  @db.VarChar(200)
+  enabled                    Boolean @default(true)
+  applyClassificationRules   Boolean @default(true) @map("apply_classification_rules")
+  ignoreParentLegacySettings Boolean @default(true) @map("ignore_parent_legacy_settings")
+  steps                      Json    @default("[]")
+  classificationCodes        Json    @default("[]") @map("classification_codes")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, moduleSlug], map: "user_workflows_config_module_key")
+  @@index([userId, logConfigurationId, moduleSlug], map: "user_workflows_user_config_module_idx")
+  @@map("user_workflows")
+}

@@ -1,0 +1,765 @@
+import { Router } from "express"
+import { asyncHandler } from "../../../shared/utils/helper"
+import { requireAuth } from "../../../shared/middleware/auth.middleware"
+import * as configModuleController from "./config-module.controller"
+import * as coreLoggingController from "./config-module.coreLogging.controller"
+import * as logRemarksController from "./config-module.logRemarks.controller"
+import * as drillingObservationsController from "./config-module.drillingObservations.controller"
+import * as waterObservationsController from "./config-module.waterObservations.controller"
+import * as wellLogsController from "./config-module.wellLogs.controller"
+import * as samplesController from "./config-module.samples.controller"
+import * as labTestsController from "./config-module.labTests.controller"
+
+const router = Router()
+
+router.use(requireAuth)
+
+router.get("/", asyncHandler(configModuleController.list))
+router.post("/", asyncHandler(configModuleController.create))
+router.post("/adopt", asyncHandler(configModuleController.adopt))
+router.post("/unadopt", asyncHandler(configModuleController.unadopt))
+router.put("/mine/settings", asyncHandler(configModuleController.syncSettings))
+router.get(
+  "/workflow-templates/:moduleSlug",
+  asyncHandler(configModuleController.getWorkflowTemplate)
+)
+router.get(
+  "/mine/workflow/:moduleSlug",
+  asyncHandler(configModuleController.getUserWorkflow)
+)
+router.put(
+  "/mine/workflow/:moduleSlug",
+  asyncHandler(configModuleController.saveUserWorkflow)
+)
+router.post(
+  "/mine/workflow/:moduleSlug/reset",
+  asyncHandler(configModuleController.resetUserWorkflow)
+)
+router.get(
+  "/origin-option-templates/:moduleSlug",
+  asyncHandler(configModuleController.getOriginOptionTemplates)
+)
+router.get(
+  "/mine/origin-options/:moduleSlug",
+  asyncHandler(configModuleController.getUserOriginOptions)
+)
+router.put(
+  "/mine/origin-options/:moduleSlug",
+  asyncHandler(configModuleController.saveUserOriginOptions)
+)
+router.post(
+  "/mine/origin-options/:moduleSlug",
+  asyncHandler(configModuleController.createUserOriginOption)
+)
+router.post(
+  "/mine/origin-options/:moduleSlug/reset",
+  asyncHandler(configModuleController.resetUserOriginOptions)
+)
+router.patch(
+  "/mine/origin-options/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.updateUserOriginOption)
+)
+router.delete(
+  "/mine/origin-options/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.deleteUserOriginOption)
+)
+router.get(
+  "/insitu-test-type-templates/:moduleSlug",
+  asyncHandler(configModuleController.getInsituTestTypeTemplates)
+)
+router.get(
+  "/mine/insitu-test-types/:moduleSlug",
+  asyncHandler(configModuleController.getUserInsituTestTypes)
+)
+router.put(
+  "/mine/insitu-test-types/:moduleSlug",
+  asyncHandler(configModuleController.saveUserInsituTestTypes)
+)
+router.post(
+  "/mine/insitu-test-types/:moduleSlug",
+  asyncHandler(configModuleController.createUserInsituTestType)
+)
+router.post(
+  "/mine/insitu-test-types/:moduleSlug/reset",
+  asyncHandler(configModuleController.resetUserInsituTestTypes)
+)
+router.patch(
+  "/mine/insitu-test-types/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.updateUserInsituTestType)
+)
+router.delete(
+  "/mine/insitu-test-types/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.deleteUserInsituTestType)
+)
+router.get(
+  "/insitu-unit-setting-templates/:moduleSlug",
+  asyncHandler(configModuleController.getInsituUnitSettingTemplates)
+)
+router.get(
+  "/mine/insitu-unit-settings/:moduleSlug",
+  asyncHandler(configModuleController.getUserInsituUnitSettings)
+)
+router.put(
+  "/mine/insitu-unit-settings/:moduleSlug",
+  asyncHandler(configModuleController.saveUserInsituUnitSettings)
+)
+router.post(
+  "/mine/insitu-unit-settings/:moduleSlug",
+  asyncHandler(configModuleController.createUserInsituUnitSetting)
+)
+router.post(
+  "/mine/insitu-unit-settings/:moduleSlug/reset",
+  asyncHandler(configModuleController.resetUserInsituUnitSettings)
+)
+router.patch(
+  "/mine/insitu-unit-settings/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.updateUserInsituUnitSetting)
+)
+router.delete(
+  "/mine/insitu-unit-settings/:moduleSlug/:optionKey",
+  asyncHandler(configModuleController.deleteUserInsituUnitSetting)
+)
+
+// Core Logging dedicated collections
+router.get(
+  "/core-defect-type-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getCoreDefectTypeTemplates)
+)
+router.get(
+  "/mine/core-defect-types/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserCoreDefectTypes)
+)
+router.put(
+  "/mine/core-defect-types/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserCoreDefectTypes)
+)
+router.post(
+  "/mine/core-defect-types/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserCoreDefectType)
+)
+router.post(
+  "/mine/core-defect-types/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserCoreDefectTypes)
+)
+router.patch(
+  "/mine/core-defect-types/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserCoreDefectType)
+)
+router.delete(
+  "/mine/core-defect-types/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserCoreDefectType)
+)
+
+router.get(
+  "/aperture-color-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getApertureColorTemplates)
+)
+router.get(
+  "/mine/aperture-colors/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserApertureColors)
+)
+router.put(
+  "/mine/aperture-colors/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserApertureColors)
+)
+router.post(
+  "/mine/aperture-colors/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserApertureColor)
+)
+router.post(
+  "/mine/aperture-colors/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserApertureColors)
+)
+router.patch(
+  "/mine/aperture-colors/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserApertureColor)
+)
+router.delete(
+  "/mine/aperture-colors/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserApertureColor)
+)
+
+router.get(
+  "/aperture-mineral-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getApertureMineralTemplates)
+)
+router.get(
+  "/mine/aperture-minerals/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserApertureMinerals)
+)
+router.put(
+  "/mine/aperture-minerals/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserApertureMinerals)
+)
+router.post(
+  "/mine/aperture-minerals/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserApertureMineral)
+)
+router.post(
+  "/mine/aperture-minerals/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserApertureMinerals)
+)
+router.patch(
+  "/mine/aperture-minerals/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserApertureMineral)
+)
+router.delete(
+  "/mine/aperture-minerals/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserApertureMineral)
+)
+
+router.get(
+  "/infill-material-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getInfillMaterialTemplates)
+)
+router.get(
+  "/mine/infill-materials/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserInfillMaterials)
+)
+router.put(
+  "/mine/infill-materials/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserInfillMaterials)
+)
+router.post(
+  "/mine/infill-materials/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserInfillMaterial)
+)
+router.post(
+  "/mine/infill-materials/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserInfillMaterials)
+)
+router.patch(
+  "/mine/infill-materials/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserInfillMaterial)
+)
+router.delete(
+  "/mine/infill-materials/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserInfillMaterial)
+)
+
+router.get(
+  "/remark-type-templates/:moduleSlug",
+  asyncHandler(logRemarksController.getRemarkTypeTemplates)
+)
+router.get(
+  "/mine/remark-types/:moduleSlug",
+  asyncHandler(logRemarksController.getUserRemarkTypes)
+)
+router.put(
+  "/mine/remark-types/:moduleSlug",
+  asyncHandler(logRemarksController.saveUserRemarkTypes)
+)
+router.post(
+  "/mine/remark-types/:moduleSlug",
+  asyncHandler(logRemarksController.createUserRemarkType)
+)
+router.post(
+  "/mine/remark-types/:moduleSlug/reset",
+  asyncHandler(logRemarksController.resetUserRemarkTypes)
+)
+router.patch(
+  "/mine/remark-types/:moduleSlug/:optionKey",
+  asyncHandler(logRemarksController.updateUserRemarkType)
+)
+router.delete(
+  "/mine/remark-types/:moduleSlug/:optionKey",
+  asyncHandler(logRemarksController.deleteUserRemarkType)
+)
+
+router.get(
+  "/remarks-quick-note-templates/:moduleSlug",
+  asyncHandler(logRemarksController.getRemarksQuickNoteTemplates)
+)
+router.get(
+  "/mine/remarks-quick-notes/:moduleSlug",
+  asyncHandler(logRemarksController.getUserRemarksQuickNotes)
+)
+router.put(
+  "/mine/remarks-quick-notes/:moduleSlug",
+  asyncHandler(logRemarksController.saveUserRemarksQuickNotes)
+)
+router.post(
+  "/mine/remarks-quick-notes/:moduleSlug",
+  asyncHandler(logRemarksController.createUserRemarksQuickNote)
+)
+router.post(
+  "/mine/remarks-quick-notes/:moduleSlug/reset",
+  asyncHandler(logRemarksController.resetUserRemarksQuickNotes)
+)
+router.patch(
+  "/mine/remarks-quick-notes/:moduleSlug/:optionKey",
+  asyncHandler(logRemarksController.updateUserRemarksQuickNote)
+)
+router.delete(
+  "/mine/remarks-quick-notes/:moduleSlug/:optionKey",
+  asyncHandler(logRemarksController.deleteUserRemarksQuickNote)
+)
+
+router.get(
+  "/drilling-type-templates/:moduleSlug",
+  asyncHandler(drillingObservationsController.getDrillingTypeTemplates)
+)
+router.get(
+  "/mine/drilling-types/:moduleSlug",
+  asyncHandler(drillingObservationsController.getUserDrillingTypes)
+)
+router.put(
+  "/mine/drilling-types/:moduleSlug",
+  asyncHandler(drillingObservationsController.saveUserDrillingTypes)
+)
+router.post(
+  "/mine/drilling-types/:moduleSlug",
+  asyncHandler(drillingObservationsController.createUserDrillingType)
+)
+router.post(
+  "/mine/drilling-types/:moduleSlug/reset",
+  asyncHandler(drillingObservationsController.resetUserDrillingTypes)
+)
+router.patch(
+  "/mine/drilling-types/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.updateUserDrillingType)
+)
+router.delete(
+  "/mine/drilling-types/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.deleteUserDrillingType)
+)
+
+router.get(
+  "/drilling-resistance-templates/:moduleSlug",
+  asyncHandler(drillingObservationsController.getDrillingResistanceTemplates)
+)
+router.get(
+  "/mine/drilling-resistances/:moduleSlug",
+  asyncHandler(drillingObservationsController.getUserDrillingResistances)
+)
+router.put(
+  "/mine/drilling-resistances/:moduleSlug",
+  asyncHandler(drillingObservationsController.saveUserDrillingResistances)
+)
+router.post(
+  "/mine/drilling-resistances/:moduleSlug",
+  asyncHandler(drillingObservationsController.createUserDrillingResistance)
+)
+router.post(
+  "/mine/drilling-resistances/:moduleSlug/reset",
+  asyncHandler(drillingObservationsController.resetUserDrillingResistances)
+)
+router.patch(
+  "/mine/drilling-resistances/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.updateUserDrillingResistance)
+)
+router.delete(
+  "/mine/drilling-resistances/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.deleteUserDrillingResistance)
+)
+
+router.get(
+  "/drilling-observation-templates/:moduleSlug",
+  asyncHandler(drillingObservationsController.getDrillingObservationTemplates)
+)
+router.get(
+  "/mine/drilling-observations/:moduleSlug",
+  asyncHandler(drillingObservationsController.getUserDrillingObservations)
+)
+router.put(
+  "/mine/drilling-observations/:moduleSlug",
+  asyncHandler(drillingObservationsController.saveUserDrillingObservations)
+)
+router.post(
+  "/mine/drilling-observations/:moduleSlug",
+  asyncHandler(drillingObservationsController.createUserDrillingObservation)
+)
+router.post(
+  "/mine/drilling-observations/:moduleSlug/reset",
+  asyncHandler(drillingObservationsController.resetUserDrillingObservations)
+)
+router.patch(
+  "/mine/drilling-observations/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.updateUserDrillingObservation)
+)
+router.delete(
+  "/mine/drilling-observations/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.deleteUserDrillingObservation)
+)
+
+router.get(
+  "/drilling-casing-templates/:moduleSlug",
+  asyncHandler(drillingObservationsController.getDrillingCasingTemplates)
+)
+router.get(
+  "/mine/drilling-casings/:moduleSlug",
+  asyncHandler(drillingObservationsController.getUserDrillingCasings)
+)
+router.put(
+  "/mine/drilling-casings/:moduleSlug",
+  asyncHandler(drillingObservationsController.saveUserDrillingCasings)
+)
+router.post(
+  "/mine/drilling-casings/:moduleSlug",
+  asyncHandler(drillingObservationsController.createUserDrillingCasing)
+)
+router.post(
+  "/mine/drilling-casings/:moduleSlug/reset",
+  asyncHandler(drillingObservationsController.resetUserDrillingCasings)
+)
+router.patch(
+  "/mine/drilling-casings/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.updateUserDrillingCasing)
+)
+router.delete(
+  "/mine/drilling-casings/:moduleSlug/:optionKey",
+  asyncHandler(drillingObservationsController.deleteUserDrillingCasing)
+)
+
+router.get(
+  "/water-observation-type-templates/:moduleSlug",
+  asyncHandler(waterObservationsController.getWaterObservationTypeTemplates)
+)
+router.get(
+  "/mine/water-observation-types/:moduleSlug",
+  asyncHandler(waterObservationsController.getUserWaterObservationTypes)
+)
+router.put(
+  "/mine/water-observation-types/:moduleSlug",
+  asyncHandler(waterObservationsController.saveUserWaterObservationTypes)
+)
+router.post(
+  "/mine/water-observation-types/:moduleSlug",
+  asyncHandler(waterObservationsController.createUserWaterObservationType)
+)
+router.post(
+  "/mine/water-observation-types/:moduleSlug/reset",
+  asyncHandler(waterObservationsController.resetUserWaterObservationTypes)
+)
+router.patch(
+  "/mine/water-observation-types/:moduleSlug/:optionKey",
+  asyncHandler(waterObservationsController.updateUserWaterObservationType)
+)
+router.delete(
+  "/mine/water-observation-types/:moduleSlug/:optionKey",
+  asyncHandler(waterObservationsController.deleteUserWaterObservationType)
+)
+
+router.get(
+  "/well-type-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellTypeTemplates)
+)
+router.get(
+  "/mine/well-types/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellTypes)
+)
+router.put(
+  "/mine/well-types/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellTypes)
+)
+router.post(
+  "/mine/well-types/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellType)
+)
+router.post(
+  "/mine/well-types/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellTypes)
+)
+router.patch(
+  "/mine/well-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellType)
+)
+router.delete(
+  "/mine/well-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellType)
+)
+
+router.get(
+  "/well-casing-type-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellCasingTypeTemplates)
+)
+router.get(
+  "/mine/well-casing-types/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellCasingTypes)
+)
+router.put(
+  "/mine/well-casing-types/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellCasingTypes)
+)
+router.post(
+  "/mine/well-casing-types/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellCasingType)
+)
+router.post(
+  "/mine/well-casing-types/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellCasingTypes)
+)
+router.patch(
+  "/mine/well-casing-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellCasingType)
+)
+router.delete(
+  "/mine/well-casing-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellCasingType)
+)
+
+router.get(
+  "/well-casing-top-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellCasingTopTemplates)
+)
+router.get(
+  "/mine/well-casing-tops/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellCasingTops)
+)
+router.put(
+  "/mine/well-casing-tops/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellCasingTops)
+)
+router.post(
+  "/mine/well-casing-tops/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellCasingTop)
+)
+router.post(
+  "/mine/well-casing-tops/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellCasingTops)
+)
+router.patch(
+  "/mine/well-casing-tops/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellCasingTop)
+)
+router.delete(
+  "/mine/well-casing-tops/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellCasingTop)
+)
+
+router.get(
+  "/well-cover-type-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellCoverTypeTemplates)
+)
+router.get(
+  "/mine/well-cover-types/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellCoverTypes)
+)
+router.put(
+  "/mine/well-cover-types/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellCoverTypes)
+)
+router.post(
+  "/mine/well-cover-types/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellCoverType)
+)
+router.post(
+  "/mine/well-cover-types/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellCoverTypes)
+)
+router.patch(
+  "/mine/well-cover-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellCoverType)
+)
+router.delete(
+  "/mine/well-cover-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellCoverType)
+)
+
+router.get(
+  "/well-probe-type-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellProbeTypeTemplates)
+)
+router.get(
+  "/mine/well-probe-types/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellProbeTypes)
+)
+router.put(
+  "/mine/well-probe-types/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellProbeTypes)
+)
+router.post(
+  "/mine/well-probe-types/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellProbeType)
+)
+router.post(
+  "/mine/well-probe-types/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellProbeTypes)
+)
+router.patch(
+  "/mine/well-probe-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellProbeType)
+)
+router.delete(
+  "/mine/well-probe-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellProbeType)
+)
+
+router.get(
+  "/well-backfill-type-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellBackfillTypeTemplates)
+)
+router.get(
+  "/mine/well-backfill-types/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellBackfillTypes)
+)
+router.put(
+  "/mine/well-backfill-types/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellBackfillTypes)
+)
+router.post(
+  "/mine/well-backfill-types/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellBackfillType)
+)
+router.post(
+  "/mine/well-backfill-types/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellBackfillTypes)
+)
+router.patch(
+  "/mine/well-backfill-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellBackfillType)
+)
+router.delete(
+  "/mine/well-backfill-types/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellBackfillType)
+)
+
+router.get(
+  "/well-default-well-id-templates/:moduleSlug",
+  asyncHandler(wellLogsController.getWellDefaultWellIdTemplates)
+)
+router.get(
+  "/mine/well-default-well-ids/:moduleSlug",
+  asyncHandler(wellLogsController.getUserWellDefaultWellIds)
+)
+router.put(
+  "/mine/well-default-well-ids/:moduleSlug",
+  asyncHandler(wellLogsController.saveUserWellDefaultWellIds)
+)
+router.post(
+  "/mine/well-default-well-ids/:moduleSlug",
+  asyncHandler(wellLogsController.createUserWellDefaultWellId)
+)
+router.post(
+  "/mine/well-default-well-ids/:moduleSlug/reset",
+  asyncHandler(wellLogsController.resetUserWellDefaultWellIds)
+)
+router.patch(
+  "/mine/well-default-well-ids/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.updateUserWellDefaultWellId)
+)
+router.delete(
+  "/mine/well-default-well-ids/:moduleSlug/:optionKey",
+  asyncHandler(wellLogsController.deleteUserWellDefaultWellId)
+)
+
+router.get(
+  "/sample-type-templates/:moduleSlug",
+  asyncHandler(samplesController.getSampleTypeTemplates)
+)
+router.get(
+  "/mine/sample-types/:moduleSlug",
+  asyncHandler(samplesController.getUserSampleTypes)
+)
+router.put(
+  "/mine/sample-types/:moduleSlug",
+  asyncHandler(samplesController.saveUserSampleTypes)
+)
+router.post(
+  "/mine/sample-types/:moduleSlug",
+  asyncHandler(samplesController.createUserSampleType)
+)
+router.post(
+  "/mine/sample-types/:moduleSlug/reset",
+  asyncHandler(samplesController.resetUserSampleTypes)
+)
+router.patch(
+  "/mine/sample-types/:moduleSlug/:optionKey",
+  asyncHandler(samplesController.updateUserSampleType)
+)
+router.delete(
+  "/mine/sample-types/:moduleSlug/:optionKey",
+  asyncHandler(samplesController.deleteUserSampleType)
+)
+
+router.get(
+  "/lab-test-type-templates/:moduleSlug",
+  asyncHandler(labTestsController.getLabTestTypeTemplates)
+)
+router.get(
+  "/mine/lab-test-types/:moduleSlug",
+  asyncHandler(labTestsController.getUserLabTestTypes)
+)
+router.put(
+  "/mine/lab-test-types/:moduleSlug",
+  asyncHandler(labTestsController.saveUserLabTestTypes)
+)
+router.post(
+  "/mine/lab-test-types/:moduleSlug",
+  asyncHandler(labTestsController.createUserLabTestType)
+)
+router.post(
+  "/mine/lab-test-types/:moduleSlug/reset",
+  asyncHandler(labTestsController.resetUserLabTestTypes)
+)
+router.patch(
+  "/mine/lab-test-types/:moduleSlug/:optionKey",
+  asyncHandler(labTestsController.updateUserLabTestType)
+)
+router.delete(
+  "/mine/lab-test-types/:moduleSlug/:optionKey",
+  asyncHandler(labTestsController.deleteUserLabTestType)
+)
+
+router.get(
+  "/lab-test-preset-templates/:moduleSlug",
+  asyncHandler(labTestsController.getLabTestPresetTemplates)
+)
+router.get(
+  "/mine/lab-test-presets/:moduleSlug",
+  asyncHandler(labTestsController.getUserLabTestPresets)
+)
+router.put(
+  "/mine/lab-test-presets/:moduleSlug",
+  asyncHandler(labTestsController.saveUserLabTestPresets)
+)
+router.post(
+  "/mine/lab-test-presets/:moduleSlug",
+  asyncHandler(labTestsController.createUserLabTestPreset)
+)
+router.post(
+  "/mine/lab-test-presets/:moduleSlug/reset",
+  asyncHandler(labTestsController.resetUserLabTestPresets)
+)
+router.patch(
+  "/mine/lab-test-presets/:moduleSlug/:optionKey",
+  asyncHandler(labTestsController.updateUserLabTestPreset)
+)
+router.delete(
+  "/mine/lab-test-presets/:moduleSlug/:optionKey",
+  asyncHandler(labTestsController.deleteUserLabTestPreset)
+)
+
+router.get(
+  "/data-type-option-templates/:moduleSlug/:dataTypeId",
+  asyncHandler(configModuleController.getDataTypeOptionTemplates)
+)
+router.get(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId",
+  asyncHandler(configModuleController.getUserDataTypeOptions)
+)
+router.put(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId",
+  asyncHandler(configModuleController.saveUserDataTypeOptions)
+)
+router.post(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId",
+  asyncHandler(configModuleController.createUserDataTypeOption)
+)
+router.post(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId/reset",
+  asyncHandler(configModuleController.resetUserDataTypeOptions)
+)
+router.patch(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId/:optionKey",
+  asyncHandler(configModuleController.updateUserDataTypeOption)
+)
+router.delete(
+  "/mine/data-type-options/:moduleSlug/:dataTypeId/:optionKey",
+  asyncHandler(configModuleController.deleteUserDataTypeOption)
+)
+router.get("/:id", asyncHandler(configModuleController.getOne))
+router.patch("/:id", asyncHandler(configModuleController.update))
+router.delete("/:id", asyncHandler(configModuleController.remove))
+
+export default router

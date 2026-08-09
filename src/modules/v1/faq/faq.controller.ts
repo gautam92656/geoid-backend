@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express"
 import { HTTP_STATUS } from "../../../shared/constants"
+import { API_MESSAGES } from "../../../shared/constants/apiMessages"
 import { ValidationError } from "../../../shared/errors/ValidationError"
 import { successResponse } from "../../../shared/utils/apiResponse"
 import * as faqService from "./faq.service"
@@ -49,7 +50,7 @@ export async function create(req: Request, res: Response, next: NextFunction): P
     return
   }
   const data = await faqService.create(value)
-  successResponse(res, data, "FAQ created", HTTP_STATUS.CREATED)
+  successResponse(res, data, API_MESSAGES.FAQ_ADDED, HTTP_STATUS.CREATED)
 }
 
 export async function update(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -64,7 +65,7 @@ export async function update(req: Request, res: Response, next: NextFunction): P
     return
   }
   const data = await faqService.update(id, value)
-  successResponse(res, data, "FAQ updated", HTTP_STATUS.OK)
+  successResponse(res, data, API_MESSAGES.FAQ_UPDATED, HTTP_STATUS.OK)
 }
 
 export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -74,5 +75,5 @@ export async function remove(req: Request, res: Response, next: NextFunction): P
     return
   }
   const data = await faqService.remove(id)
-  successResponse(res, data, undefined, HTTP_STATUS.OK)
+  successResponse(res, data, API_MESSAGES.FAQ_DELETED, HTTP_STATUS.OK)
 }

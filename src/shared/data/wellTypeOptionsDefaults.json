@@ -1,0 +1,16 @@
+[
+  {
+    "id": "pvc-solid",
+    "name": "50mm PVC Solid",
+    "tablogsAlias": "solid",
+    "graphic": "solidBlack.png",
+    "allowNegativeDepth": false
+  },
+  {
+    "id": "pvc-slotted",
+    "name": "50mm PVC Slotted",
+    "tablogsAlias": "slotted",
+    "graphic": "slotted.png",
+    "allowNegativeDepth": false
+  }
+]
