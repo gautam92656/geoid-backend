@@ -1,0 +1,44 @@
+[
+  {
+    "id": "standing",
+    "name": "Standing",
+    "tablogsAlias": "standing",
+    "graphic": "water_symbol_1.svg",
+    "depthRequired": true
+  },
+  {
+    "id": "inflow",
+    "name": "Inflow",
+    "tablogsAlias": "inflow",
+    "graphic": "water_symbol_2.svg",
+    "depthRequired": true
+  },
+  {
+    "id": "outflow",
+    "name": "Outflow",
+    "tablogsAlias": "outflow",
+    "graphic": "water_symbol_3.svg",
+    "depthRequired": true
+  },
+  {
+    "id": "not-encountered",
+    "name": "Not Encountered",
+    "tablogsAlias": "not-encountered",
+    "graphic": "no_graphic_water.svg",
+    "depthRequired": false
+  },
+  {
+    "id": "ground-water",
+    "name": "Ground Water",
+    "tablogsAlias": "ground-water",
+    "graphic": "water_symbol_4.svg",
+    "depthRequired": true
+  },
+  {
+    "id": "seepage-water",
+    "name": "Seepage Water",
+    "tablogsAlias": "seepage-water",
+    "graphic": "water_symbol_5.svg",
+    "depthRequired": true
+  }
+]

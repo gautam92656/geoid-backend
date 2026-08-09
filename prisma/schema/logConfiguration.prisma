@@ -1,0 +1,66 @@
+enum LogConfigurationStatus {
+  active
+  inactive
+
+  @@map("log_configuration_status")
+}
+
+model LogConfiguration {
+  id     Int                    @id @default(autoincrement())
+  userId Int                    @map("user_id")
+  name   String                 @db.VarChar(500)
+  status LogConfigurationStatus @default(active)
+
+  templateSlug                   String? @map("template_slug") @db.VarChar(100)
+  description                    String  @default("") @db.Text
+  coordinateSystem               String  @default("easting-northing") @map("coordinate_system") @db.VarChar(100)
+  coordinateSystemUnit           String  @default("meters") @map("coordinate_system_unit") @db.VarChar(50)
+  allowCoordinateSystemAtLog     Boolean @default(true) @map("allow_coordinate_system_at_log")
+  allowCoordinateSystemAtProject Boolean @default(true) @map("allow_coordinate_system_at_project")
+  autoElevation                  Boolean @default(true) @map("auto_elevation")
+  coordinateRequirement          String  @default("can-be-null") @map("coordinate_requirement") @db.VarChar(50)
+  allowDuplicateProjectNumbers   Boolean @default(false) @map("allow_duplicate_project_numbers")
+  measurementSystem              String  @default("metric") @map("measurement_system") @db.VarChar(50)
+  dateFormat                     String  @default("DD/MM/YYYY") @map("date_format") @db.VarChar(50)
+  elevationUnit                  String  @default("meters") @map("elevation_unit") @db.VarChar(50)
+  projectDetailFields            Json    @default("{}") @map("project_detail_fields")
+  logDetailFields                Json    @default("{}") @map("log_detail_fields")
+  enabledModules                 Json    @default("[]") @map("enabled_modules")
+  moduleSettings                 Json    @default("{}") @map("module_settings")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user         User                          @relation(fields: [userId], references: [id])
+  fieldOptions LogConfigurationFieldOption[]
+  userModules            UserModule[]
+  userWorkflows          UserWorkflow[]
+  userOriginOptions      UserOriginOption[]
+  userDataTypeOptions    UserDataTypeOption[]
+  userInsituTestTypes    UserInsituTestType[]
+  userInsituUnitSettings UserInsituUnitSetting[]
+  userCoreDefectTypes    UserCoreDefectType[]
+  userApertureColors     UserApertureColor[]
+  userApertureMinerals   UserApertureMineral[]
+  userInfillMaterials    UserInfillMaterial[]
+  userRemarkTypes           UserRemarkType[]
+  userRemarksQuickNotes     UserRemarksQuickNote[]
+  userDrillingTypes         UserDrillingType[]
+  userDrillingResistances   UserDrillingResistance[]
+  userDrillingObservations  UserDrillingObservation[]
+  userDrillingCasings       UserDrillingCasing[]
+  userWaterObservationTypes UserWaterObservationType[]
+  userWellTypes             UserWellType[]
+  userWellCasingTypes       UserWellCasingType[]
+  userWellCasingTops        UserWellCasingTop[]
+  userWellCoverTypes        UserWellCoverType[]
+  userWellProbeTypes        UserWellProbeType[]
+  userWellBackfillTypes     UserWellBackfillType[]
+  userWellDefaultWellIds    UserWellDefaultWellId[]
+  userSampleTypes           UserSampleType[]
+  userLabTestTypes          UserLabTestType[]
+  userLabTestPresets        UserLabTestPreset[]
+
+  @@map("log_configurations")
+}

@@ -1,0 +1,317 @@
+[
+  {
+    "key": "wellType",
+    "modelTpl": "WellTypeTemplate",
+    "modelUser": "UserWellType",
+    "tableTpl": "well_type_templates",
+    "tableUser": "user_well_types",
+    "idx": "well_type",
+    "dataTypeId": "well-types",
+    "defaultsFile": "wellTypeOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "pvc-solid",
+        "name": "50mm PVC Solid",
+        "tablogsAlias": "solid",
+        "graphic": "solidBlack.png",
+        "allowNegativeDepth": false
+      },
+      {
+        "id": "pvc-slotted",
+        "name": "50mm PVC Slotted",
+        "tablogsAlias": "slotted",
+        "graphic": "slotted.png",
+        "allowNegativeDepth": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      },
+      {
+        "name": "allowNegativeDepth",
+        "prisma": "Boolean",
+        "map": "allow_negative_depth",
+        "sql": "BOOLEAN NOT NULL DEFAULT false",
+        "prismaDefault": "false"
+      }
+    ]
+  },
+  {
+    "key": "wellCasingType",
+    "modelTpl": "WellCasingTypeTemplate",
+    "modelUser": "UserWellCasingType",
+    "tableTpl": "well_casing_type_templates",
+    "tableUser": "user_well_casing_types",
+    "idx": "well_casing",
+    "dataTypeId": "well-casing-types",
+    "defaultsFile": "wellCasingTypeOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "surface-casing",
+        "name": "Surface Casing",
+        "tablogsAlias": "Surface Casing",
+        "type": "surface",
+        "graphic": "graphic_02.png",
+        "allowNegativeDepth": false
+      },
+      {
+        "id": "regular-casing",
+        "name": "Regular Casing",
+        "tablogsAlias": "Regular Casing",
+        "type": "regular",
+        "graphic": "graphic_01.png",
+        "allowNegativeDepth": false
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "type",
+        "prisma": "String",
+        "map": null,
+        "sql": "VARCHAR(20) NOT NULL DEFAULT 'surface'",
+        "prismaDefault": "\"surface\"",
+        "db": "VarChar(20)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      },
+      {
+        "name": "allowNegativeDepth",
+        "prisma": "Boolean",
+        "map": "allow_negative_depth",
+        "sql": "BOOLEAN NOT NULL DEFAULT false",
+        "prismaDefault": "false"
+      }
+    ]
+  },
+  {
+    "key": "wellCasingTop",
+    "modelTpl": "WellCasingTopTemplate",
+    "modelUser": "UserWellCasingTop",
+    "tableTpl": "well_casing_top_templates",
+    "tableUser": "user_well_casing_tops",
+    "idx": "well_casing_top",
+    "dataTypeId": "well-casing-tops",
+    "defaultsFile": "wellCasingTopOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "well-casing-top",
+        "name": "Well Casing Top",
+        "tablogsAlias": null,
+        "graphic": "graphic_01.png",
+        "allowNegativeDepth": true
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      },
+      {
+        "name": "allowNegativeDepth",
+        "prisma": "Boolean",
+        "map": "allow_negative_depth",
+        "sql": "BOOLEAN NOT NULL DEFAULT true",
+        "prismaDefault": "true"
+      }
+    ]
+  },
+  {
+    "key": "wellCoverType",
+    "modelTpl": "WellCoverTypeTemplate",
+    "modelUser": "UserWellCoverType",
+    "tableTpl": "well_cover_type_templates",
+    "tableUser": "user_well_cover_types",
+    "idx": "well_cover",
+    "dataTypeId": "well-cover-types",
+    "defaultsFile": "wellCoverTypeOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "rounded",
+        "name": "Rounded",
+        "tablogsAlias": "rounded",
+        "graphic": "well_cover_1.png",
+        "allowNegativeDepth": false,
+        "graphicAlignment": "bottom"
+      },
+      {
+        "id": "flat",
+        "name": "Flat",
+        "tablogsAlias": "flat",
+        "graphic": "well_cover_4.png",
+        "allowNegativeDepth": false,
+        "graphicAlignment": "bottom"
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      },
+      {
+        "name": "allowNegativeDepth",
+        "prisma": "Boolean",
+        "map": "allow_negative_depth",
+        "sql": "BOOLEAN NOT NULL DEFAULT false",
+        "prismaDefault": "false"
+      },
+      {
+        "name": "graphicAlignment",
+        "prisma": "String",
+        "map": "graphic_alignment",
+        "sql": "VARCHAR(20) NOT NULL DEFAULT 'bottom'",
+        "prismaDefault": "\"bottom\"",
+        "db": "VarChar(20)"
+      }
+    ]
+  },
+  {
+    "key": "wellProbeType",
+    "modelTpl": "WellProbeTypeTemplate",
+    "modelUser": "UserWellProbeType",
+    "tableTpl": "well_probe_type_templates",
+    "tableUser": "user_well_probe_types",
+    "idx": "well_probe",
+    "dataTypeId": "well-probe-types",
+    "defaultsFile": "wellProbeTypeOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "soil-vapour",
+        "name": "Soil Vapour Probe",
+        "tablogsAlias": "soil-vapour",
+        "graphic": "probe_graphic_01.png",
+        "recordDepthTo": true
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      },
+      {
+        "name": "recordDepthTo",
+        "prisma": "Boolean",
+        "map": "record_depth_to",
+        "sql": "BOOLEAN NOT NULL DEFAULT true",
+        "prismaDefault": "true"
+      }
+    ]
+  },
+  {
+    "key": "wellBackfillType",
+    "modelTpl": "WellBackfillTypeTemplate",
+    "modelUser": "UserWellBackfillType",
+    "tableTpl": "well_backfill_type_templates",
+    "tableUser": "user_well_backfill_types",
+    "idx": "well_backfill",
+    "dataTypeId": "well-backfill-types",
+    "defaultsFile": "wellBackfillTypeOptionsDefaults.json",
+    "defaults": [
+      {
+        "id": "blank",
+        "name": "Blank",
+        "tablogsAlias": null,
+        "graphic": "01.png"
+      },
+      {
+        "id": "backfill",
+        "name": "Backfill",
+        "tablogsAlias": null,
+        "graphic": "10.png"
+      },
+      {
+        "id": "bentonite",
+        "name": "Bentonite",
+        "tablogsAlias": null,
+        "graphic": "21.png"
+      },
+      {
+        "id": "filter-pack",
+        "name": "Filter Pack",
+        "tablogsAlias": null,
+        "graphic": "31.png"
+      },
+      {
+        "id": "concrete-cement",
+        "name": "Concrete Cement",
+        "tablogsAlias": null,
+        "graphic": "41.png"
+      },
+      {
+        "id": "concrete-cement-grout",
+        "name": "Concrete Cement Grout",
+        "tablogsAlias": null,
+        "graphic": "42.png"
+      }
+    ],
+    "fields": [
+      {
+        "name": "tablogsAlias",
+        "prisma": "String?",
+        "map": "tablogs_alias",
+        "sql": "VARCHAR(100)"
+      },
+      {
+        "name": "graphic",
+        "prisma": "String?",
+        "map": null,
+        "sql": "VARCHAR(255)"
+      }
+    ]
+  },
+  {
+    "key": "wellDefaultWellId",
+    "modelTpl": "WellDefaultWellIdTemplate",
+    "modelUser": "UserWellDefaultWellId",
+    "tableTpl": "well_default_well_id_templates",
+    "tableUser": "user_well_default_well_ids",
+    "idx": "well_def_id",
+    "dataTypeId": "default-well-ids",
+    "defaultsFile": "wellDefaultWellIdOptionsDefaults.json",
+    "defaults": [],
+    "fields": []
+  }
+]

@@ -1,0 +1,74 @@
+enum LogStatus {
+  to_do
+  in_progress
+  field
+  lab
+  completed
+  preliminary
+  draft
+  final
+  in_active
+
+  @@map("log_status")
+}
+
+enum LogType {
+  borelog
+  test_pit
+  probe
+  monitoring_well
+  inclined_borehole
+
+  @@map("log_type")
+}
+
+model Log {
+  id                Int       @id @default(autoincrement())
+  userId            Int       @map("user_id")
+  projectId         Int       @map("project_id")
+  proposedBorelogId Int?      @map("proposed_borelog_id")
+  logNumber         String    @map("log_number") @db.VarChar(50)
+  logConfigId       String    @map("log_config_id") @db.VarChar(100)
+  logType           LogType
+  logStatus         LogStatus @default(to_do) @map("log_status")
+  drillingDate      DateTime? @map("drilling_date") @db.Date
+  drillingTime      String?   @map("drilling_time") @db.VarChar(10)
+  finishLogDate     DateTime? @map("finish_log_date") @db.Date
+  finishLogTime     String?   @map("finish_log_time") @db.VarChar(10)
+  endDepth          String?   @map("end_depth") @db.VarChar(50)
+  finishingReason   String?   @map("finishing_reason") @db.VarChar(200)
+  finishingComment  String?   @map("finishing_comment")
+  coordinateSystem  String?   @map("coordinate_system") @db.VarChar(100)
+  latitude          String?   @db.VarChar(50)
+  longitude         String?   @db.VarChar(50)
+  easting           String?   @db.VarChar(50)
+  northing          String?   @db.VarChar(50)
+  utmZone           String?   @map("utm_zone") @db.VarChar(50)
+  elevation         String?   @db.VarChar(50)
+  station           String?   @db.VarChar(100)
+  locationComment   String?   @map("location_comment")
+  supplierId        Int?      @map("supplier_id")
+  equipmentId       Int?      @map("equipment_id")
+  loggedBy          String?   @map("logged_by") @db.VarChar(200)
+  reviewedBy        String?   @map("reviewed_by") @db.VarChar(200)
+  inclination       String?   @db.VarChar(50)
+  azimuth           String?   @db.VarChar(50)
+  generalComments   String?   @map("general_comments")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user            User       @relation(fields: [userId], references: [id])
+  project         Project    @relation(fields: [projectId], references: [id])
+  proposedBorelog Log?       @relation("ProposedBorelog", fields: [proposedBorelogId], references: [id])
+  proposedLogs    Log[]      @relation("ProposedBorelog")
+  supplier        Supplier?  @relation(fields: [supplierId], references: [id])
+  equipment       Equipment? @relation(fields: [equipmentId], references: [id])
+  subsurfaceLayers LogSubsurfaceLayer[]
+  insituTests      LogInsituTest[]
+  remarks          LogRemark[]
+
+  @@unique([projectId, logNumber])
+  @@map("logs")
+}

@@ -1,0 +1,17 @@
+/// Common Core Logging aperture-color catalog defaults.
+model ApertureColorTemplate {
+  id         Int     @id @default(autoincrement())
+  moduleSlug String  @map("module_slug") @db.VarChar(100)
+  optionKey  String  @map("option_key") @db.VarChar(100)
+  name       String  @db.VarChar(200)
+  color      String? @db.VarChar(50)
+  textColor  String? @map("text_color") @db.VarChar(50)
+  sortOrder  Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "aperture_color_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "aperture_color_tpl_module_sort_idx")
+  @@map("aperture_color_templates")
+}

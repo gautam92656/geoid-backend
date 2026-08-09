@@ -1,0 +1,28 @@
+enum LogReportTemplateLogType {
+  borelog
+  corelog
+
+  @@map("log_report_template_log_type")
+}
+
+model LogReportTemplate {
+  id                   Int                       @id @default(autoincrement())
+  userId               Int                       @map("user_id")
+  name                 String                    @db.VarChar(200)
+  logType              LogReportTemplateLogType  @map("log_type")
+  isDefault            Boolean                   @default(false) @map("is_default")
+  config               Json                      @default("{}")
+  logConfigurationIds  Json                      @default("[]") @map("log_configuration_ids")
+  templateVersion      Int                       @default(2) @map("template_version")
+  sortOrder            Int                       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId, deletedAt])
+  @@index([userId, logType, deletedAt])
+  @@map("log_report_templates")
+}

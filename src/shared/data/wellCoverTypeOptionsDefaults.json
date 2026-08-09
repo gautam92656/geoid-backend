@@ -1,0 +1,18 @@
+[
+  {
+    "id": "rounded",
+    "name": "Rounded",
+    "tablogsAlias": "rounded",
+    "graphic": "well_cover_1.png",
+    "allowNegativeDepth": false,
+    "graphicAlignment": "bottom"
+  },
+  {
+    "id": "flat",
+    "name": "Flat",
+    "tablogsAlias": "flat",
+    "graphic": "well_cover_4.png",
+    "allowNegativeDepth": false,
+    "graphicAlignment": "bottom"
+  }
+]

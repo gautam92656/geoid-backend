@@ -1,0 +1,16 @@
+model LogConfigurationFieldOption {
+  id                 Int       @id @default(autoincrement())
+  logConfigurationId Int       @map("log_configuration_id")
+  fieldGroup         String    @map("field_group") @db.VarChar(50)
+  fieldKey           String    @map("field_key") @db.VarChar(50)
+  name               String    @db.VarChar(200)
+  sortOrder          Int       @default(0) @map("sort_order")
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt          DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@index([logConfigurationId, fieldGroup, fieldKey])
+  @@map("log_configuration_field_options")
+}

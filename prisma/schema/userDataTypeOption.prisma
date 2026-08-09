@@ -1,0 +1,33 @@
+/// Per-configuration customized data-type options (rock_type, non_soil_type, …).
+model UserDataTypeOption {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @map("user_id")
+  logConfigurationId Int      @map("log_configuration_id")
+  moduleSlug         String   @map("module_slug") @db.VarChar(100)
+  /// e.g. rock_type | non_soil_type | colors | geomodal_layer
+  dataTypeId         String   @map("data_type_id") @db.VarChar(100)
+  optionKey          String   @map("option_key") @db.VarChar(100)
+  sourceTemplateId   Int?     @map("source_template_id")
+  name               String   @db.VarChar(200)
+  code               String?  @db.VarChar(100)
+  graphic            String?  @db.VarChar(255)
+  rockGroup          String?  @map("rock_group") @db.VarChar(100)
+  /// Geomodal layer / colors catalog fill color.
+  color              String?  @db.VarChar(100)
+  /// Geomodal layer graphic overlay color.
+  overlayColor       String?  @map("overlay_color") @db.VarChar(100)
+  /// Colors catalog label text color (typically white/black hex).
+  textColor          String?  @map("text_color") @db.VarChar(100)
+  showAutoScale      Boolean  @default(true) @map("show_auto_scale")
+  sortOrder          Int      @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, moduleSlug, dataTypeId, optionKey], map: "user_dtype_opts_config_key")
+  @@index([userId, logConfigurationId, moduleSlug, dataTypeId, sortOrder], map: "user_dtype_opts_user_config_idx")
+  @@map("user_data_type_options")
+}

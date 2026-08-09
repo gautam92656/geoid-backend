@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
 import path from "path"
+import dotenv from "dotenv"
 
 const nodeEnv = process.env.NODE_ENV || "development"
 dotenv.config()
@@ -14,6 +14,7 @@ function parsePort(raw: string | undefined, fallback: number): number {
 export const env = {
   NODE_ENV: process.env.NODE_ENV || "development",
   PORT: parsePort(process.env.PORT, 3000),
+  UPLOADS_DIR: process.env.UPLOADS_DIR || path.resolve(process.cwd(), "uploads"),
   DATABASE_URL: process.env.DATABASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,

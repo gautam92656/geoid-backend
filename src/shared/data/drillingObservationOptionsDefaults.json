@@ -1,0 +1,22 @@
+[
+  {
+    "id": "water-encountered",
+    "name": "Water encountered",
+    "tablogsAlias": "Water encountered",
+    "graphic": "symbol_01.png",
+    "depthRequired": false,
+    "observationDateTimeRequired": true,
+    "isDepthOfCasing": false,
+    "isDepthToWater": false
+  },
+  {
+    "id": "cave-in",
+    "name": "Cave in",
+    "tablogsAlias": "Cave in",
+    "graphic": "symbol_13.png",
+    "depthRequired": true,
+    "observationDateTimeRequired": true,
+    "isDepthOfCasing": false,
+    "isDepthToWater": false
+  }
+]

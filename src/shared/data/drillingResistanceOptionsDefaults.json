@@ -1,0 +1,5 @@
+[
+  { "id": "chatter", "name": "Chatter", "tablogsAlias": "chatter" },
+  { "id": "vibration", "name": "Vibration", "tablogsAlias": "vibration" },
+  { "id": "rig-standup", "name": "Rig Stand-up", "tablogsAlias": "rig-standup" }
+]

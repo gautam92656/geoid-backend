@@ -1,0 +1,34 @@
+/// Per-configuration Insitu testing types (copied from common templates on first use).
+model UserInsituTestType {
+  id                          Int      @id @default(autoincrement())
+  userId                      Int      @map("user_id")
+  logConfigurationId          Int      @map("log_configuration_id")
+  moduleSlug                  String   @map("module_slug") @db.VarChar(100)
+  optionKey                   String   @map("option_key") @db.VarChar(100)
+  sourceTemplateId            Int?     @map("source_template_id")
+  name                        String   @db.VarChar(200)
+  active                      Boolean  @default(true)
+  graphic                     String?  @db.VarChar(255)
+  enableSegregatedGraphic     Boolean  @default(false) @map("enable_segregated_graphic")
+  topGraphic                  String?  @map("top_graphic") @db.VarChar(255)
+  bottomGraphic               String?  @map("bottom_graphic") @db.VarChar(255)
+  depthFrequencyEnabled       Boolean  @default(false) @map("depth_frequency_enabled")
+  depthFrequency              String?  @map("depth_frequency") @db.VarChar(100)
+  enableSampleLogging         Boolean  @default(false) @map("enable_sample_logging")
+  enableSubsurfaceLogging     Boolean  @default(false) @map("enable_subsurface_logging")
+  defaultSampleTypeId         String?  @map("default_sample_type_id") @db.VarChar(100)
+  enableAutoSampleDescription Boolean  @default(false) @map("enable_auto_sample_description")
+  /// Tablogs-aligned test settings (intervals, other toggles, unit fields).
+  settings                    Json     @default("{}")
+  sortOrder                   Int      @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, moduleSlug, optionKey], map: "user_insitu_types_config_key")
+  @@index([userId, logConfigurationId, moduleSlug, sortOrder], map: "user_insitu_types_user_config_idx")
+  @@map("user_insitu_test_types")
+}

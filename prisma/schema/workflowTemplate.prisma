@@ -1,0 +1,16 @@
+/// Common workflow + classification defaults per module template (e.g. subsurfaces).
+model WorkflowTemplate {
+  id                       Int      @id @default(autoincrement())
+  moduleSlug               String   @unique @map("module_slug") @db.VarChar(100)
+  name                     String   @db.VarChar(200)
+  enabled                  Boolean  @default(true)
+  applyClassificationRules Boolean  @default(true) @map("apply_classification_rules")
+  ignoreParentLegacySettings Boolean @default(true) @map("ignore_parent_legacy_settings")
+  steps                    Json     @default("[]")
+  classificationCodes      Json     @default("[]") @map("classification_codes")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("workflow_templates")
+}

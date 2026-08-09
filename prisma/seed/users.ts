@@ -20,6 +20,7 @@ export async function seedUsers(prisma: PrismaClient) {
       passwordHash,
       termsAndConditions: true,
       isEmailVerified: true,
+      role: "super_admin",
       deletedAt: null,
     },
     create: {
@@ -29,8 +30,11 @@ export async function seedUsers(prisma: PrismaClient) {
       passwordHash,
       termsAndConditions: true,
       isEmailVerified: true,
+      role: "super_admin",
     },
   })
 
-  console.log(`Seeded login user: ${SEED_USER.email}`)
+  console.log("Seeded super admin login:")
+  console.log(`  Email:    ${SEED_USER.email}`)
+  console.log(`  Password: ${SEED_USER.password}`)
 }

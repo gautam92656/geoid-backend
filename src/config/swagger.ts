@@ -6,11 +6,12 @@ const swaggerSpec = {
   info: {
     title: "Astra Backend API",
     version: "1.0.0",
-    description: "Starter API with auth and FAQ CRUD",
+    description: "Starter API with auth, client CRUD, and FAQ CRUD",
   },
   servers: [{ url: "/api/v1" }],
   tags: [
     { name: "Auth", description: "Signup, login, OTP, forgot/reset password" },
+    { name: "Clients", description: "Client CRUD (requires Bearer token)" },
     { name: "FAQs", description: "FAQ CRUD (requires Bearer token)" },
   ],
   paths: {
@@ -48,6 +49,43 @@ const swaggerSpec = {
         tags: ["Auth"],
         summary: "Reset password",
         responses: { "200": { description: "Password updated" } },
+      },
+    },
+    "/clients": {
+      get: {
+        tags: ["Clients"],
+        summary: "List clients",
+        security: [{ bearerAuth: [] }],
+        responses: { "200": { description: "Paginated client list" } },
+      },
+      post: {
+        tags: ["Clients"],
+        summary: "Create client",
+        security: [{ bearerAuth: [] }],
+        responses: { "201": { description: "Client created" } },
+      },
+    },
+    "/clients/{id}": {
+      get: {
+        tags: ["Clients"],
+        summary: "Get client by ID",
+        security: [{ bearerAuth: [] }],
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "integer" } }],
+        responses: { "200": { description: "Client details" } },
+      },
+      patch: {
+        tags: ["Clients"],
+        summary: "Update client",
+        security: [{ bearerAuth: [] }],
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "integer" } }],
+        responses: { "200": { description: "Client updated" } },
+      },
+      delete: {
+        tags: ["Clients"],
+        summary: "Delete client",
+        security: [{ bearerAuth: [] }],
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "integer" } }],
+        responses: { "200": { description: "Client removed" } },
       },
     },
     "/faqs": {

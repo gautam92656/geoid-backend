@@ -1,0 +1,33 @@
+/// Per-configuration sample types (copied from common templates on first use).
+model UserSampleType {
+  id                       Int     @id @default(autoincrement())
+  userId                   Int     @map("user_id")
+  logConfigurationId       Int     @map("log_configuration_id")
+  moduleSlug               String  @map("module_slug") @db.VarChar(100)
+  optionKey                String  @map("option_key") @db.VarChar(100)
+  sourceTemplateId         Int?    @map("source_template_id")
+  name                     String  @db.VarChar(200)
+  tablogsAlias             String? @map("tablogs_alias") @db.VarChar(100)
+  graphic                  String? @db.VarChar(255)
+  sampleAbbreviation       String? @map("sample_abbreviation") @db.VarChar(100)
+  noteRecovery             Boolean @default(false) @map("note_recovery")
+  displayQcId              Boolean @default(false) @map("display_qc_id")
+  enableSegregatedGraphic  Boolean @default(false) @map("enable_segregated_graphic")
+  topGraphic               String? @map("top_graphic") @db.VarChar(255)
+  bottomGraphic            String? @map("bottom_graphic") @db.VarChar(255)
+  enableSubsurfaceLogging  Boolean @default(false) @map("enable_subsurface_logging")
+  enableAssignLabTest      Boolean @default(false) @map("enable_assign_lab_test")
+  enableInsituTestLogging  Boolean @default(false) @map("enable_insitu_test_logging")
+  defaultInsituTestTypeId  String? @map("default_insitu_test_type_id") @db.VarChar(100)
+  sortOrder                Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, moduleSlug, optionKey], map: "user_sample_type_config_key")
+  @@index([userId, logConfigurationId, moduleSlug, sortOrder], map: "user_sample_type_user_config_idx")
+  @@map("user_sample_types")
+}

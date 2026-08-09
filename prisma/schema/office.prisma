@@ -1,0 +1,19 @@
+model Office {
+  id           Int     @id @default(autoincrement())
+  userId       Int     @map("user_id")
+  name         String  @db.VarChar(200)
+  address      String? @db.VarChar(500)
+  phone        String? @db.VarChar(20)
+  externalId   String? @map("external_id") @db.VarChar(100)
+  officeNumber String? @map("office_number") @db.VarChar(100)
+  state        String? @db.VarChar(100)
+  laboratory   String? @db.VarChar(200)
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("offices")
+}

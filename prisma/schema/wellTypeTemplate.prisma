@@ -1,0 +1,18 @@
+/// Common Well Logs catalog defaults.
+model WellTypeTemplate {
+  id         Int     @id @default(autoincrement())
+  moduleSlug String  @map("module_slug") @db.VarChar(100)
+  optionKey  String  @map("option_key") @db.VarChar(100)
+  name       String  @db.VarChar(200)
+  tablogsAlias              String? @map("tablogs_alias") @db.VarChar(100)
+  graphic                   String? @db.VarChar(255)
+  allowNegativeDepth        Boolean @default(false) @map("allow_negative_depth")
+  sortOrder  Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "well_type_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "well_type_tpl_module_sort_idx")
+  @@map("well_type_templates")
+}

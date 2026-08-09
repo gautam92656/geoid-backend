@@ -13,5 +13,17 @@ export function generateToken(payload: TokenPayload): string {
 }
 
 export function verifyToken(token: string): TokenPayload {
-  return jwt.verify(token, env.JWT_SECRET!) as unknown as TokenPayload
+  const payload = jwt.verify(token, env.JWT_SECRET!) as jwt.JwtPayload & {
+    sub?: unknown
+    email?: unknown
+  }
+
+  const sub = typeof payload.sub === "number" ? payload.sub : Number.parseInt(String(payload.sub ?? ""), 10)
+  const email = typeof payload.email === "string" ? payload.email : ""
+
+  if (!Number.isInteger(sub) || sub < 1 || !email) {
+    throw new Error("Invalid token payload")
+  }
+
+  return { sub, email }
 }

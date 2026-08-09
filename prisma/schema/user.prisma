@@ -1,3 +1,10 @@
+enum UserRole {
+  user
+  super_admin
+
+  @@map("user_role")
+}
+
 model User {
   id               Int      @id @default(autoincrement())
   firstName        String   @map("first_name") @db.VarChar(50)
@@ -8,10 +15,55 @@ model User {
   passwordHash     String   @map("password_hash")
   termsAndConditions Boolean @default(false) @map("terms_and_conditions")
   isEmailVerified  Boolean  @default(false) @map("is_email_verified")
+  role             UserRole @default(user)
+  companyName      String?  @map("company_name") @db.VarChar(200)
+  companyLogoUrl   String?  @map("company_logo_url") @db.Text
 
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
   deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  equipmentTypes     EquipmentType[]
+  equipment          Equipment[]
+  clients            Client[]
+  suppliers          Supplier[]
+  offices            Office[]
+  headerFooterTemplates HeaderFooterTemplate[]
+  logReportTemplates    LogReportTemplate[]
+  projects              Project[]
+  projectStatusHistory  ProjectStatusHistory[]
+  logConfigurations         LogConfiguration[]
+  userModules            UserModule[]
+  userWorkflows          UserWorkflow[]
+  userOriginOptions      UserOriginOption[]
+  userDataTypeOptions    UserDataTypeOption[]
+  userInsituTestTypes    UserInsituTestType[]
+  userInsituUnitSettings UserInsituUnitSetting[]
+  userCoreDefectTypes    UserCoreDefectType[]
+  userApertureColors     UserApertureColor[]
+  userApertureMinerals   UserApertureMineral[]
+  userInfillMaterials    UserInfillMaterial[]
+  userRemarkTypes           UserRemarkType[]
+  userRemarksQuickNotes     UserRemarksQuickNote[]
+  userDrillingTypes         UserDrillingType[]
+  userDrillingResistances   UserDrillingResistance[]
+  userDrillingObservations  UserDrillingObservation[]
+  userDrillingCasings       UserDrillingCasing[]
+  userWaterObservationTypes UserWaterObservationType[]
+  userWellTypes             UserWellType[]
+  userWellCasingTypes       UserWellCasingType[]
+  userWellCasingTops        UserWellCasingTop[]
+  userWellCoverTypes        UserWellCoverType[]
+  userWellProbeTypes        UserWellProbeType[]
+  userWellBackfillTypes     UserWellBackfillType[]
+  userWellDefaultWellIds    UserWellDefaultWellId[]
+  userSampleTypes           UserSampleType[]
+  userLabTestTypes          UserLabTestType[]
+  userLabTestPresets        UserLabTestPreset[]
+  logs                      Log[]
+  logSubsurfaceLayers       LogSubsurfaceLayer[]
+  logInsituTests            LogInsituTest[]
+  logRemarks                LogRemark[]
 
   @@map("users")
 }

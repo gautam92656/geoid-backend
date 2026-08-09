@@ -1,0 +1,22 @@
+[
+  {
+    "id": "logged-remarks",
+    "name": "Logged Remarks",
+    "tablogsAlias": "logged-remarks"
+  },
+  {
+    "id": "unlogged-remarks",
+    "name": "Unlogged Remarks",
+    "tablogsAlias": "unlogged-remarks"
+  },
+  {
+    "id": "l-pile-value",
+    "name": "L-Pile Value",
+    "tablogsAlias": "l-pile-value"
+  },
+  {
+    "id": "remarks",
+    "name": "Remarks",
+    "tablogsAlias": "remarks"
+  }
+]

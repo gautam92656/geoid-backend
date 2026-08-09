@@ -1,0 +1,22 @@
+/// Common Drilling Observations drilling-type catalog defaults.
+/// Users get a per-log-configuration copy in `user_drilling_types`.
+model DrillingTypeTemplate {
+  id                        Int     @id @default(autoincrement())
+  moduleSlug                String  @map("module_slug") @db.VarChar(100)
+  optionKey                 String  @map("option_key") @db.VarChar(100)
+  name                      String  @db.VarChar(200)
+  tablogsAlias              String? @map("tablogs_alias") @db.VarChar(100)
+  logKind                   String  @default("bore") @map("log_kind") @db.VarChar(20)
+  graphic                   String? @db.VarChar(255)
+  enableRecoveryField       Boolean @default(false) @map("enable_recovery_field")
+  enableWindowedWindowless  Boolean @default(false) @map("enable_windowed_windowless")
+  waterAdded                Boolean @default(false) @map("water_added")
+  sortOrder                 Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "drilling_type_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "drilling_type_tpl_module_sort_idx")
+  @@map("drilling_type_templates")
+}

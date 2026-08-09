@@ -1,0 +1,9 @@
+[
+  {
+    "id": "soil-vapour",
+    "name": "Soil Vapour Probe",
+    "tablogsAlias": "soil-vapour",
+    "graphic": "probe_graphic_01.png",
+    "recordDepthTo": true
+  }
+]

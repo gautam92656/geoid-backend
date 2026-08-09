@@ -1,0 +1,272 @@
+[
+  {
+    "id": "moisture-content",
+    "name": "Moisture Content",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Moisture Content",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "particle-size-distribution",
+    "name": "Particle Size Distribution",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Particle Size Distribution",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "atterberg-limits",
+    "name": "Atterberg Limits",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Atterberg Limits",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "is50",
+    "name": "IS50",
+    "graphic": "graphic_00.png",
+    "aliasTable": "IS50",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "gs-mechanical-grain-size",
+    "name": "GS - Mechanical Grain Size",
+    "graphic": "graphic_00.png",
+    "aliasTable": "GS - Mechanical Grain Size",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "w-moisture-content",
+    "name": "w - Moisture Content",
+    "graphic": "graphic_00.png",
+    "aliasTable": "w - Moisture Content",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "c-consolidation-test",
+    "name": "C - Consolidation Test",
+    "graphic": "graphic_00.png",
+    "aliasTable": "C - Consolidation Test",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "l-pile",
+    "name": "L-Pile",
+    "graphic": "graphic_00.png",
+    "aliasTable": "L-Pile",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "hcsi",
+    "name": "HCSI",
+    "graphic": "graphic_00.png",
+    "aliasTable": "HCSI",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "dr-relative-density",
+    "name": "DR - Relative Density",
+    "graphic": "graphic_00.png",
+    "aliasTable": "DR - Relative Density",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "k-permeability-coefficient",
+    "name": "k - Permeability Coefficient",
+    "graphic": "graphic_00.png",
+    "aliasTable": "k - Permeability Coefficient",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "q-triaxial-test",
+    "name": "q - Triaxial Test",
+    "graphic": "graphic_00.png",
+    "aliasTable": "q - Triaxial Test",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "ucs-unconfined-compressive-strength",
+    "name": "UCS - Unconfined Compressive Strength",
+    "graphic": "graphic_00.png",
+    "aliasTable": "UCS - Unconfined Compressive Strength",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "sb-shear-box-test",
+    "name": "SB - Shear Box Test",
+    "graphic": "graphic_00.png",
+    "aliasTable": "SB - Shear Box Test",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "y-unit-weight",
+    "name": "Y - Unit Weight",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Y - Unit Weight",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "yd-dry-unit-weight",
+    "name": "Yd - Dry Unit Weight",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Yd - Dry Unit Weight",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "p-density",
+    "name": "p - Density",
+    "graphic": "graphic_00.png",
+    "aliasTable": "p - Density",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  },
+  {
+    "id": "pd-dry-density",
+    "name": "Pd - Dry Density",
+    "graphic": "graphic_00.png",
+    "aliasTable": "Pd - Dry Density",
+    "active": true,
+    "labTestResultFields": [
+      {
+        "id": "result-field-1",
+        "name": "",
+        "externalAlias": null,
+        "tablogsAlias": null
+      }
+    ]
+  }
+]

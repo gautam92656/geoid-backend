@@ -1,0 +1,9 @@
+[
+  {
+    "id": "well-casing-top",
+    "name": "Well Casing Top",
+    "tablogsAlias": null,
+    "graphic": "graphic_01.png",
+    "allowNegativeDepth": true
+  }
+]

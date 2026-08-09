@@ -227,3 +227,38 @@ export async function changePassword(userId: number, input: ChangePasswordInput,
 
   return { message: t(lang, "auth.password.change_success") }
 }
+
+export type UpdateProfileInput = {
+  companyLogoUrl?: string | null
+  companyName?: string | null
+}
+
+export async function updateProfile(
+  userId: number,
+  input: UpdateProfileInput,
+  lang: UserAppLanguage = "en"
+) {
+  const user = await userRepository.findById(userId)
+  if (!user) throw new NotFoundError(t(lang, "auth.user_not_found"))
+
+  const normalize = (value: string | null | undefined) => {
+    if (value === undefined) return undefined
+    if (value === null) return null
+    const trimmed = value.trim()
+    return trimmed || null
+  }
+
+  const updated = await userRepository.update(userId, {
+    ...(input.companyLogoUrl !== undefined
+      ? { companyLogoUrl: normalize(input.companyLogoUrl) ?? null }
+      : {}),
+    ...(input.companyName !== undefined
+      ? { companyName: normalize(input.companyName) ?? null }
+      : {}),
+  })
+
+  return {
+    message: t(lang, "profile.updated"),
+    user: toUserDTO(updated),
+  }
+}

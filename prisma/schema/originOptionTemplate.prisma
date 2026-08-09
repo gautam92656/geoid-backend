@@ -1,0 +1,27 @@
+/// Common origin-option catalog per module (e.g. Topsoil, Fill for subsurfaces).
+/// Seeded defaults; users get a personal copy in `user_origin_options`.
+model OriginOptionTemplate {
+  id                         Int      @id @default(autoincrement())
+  moduleSlug                 String   @map("module_slug") @db.VarChar(100)
+  /// Stable key used as the client-facing option id (e.g. "19397").
+  optionKey                  String   @map("option_key") @db.VarChar(100)
+  name                       String   @db.VarChar(200)
+  nameInDescription          String?  @map("name_in_description") @db.VarChar(200)
+  codeInDescription          String?  @map("code_in_description") @db.VarChar(100)
+  classificationCodeOverride Boolean  @default(false) @map("classification_code_override")
+  /// Soil | Rock | Non-Soil
+  type                       String   @default("Soil") @db.VarChar(50)
+  color                      String?  @db.VarChar(100)
+  applyColorToPdf            Boolean  @default(false) @map("apply_color_to_pdf")
+  overrideGraphic            Boolean  @default(false) @map("override_graphic")
+  splitGraphic               Boolean  @default(false) @map("split_graphic")
+  graphic                    String?  @db.VarChar(255)
+  sortOrder                  Int      @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey])
+  @@index([moduleSlug, sortOrder])
+  @@map("origin_option_templates")
+}

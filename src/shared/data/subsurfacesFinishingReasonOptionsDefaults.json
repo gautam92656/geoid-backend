@@ -1,0 +1,14 @@
+[
+  {
+    "id": "terminated",
+    "name": "Terminated",
+    "code": "",
+    "showAutoScale": true
+  },
+  {
+    "id": "refusal",
+    "name": "Refusal",
+    "code": "",
+    "showAutoScale": true
+  }
+]
