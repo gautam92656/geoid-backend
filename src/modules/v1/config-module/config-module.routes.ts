@@ -238,6 +238,122 @@ router.delete(
 )
 
 router.get(
+  "/surface-shape-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getSurfaceShapeTemplates)
+)
+router.get(
+  "/mine/surface-shapes/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserSurfaceShapes)
+)
+router.put(
+  "/mine/surface-shapes/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserSurfaceShapes)
+)
+router.post(
+  "/mine/surface-shapes/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserSurfaceShape)
+)
+router.post(
+  "/mine/surface-shapes/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserSurfaceShapes)
+)
+router.patch(
+  "/mine/surface-shapes/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserSurfaceShape)
+)
+router.delete(
+  "/mine/surface-shapes/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserSurfaceShape)
+)
+
+router.get(
+  "/surface-roughness-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getSurfaceRoughnessTemplates)
+)
+router.get(
+  "/mine/surface-roughnesses/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserSurfaceRoughnesses)
+)
+router.put(
+  "/mine/surface-roughnesses/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserSurfaceRoughnesses)
+)
+router.post(
+  "/mine/surface-roughnesses/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserSurfaceRoughness)
+)
+router.post(
+  "/mine/surface-roughnesses/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserSurfaceRoughnesses)
+)
+router.patch(
+  "/mine/surface-roughnesses/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserSurfaceRoughness)
+)
+router.delete(
+  "/mine/surface-roughnesses/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserSurfaceRoughness)
+)
+
+router.get(
+  "/defect-openness-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getDefectOpennessTemplates)
+)
+router.get(
+  "/mine/defect-opennesses/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserDefectOpennesses)
+)
+router.put(
+  "/mine/defect-opennesses/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserDefectOpennesses)
+)
+router.post(
+  "/mine/defect-opennesses/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserDefectOpenness)
+)
+router.post(
+  "/mine/defect-opennesses/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserDefectOpennesses)
+)
+router.patch(
+  "/mine/defect-opennesses/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserDefectOpenness)
+)
+router.delete(
+  "/mine/defect-opennesses/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserDefectOpenness)
+)
+
+router.get(
+  "/defect-coating-templates/:moduleSlug",
+  asyncHandler(coreLoggingController.getDefectCoatingTemplates)
+)
+router.get(
+  "/mine/defect-coatings/:moduleSlug",
+  asyncHandler(coreLoggingController.getUserDefectCoatings)
+)
+router.put(
+  "/mine/defect-coatings/:moduleSlug",
+  asyncHandler(coreLoggingController.saveUserDefectCoatings)
+)
+router.post(
+  "/mine/defect-coatings/:moduleSlug",
+  asyncHandler(coreLoggingController.createUserDefectCoating)
+)
+router.post(
+  "/mine/defect-coatings/:moduleSlug/reset",
+  asyncHandler(coreLoggingController.resetUserDefectCoatings)
+)
+router.patch(
+  "/mine/defect-coatings/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.updateUserDefectCoating)
+)
+router.delete(
+  "/mine/defect-coatings/:moduleSlug/:optionKey",
+  asyncHandler(coreLoggingController.deleteUserDefectCoating)
+)
+
+router.get(
   "/remark-type-templates/:moduleSlug",
   asyncHandler(logRemarksController.getRemarkTypeTemplates)
 )

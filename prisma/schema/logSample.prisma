@@ -1,0 +1,37 @@
+model LogSample {
+  id             Int       @id @default(autoincrement())
+  userId         Int       @map("user_id")
+  projectId      Int       @map("project_id")
+  logId          Int       @map("log_id")
+  depthFrom      String    @map("depth_from") @db.VarChar(50)
+  depthTo        String    @default("") @map("depth_to") @db.VarChar(50)
+  sampleTypeId   String    @map("sample_type_id") @db.VarChar(100)
+  sampleTypeName String    @map("sample_type_name") @db.VarChar(200)
+  sampleNo       String    @default("") @map("sample_no") @db.VarChar(200)
+  qcSampleId     String    @default("") @map("qc_sample_id") @db.VarChar(200)
+  sampleDate     String    @default("") @map("sample_date") @db.VarChar(50)
+  sampleTime     String    @default("") @map("sample_time") @db.VarChar(50)
+  recovery       String    @default("") @db.VarChar(100)
+  comments       String    @default("")
+  labTestRequestId   String @default("") @map("lab_test_request_id") @db.VarChar(100)
+  labTestRequestName String @default("") @map("lab_test_request_name") @db.VarChar(200)
+  labTestTypeIds     Json   @default("[]") @map("lab_test_type_ids")
+  subsurfaceClassification String @default("") @map("subsurface_classification") @db.VarChar(200)
+  /// Legacy nested drafts (prefer LogInsituTest.sampleId for linked tests).
+  insituTests    Json      @default("[]") @map("insitu_tests")
+  sortOrder      Int       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user        User           @relation(fields: [userId], references: [id])
+  project     Project        @relation(fields: [projectId], references: [id])
+  log         Log            @relation(fields: [logId], references: [id], onDelete: Cascade)
+  linkedTests    LogInsituTest[]
+  linkedLabTests LogLabTest[]
+
+  @@index([logId, deletedAt, sortOrder])
+  @@index([projectId, logId])
+  @@map("log_samples")
+}

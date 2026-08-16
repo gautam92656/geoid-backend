@@ -1,0 +1,6 @@
+[
+  { "id": "clean", "name": "Clean", "code": "CL" },
+  { "id": "stained", "name": "Stained", "code": "ST" },
+  { "id": "veneer", "name": "Veneer", "code": "VE" },
+  { "id": "coating", "name": "Coating", "code": "CO" }
+]

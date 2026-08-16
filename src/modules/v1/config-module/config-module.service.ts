@@ -21,6 +21,10 @@ import * as coreDefectTypeService from "./config-module.coreDefectType.service"
 import * as apertureColorService from "./config-module.apertureColor.service"
 import * as apertureMineralService from "./config-module.apertureMineral.service"
 import * as infillMaterialService from "./config-module.infillMaterial.service"
+import * as surfaceShapeService from "./config-module.surfaceShape.service"
+import * as surfaceRoughnessService from "./config-module.surfaceRoughness.service"
+import * as defectOpennessService from "./config-module.defectOpenness.service"
+import * as defectCoatingService from "./config-module.defectCoating.service"
 import * as remarkTypeService from "./config-module.remarkType.service"
 import * as remarksQuickNoteService from "./config-module.remarksQuickNote.service"
 import * as drillingTypeService from "./config-module.drillingType.service"
@@ -226,6 +230,10 @@ export async function adoptTemplate(
     await apertureColorService.ensureUserApertureColors(actorUserId, configId, slug)
     await apertureMineralService.ensureUserApertureMinerals(actorUserId, configId, slug)
     await infillMaterialService.ensureUserInfillMaterials(actorUserId, configId, slug)
+    await surfaceShapeService.ensureUserSurfaceShapes(actorUserId, configId, slug)
+    await surfaceRoughnessService.ensureUserSurfaceRoughnesses(actorUserId, configId, slug)
+    await defectOpennessService.ensureUserDefectOpennesses(actorUserId, configId, slug)
+    await defectCoatingService.ensureUserDefectCoatings(actorUserId, configId, slug)
   }
 
   if (slug === "log-remarks") {

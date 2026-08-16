@@ -6,6 +6,10 @@ import {
   getModuleApertureMineralDefaults,
   getModuleCoreDefectTypeDefaults,
   getModuleInfillMaterialDefaults,
+  getModuleSurfaceShapeDefaults,
+  getModuleSurfaceRoughnessDefaults,
+  getModuleDefectOpennessDefaults,
+  getModuleDefectCoatingDefaults,
 } from "./coreLoggingOptionDefaults"
 import {
   APERTURE_COLORS_DATA_TYPE_ID,
@@ -13,6 +17,10 @@ import {
   CORE_DEFECT_TYPES_DATA_TYPE_ID,
   CORE_LOGGING_MODULE_SLUG,
   INFILL_MATERIALS_DATA_TYPE_ID,
+  SURFACE_SHAPES_DATA_TYPE_ID,
+  SURFACE_ROUGHNESSES_DATA_TYPE_ID,
+  DEFECT_OPENNESSES_DATA_TYPE_ID,
+  DEFECT_COATINGS_DATA_TYPE_ID,
 } from "./coreLoggingOptionTypes"
 import {
   getModuleRemarkTypeDefaults,
@@ -225,6 +233,10 @@ export const MODULE_DATA_TYPE_IDS_BY_MODULE: Record<string, string[]> = {
     "aperture-colors",
     "aperture-minerals",
     "infill-materials",
+    "surface-shapes",
+    "surface-roughnesses",
+    "defect-opennesses",
+    "defect-coatings",
   ],
   samples: ["sample-types", "sample-ids"],
   "lab-tests": ["lab-test-types", "lab-test-presets"],
@@ -689,6 +701,38 @@ function createDefaultDataTypeOptions(moduleId: string): Record<string, ModuleNa
       }
       if (dataTypeId === INFILL_MATERIALS_DATA_TYPE_ID) {
         options[dataTypeId] = getModuleInfillMaterialDefaults(moduleId).map((entry) => ({
+          id: entry.id,
+          name: entry.name,
+          code: entry.code ?? null,
+        }))
+        continue
+      }
+      if (dataTypeId === SURFACE_SHAPES_DATA_TYPE_ID) {
+        options[dataTypeId] = getModuleSurfaceShapeDefaults(moduleId).map((entry) => ({
+          id: entry.id,
+          name: entry.name,
+          code: entry.code ?? null,
+        }))
+        continue
+      }
+      if (dataTypeId === SURFACE_ROUGHNESSES_DATA_TYPE_ID) {
+        options[dataTypeId] = getModuleSurfaceRoughnessDefaults(moduleId).map((entry) => ({
+          id: entry.id,
+          name: entry.name,
+          code: entry.code ?? null,
+        }))
+        continue
+      }
+      if (dataTypeId === DEFECT_OPENNESSES_DATA_TYPE_ID) {
+        options[dataTypeId] = getModuleDefectOpennessDefaults(moduleId).map((entry) => ({
+          id: entry.id,
+          name: entry.name,
+          code: entry.code ?? null,
+        }))
+        continue
+      }
+      if (dataTypeId === DEFECT_COATINGS_DATA_TYPE_ID) {
+        options[dataTypeId] = getModuleDefectCoatingDefaults(moduleId).map((entry) => ({
           id: entry.id,
           name: entry.name,
           code: entry.code ?? null,

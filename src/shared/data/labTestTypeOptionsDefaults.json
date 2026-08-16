@@ -3,14 +3,16 @@
     "id": "moisture-content",
     "name": "Moisture Content",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "Moisture Content",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Results",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Moisture Content (%)"
       }
     ]
   },
@@ -18,12 +20,74 @@
     "id": "particle-size-distribution",
     "name": "Particle Size Distribution",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "Particle Size Distribution",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Sieve 0.075mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-2",
+        "name": "Sieve 0.21mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-3",
+        "name": "Sieve 0.6mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-4",
+        "name": "Sieve 2.36mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-5",
+        "name": "Sieve 6.7mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-6",
+        "name": "Sieve 19mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-7",
+        "name": "Sieve 63mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-8",
+        "name": "Sieve 200mm",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-9",
+        "name": "D60",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-10",
+        "name": "D30",
+        "externalAlias": null,
+        "tablogsAlias": null
+      },
+      {
+        "id": "result-field-11",
+        "name": "D10",
         "externalAlias": null,
         "tablogsAlias": null
       }
@@ -33,14 +97,28 @@
     "id": "atterberg-limits",
     "name": "Atterberg Limits",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "Atterberg Limits",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Plasticity Index % (PI)",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Plasticity Index % (PI)"
+      },
+      {
+        "id": "result-field-2",
+        "name": "Plasticity Limit% (PL)",
+        "externalAlias": null,
+        "tablogsAlias": "Plasticity Limit % (PL)"
+      },
+      {
+        "id": "result-field-3",
+        "name": "Liquid Limit % (LL)",
+        "externalAlias": null,
+        "tablogsAlias": "Liquid Limit % (LL)"
       }
     ]
   },
@@ -48,14 +126,22 @@
     "id": "is50",
     "name": "IS50",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "IS50",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Axial",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Axial"
+      },
+      {
+        "id": "result-field-2",
+        "name": "Diametral",
+        "externalAlias": null,
+        "tablogsAlias": "Diametral"
       }
     ]
   },
@@ -63,14 +149,28 @@
     "id": "gs-mechanical-grain-size",
     "name": "GS - Mechanical Grain Size",
     "graphic": "graphic_00.png",
-    "aliasTable": "GS - Mechanical Grain Size",
+    "externalAlias": null,
+    "aliasTable": "GS - Mechanical Grain Size with Hydrometer",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "%Fines",
         "externalAlias": null,
         "tablogsAlias": null
+      },
+      {
+        "id": "result-field-2",
+        "name": "%Sand",
+        "externalAlias": null,
+        "tablogsAlias": "% Sand"
+      },
+      {
+        "id": "result-field-3",
+        "name": "%Gravel",
+        "externalAlias": null,
+        "tablogsAlias": "% Gravel"
       }
     ]
   },
@@ -78,14 +178,16 @@
     "id": "w-moisture-content",
     "name": "w - Moisture Content",
     "graphic": "graphic_00.png",
-    "aliasTable": "w - Moisture Content",
+    "externalAlias": null,
+    "aliasTable": "Moisture Content",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "w",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Moisture Content (%)"
       }
     ]
   },
@@ -93,14 +195,16 @@
     "id": "c-consolidation-test",
     "name": "C - Consolidation Test",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "C - Consolidation Test",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "C",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "C"
       }
     ]
   },
@@ -108,14 +212,28 @@
     "id": "l-pile",
     "name": "L-Pile",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "L-Pile",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "KS",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "KS"
+      },
+      {
+        "id": "result-field-2",
+        "name": "KC",
+        "externalAlias": null,
+        "tablogsAlias": "KC"
+      },
+      {
+        "id": "result-field-3",
+        "name": "E50",
+        "externalAlias": null,
+        "tablogsAlias": "E50"
       }
     ]
   },
@@ -123,14 +241,16 @@
     "id": "hcsi",
     "name": "HCSI",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "HCSI",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "HCSI Index",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "HCSI Index"
       }
     ]
   },
@@ -138,14 +258,16 @@
     "id": "dr-relative-density",
     "name": "DR - Relative Density",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "DR - Relative Density",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "DR",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Relative Density"
       }
     ]
   },
@@ -153,14 +275,16 @@
     "id": "k-permeability-coefficient",
     "name": "k - Permeability Coefficient",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "k - Permeability Coefficient",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "k",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "k"
       }
     ]
   },
@@ -168,14 +292,16 @@
     "id": "q-triaxial-test",
     "name": "q - Triaxial Test",
     "graphic": "graphic_00.png",
-    "aliasTable": "q - Triaxial Test",
+    "externalAlias": null,
+    "aliasTable": "q - Triaxial Compression Test",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "q",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Triaxial"
       }
     ]
   },
@@ -183,14 +309,16 @@
     "id": "ucs-unconfined-compressive-strength",
     "name": "UCS - Unconfined Compressive Strength",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "UCS - Unconfined Compressive Strength",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "UCS",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "UCS (MPa)"
       }
     ]
   },
@@ -198,14 +326,16 @@
     "id": "sb-shear-box-test",
     "name": "SB - Shear Box Test",
     "graphic": "graphic_00.png",
+    "externalAlias": null,
     "aliasTable": "SB - Shear Box Test",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "SB",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "SB"
       }
     ]
   },
@@ -213,14 +343,16 @@
     "id": "y-unit-weight",
     "name": "Y - Unit Weight",
     "graphic": "graphic_00.png",
-    "aliasTable": "Y - Unit Weight",
+    "externalAlias": null,
+    "aliasTable": "Wet Unit Weight",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Y",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "Wet Unit Weight"
       }
     ]
   },
@@ -228,12 +360,14 @@
     "id": "yd-dry-unit-weight",
     "name": "Yd - Dry Unit Weight",
     "graphic": "graphic_00.png",
-    "aliasTable": "Yd - Dry Unit Weight",
+    "externalAlias": null,
+    "aliasTable": "Dry Unit Weight",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Yd",
         "externalAlias": null,
         "tablogsAlias": null
       }
@@ -243,14 +377,16 @@
     "id": "p-density",
     "name": "p - Density",
     "graphic": "graphic_00.png",
-    "aliasTable": "p - Density",
+    "externalAlias": null,
+    "aliasTable": "Density",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "p",
         "externalAlias": null,
-        "tablogsAlias": null
+        "tablogsAlias": "p - Density"
       }
     ]
   },
@@ -258,12 +394,14 @@
     "id": "pd-dry-density",
     "name": "Pd - Dry Density",
     "graphic": "graphic_00.png",
-    "aliasTable": "Pd - Dry Density",
+    "externalAlias": null,
+    "aliasTable": "Dry Density",
+    "addAsSelectedDataPlot": true,
     "active": true,
     "labTestResultFields": [
       {
         "id": "result-field-1",
-        "name": "",
+        "name": "Pd",
         "externalAlias": null,
         "tablogsAlias": null
       }

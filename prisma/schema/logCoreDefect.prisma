@@ -1,0 +1,33 @@
+model LogCoreDefect {
+  id                     Int       @id @default(autoincrement())
+  userId                 Int       @map("user_id")
+  projectId              Int       @map("project_id")
+  logId                  Int       @map("log_id")
+  defectTypeId           String    @map("defect_type_id") @db.VarChar(100)
+  defectTypeName         String    @map("defect_type_name") @db.VarChar(200)
+  depthFrom              String    @map("depth_from") @db.VarChar(50)
+  depthTo                String    @default("") @map("depth_to") @db.VarChar(50)
+  defectOrientation      String    @default("") @map("defect_orientation") @db.VarChar(50)
+  surfaceShapeIds        Json      @default("[]") @map("surface_shape_ids")
+  surfaceRoughnessIds    Json      @default("[]") @map("surface_roughness_ids")
+  defectCoatingIds       Json      @default("[]") @map("defect_coating_ids")
+  defectOpennessIds      Json      @default("[]") @map("defect_openness_ids")
+  defectSpacingOverride  String    @default("") @map("defect_spacing_override") @db.VarChar(50)
+  boundsOnDefectMin      String    @default("") @map("bounds_on_defect_min") @db.VarChar(50)
+  boundsOnDefectMax      String    @default("") @map("bounds_on_defect_max") @db.VarChar(50)
+  comments               String    @default("")
+  photoName              String    @default("") @map("photo_name") @db.VarChar(255)
+  sortOrder              Int       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  log     Log     @relation(fields: [logId], references: [id], onDelete: Cascade)
+
+  @@index([logId, deletedAt, sortOrder])
+  @@index([projectId, logId])
+  @@map("log_core_defects")
+}

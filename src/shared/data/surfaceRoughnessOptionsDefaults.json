@@ -1,0 +1,7 @@
+[
+  { "id": "very-rough", "name": "Very Rough", "code": "VR" },
+  { "id": "rough", "name": "Rough", "code": "RO" },
+  { "id": "smooth", "name": "Smooth", "code": "SM" },
+  { "id": "polished", "name": "Polished", "code": "PO" },
+  { "id": "slickensided", "name": "Slickensided", "code": "SL" }
+]

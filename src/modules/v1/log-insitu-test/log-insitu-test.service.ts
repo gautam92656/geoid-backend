@@ -9,6 +9,7 @@ function toDTO(item: NonNullable<Awaited<ReturnType<typeof repo.findByIdForUser>
     id: String(item.id),
     logId: item.logId,
     projectId: item.projectId,
+    sampleId: item.sampleId != null ? String(item.sampleId) : null,
     depthFrom: item.depthFrom,
     depthTo: item.depthTo,
     testTypeId: item.testTypeId,
@@ -69,7 +70,14 @@ export type CreateInsituTestBody = {
   results?: string
   comments?: string
   resultValues?: Prisma.InputJsonValue
+  sampleId?: number | string | null
   sortOrder?: number
+}
+
+function parseOptionalSampleId(value: number | string | null | undefined): number | null {
+  if (value == null || value === "") return null
+  const id = typeof value === "number" ? value : parseInt(String(value), 10)
+  return Number.isNaN(id) || id < 1 ? null : id
 }
 
 export async function create(
@@ -80,6 +88,12 @@ export async function create(
 ) {
   await assertLogForUser(userId, projectId, logId)
 
+  const sampleId = parseOptionalSampleId(input.sampleId)
+  if (sampleId != null) {
+    const sample = await repo.findSampleForLog(sampleId, userId, projectId, logId)
+    if (!sample) throw new ValidationError("Sample not found for this log")
+  }
+
   const sortOrder =
     input.sortOrder ?? (await repo.findMaxSortOrder(logId, userId, projectId)) + 1
 
@@ -87,6 +101,7 @@ export async function create(
     userId,
     projectId,
     logId,
+    sampleId,
     depthFrom: input.depthFrom,
     depthTo: input.depthTo,
     testTypeId: input.testTypeId,
@@ -104,13 +119,23 @@ export async function update(
   projectId: number,
   logId: number,
   id: number,
-  input: repo.UpdateLogInsituTestInput
+  input: repo.UpdateLogInsituTestInput & { sampleId?: number | string | null }
 ) {
   await assertLogForUser(userId, projectId, logId)
   const existing = await repo.findByIdForUser(id, userId, projectId, logId)
   if (!existing || existing.deletedAt) throw new NotFoundError("Insitu test not found")
 
-  const updated = await repo.update(id, input)
+  const patch: repo.UpdateLogInsituTestInput = { ...input }
+  if (Object.prototype.hasOwnProperty.call(input, "sampleId")) {
+    const sampleId = parseOptionalSampleId(input.sampleId as number | string | null | undefined)
+    if (sampleId != null) {
+      const sample = await repo.findSampleForLog(sampleId, userId, projectId, logId)
+      if (!sample) throw new ValidationError("Sample not found for this log")
+    }
+    patch.sampleId = sampleId
+  }
+
+  const updated = await repo.update(id, patch)
   return toDTO(updated)
 }
 
@@ -161,6 +186,7 @@ export async function copy(
     userId,
     projectId,
     logId,
+    sampleId: existing.sampleId,
     depthFrom: existing.depthFrom,
     depthTo: existing.depthTo,
     testTypeId: existing.testTypeId,

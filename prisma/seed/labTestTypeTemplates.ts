@@ -10,6 +10,8 @@ export async function seedLabTestTypeTemplates(prisma: PrismaClient) {
     const defaults = getModuleLabTestTypeDefaults(moduleSlug)
     if (defaults.length === 0) continue
 
+    const defaultKeys = defaults.map((option) => option.id)
+
     for (const [index, option] of defaults.entries()) {
       await prisma.labTestTypeTemplate.upsert({
         where: {
@@ -42,6 +44,13 @@ export async function seedLabTestTypeTemplates(prisma: PrismaClient) {
         },
       })
     }
+
+    await prisma.labTestTypeTemplate.deleteMany({
+      where: {
+        moduleSlug,
+        optionKey: { notIn: defaultKeys },
+      },
+    })
 
     console.log(`  Seeded ${defaults.length} lab test type templates for module "${moduleSlug}"`)
   }

@@ -4,6 +4,10 @@ export const CORE_DEFECT_TYPES_DATA_TYPE_ID = "core-defect-types" as const
 export const APERTURE_COLORS_DATA_TYPE_ID = "aperture-colors" as const
 export const APERTURE_MINERALS_DATA_TYPE_ID = "aperture-minerals" as const
 export const INFILL_MATERIALS_DATA_TYPE_ID = "infill-materials" as const
+export const SURFACE_SHAPES_DATA_TYPE_ID = "surface-shapes" as const
+export const SURFACE_ROUGHNESSES_DATA_TYPE_ID = "surface-roughnesses" as const
+export const DEFECT_OPENNESSES_DATA_TYPE_ID = "defect-opennesses" as const
+export const DEFECT_COATINGS_DATA_TYPE_ID = "defect-coatings" as const
 
 export type CoreDefectTypeDTO = {
   id: string
@@ -27,6 +31,30 @@ export type ApertureMineralDTO = {
 }
 
 export type InfillMaterialDTO = {
+  id: string
+  name: string
+  code?: string | null
+}
+
+export type SurfaceShapeDTO = {
+  id: string
+  name: string
+  code?: string | null
+}
+
+export type SurfaceRoughnessDTO = {
+  id: string
+  name: string
+  code?: string | null
+}
+
+export type DefectOpennessDTO = {
+  id: string
+  name: string
+  code?: string | null
+}
+
+export type DefectCoatingDTO = {
   id: string
   name: string
   code?: string | null
@@ -235,6 +263,170 @@ export function parseInfillMaterialDTOList(value: unknown): InfillMaterialDTO[] 
 
   for (const [index, entry] of value.entries()) {
     const parsed = parseInfillMaterialDTO(entry, index)
+    if (!parsed) continue
+    const key = parsed.name.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    options.push(parsed)
+  }
+
+  return options
+}
+
+export function parseSurfaceShapeDTO(
+  value: unknown,
+  index: number
+): SurfaceShapeDTO | null {
+  if (!isRecord(value)) return null
+  const name = typeof value.name === "string" ? value.name.trim() : ""
+  if (!name) return null
+
+  const id =
+    typeof value.id === "string" && value.id.trim()
+      ? value.id.trim()
+      : typeof value.optionKey === "string" && value.optionKey.trim()
+        ? value.optionKey.trim()
+        : typeof value.id === "number"
+          ? String(value.id)
+          : `surface-shape-${index + 1}`
+
+  return {
+    id,
+    name,
+    code: asNullableString(value.code) ?? "",
+  }
+}
+
+export function parseSurfaceShapeDTOList(value: unknown): SurfaceShapeDTO[] {
+  if (!Array.isArray(value)) return []
+  const options: SurfaceShapeDTO[] = []
+  const seen = new Set<string>()
+
+  for (const [index, entry] of value.entries()) {
+    const parsed = parseSurfaceShapeDTO(entry, index)
+    if (!parsed) continue
+    const key = parsed.name.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    options.push(parsed)
+  }
+
+  return options
+}
+
+export function parseSurfaceRoughnessDTO(
+  value: unknown,
+  index: number
+): SurfaceRoughnessDTO | null {
+  if (!isRecord(value)) return null
+  const name = typeof value.name === "string" ? value.name.trim() : ""
+  if (!name) return null
+
+  const id =
+    typeof value.id === "string" && value.id.trim()
+      ? value.id.trim()
+      : typeof value.optionKey === "string" && value.optionKey.trim()
+        ? value.optionKey.trim()
+        : typeof value.id === "number"
+          ? String(value.id)
+          : `surface-roughness-${index + 1}`
+
+  return {
+    id,
+    name,
+    code: asNullableString(value.code) ?? "",
+  }
+}
+
+export function parseSurfaceRoughnessDTOList(value: unknown): SurfaceRoughnessDTO[] {
+  if (!Array.isArray(value)) return []
+  const options: SurfaceRoughnessDTO[] = []
+  const seen = new Set<string>()
+
+  for (const [index, entry] of value.entries()) {
+    const parsed = parseSurfaceRoughnessDTO(entry, index)
+    if (!parsed) continue
+    const key = parsed.name.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    options.push(parsed)
+  }
+
+  return options
+}
+
+export function parseDefectOpennessDTO(
+  value: unknown,
+  index: number
+): DefectOpennessDTO | null {
+  if (!isRecord(value)) return null
+  const name = typeof value.name === "string" ? value.name.trim() : ""
+  if (!name) return null
+
+  const id =
+    typeof value.id === "string" && value.id.trim()
+      ? value.id.trim()
+      : typeof value.optionKey === "string" && value.optionKey.trim()
+        ? value.optionKey.trim()
+        : typeof value.id === "number"
+          ? String(value.id)
+          : `defect-openness-${index + 1}`
+
+  return {
+    id,
+    name,
+    code: asNullableString(value.code) ?? "",
+  }
+}
+
+export function parseDefectOpennessDTOList(value: unknown): DefectOpennessDTO[] {
+  if (!Array.isArray(value)) return []
+  const options: DefectOpennessDTO[] = []
+  const seen = new Set<string>()
+
+  for (const [index, entry] of value.entries()) {
+    const parsed = parseDefectOpennessDTO(entry, index)
+    if (!parsed) continue
+    const key = parsed.name.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    options.push(parsed)
+  }
+
+  return options
+}
+
+export function parseDefectCoatingDTO(
+  value: unknown,
+  index: number
+): DefectCoatingDTO | null {
+  if (!isRecord(value)) return null
+  const name = typeof value.name === "string" ? value.name.trim() : ""
+  if (!name) return null
+
+  const id =
+    typeof value.id === "string" && value.id.trim()
+      ? value.id.trim()
+      : typeof value.optionKey === "string" && value.optionKey.trim()
+        ? value.optionKey.trim()
+        : typeof value.id === "number"
+          ? String(value.id)
+          : `defect-coating-${index + 1}`
+
+  return {
+    id,
+    name,
+    code: asNullableString(value.code) ?? "",
+  }
+}
+
+export function parseDefectCoatingDTOList(value: unknown): DefectCoatingDTO[] {
+  if (!Array.isArray(value)) return []
+  const options: DefectCoatingDTO[] = []
+  const seen = new Set<string>()
+
+  for (const [index, entry] of value.entries()) {
+    const parsed = parseDefectCoatingDTO(entry, index)
     if (!parsed) continue
     const key = parsed.name.toLowerCase()
     if (seen.has(key)) continue

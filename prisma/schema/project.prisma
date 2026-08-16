@@ -43,10 +43,25 @@ model Project {
   user          User                   @relation(fields: [userId], references: [id])
   client        Client?                @relation(fields: [clientId], references: [id])
   logs          Log[]
-  subsurfaceLayers LogSubsurfaceLayer[]
-  insituTests      LogInsituTest[]
-  remarks          LogRemark[]
-  statusHistory ProjectStatusHistory[]
+  subsurfaceLayers     LogSubsurfaceLayer[]
+  insituTests          LogInsituTest[]
+  labTests             LogLabTest[]
+  remarks              LogRemark[]
+  samples              LogSample[]
+  drillingObservations LogDrillingObservation[]
+  drillingMethods      LogDrillingMethod[]
+  drillingResistances  LogDrillingResistance[]
+  drillingCasings      LogDrillingCasing[]
+  waterObservations    LogWaterObservation[]
+  wellLogs             LogWellLog[]
+  wellCovers           LogWellCover[]
+  wellProbes           LogWellProbe[]
+  wellBackfills        LogWellBackfill[]
+  wellCasings          LogWellCasing[]
+  wellCasingTops       LogWellCasingTop[]
+  rqdTcrs              LogRqdTcr[]
+  coreDefects          LogCoreDefect[]
+  statusHistory        ProjectStatusHistory[]
 
   @@unique([userId, projectNo])
   @@map("projects")

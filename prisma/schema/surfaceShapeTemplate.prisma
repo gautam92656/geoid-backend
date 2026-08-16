@@ -1,0 +1,16 @@
+/// Common Core Logging surface-shape catalog defaults.
+model SurfaceShapeTemplate {
+  id         Int     @id @default(autoincrement())
+  moduleSlug String  @map("module_slug") @db.VarChar(100)
+  optionKey  String  @map("option_key") @db.VarChar(100)
+  name       String  @db.VarChar(200)
+  code       String? @db.VarChar(100)
+  sortOrder  Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([moduleSlug, optionKey], map: "surface_shape_tpl_module_key")
+  @@index([moduleSlug, sortOrder], map: "surface_shape_tpl_module_sort_idx")
+  @@map("surface_shape_templates")
+}

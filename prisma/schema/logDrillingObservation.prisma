@@ -1,0 +1,27 @@
+model LogDrillingObservation {
+  id                   Int       @id @default(autoincrement())
+  userId               Int       @map("user_id")
+  projectId            Int       @map("project_id")
+  logId                Int       @map("log_id")
+  depth                String    @default("") @db.VarChar(50)
+  depthOfCasing        String    @default("") @map("depth_of_casing") @db.VarChar(50)
+  depthToWater         String    @default("") @map("depth_to_water") @db.VarChar(50)
+  observationTypeId    String    @map("observation_type_id") @db.VarChar(100)
+  observationTypeName  String    @map("observation_type_name") @db.VarChar(200)
+  observationDate      String    @default("") @map("observation_date") @db.VarChar(30)
+  observationTime      String    @default("") @map("observation_time") @db.VarChar(10)
+  comments             String    @default("")
+  sortOrder            Int       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  log     Log     @relation(fields: [logId], references: [id], onDelete: Cascade)
+
+  @@index([logId, deletedAt, sortOrder])
+  @@index([projectId, logId])
+  @@map("log_drilling_observations")
+}

@@ -65,9 +65,24 @@ model Log {
   proposedLogs    Log[]      @relation("ProposedBorelog")
   supplier        Supplier?  @relation(fields: [supplierId], references: [id])
   equipment       Equipment? @relation(fields: [equipmentId], references: [id])
-  subsurfaceLayers LogSubsurfaceLayer[]
-  insituTests      LogInsituTest[]
-  remarks          LogRemark[]
+  subsurfaceLayers      LogSubsurfaceLayer[]
+  insituTests           LogInsituTest[]
+  labTests              LogLabTest[]
+  remarks               LogRemark[]
+  samples               LogSample[]
+  drillingObservations  LogDrillingObservation[]
+  drillingMethods       LogDrillingMethod[]
+  drillingResistances   LogDrillingResistance[]
+  drillingCasings       LogDrillingCasing[]
+  waterObservations     LogWaterObservation[]
+  wellLogs              LogWellLog[]
+  wellCovers            LogWellCover[]
+  wellProbes            LogWellProbe[]
+  wellBackfills         LogWellBackfill[]
+  wellCasings           LogWellCasing[]
+  wellCasingTops        LogWellCasingTop[]
+  rqdTcrs               LogRqdTcr[]
+  coreDefects           LogCoreDefect[]
 
   @@unique([projectId, logNumber])
   @@map("logs")

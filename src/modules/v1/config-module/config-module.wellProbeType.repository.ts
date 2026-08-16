@@ -9,6 +9,7 @@ type TemplateRow = {
   tablogsAlias: string | null
   graphic: string | null
   recordDepthTo: boolean
+  allowNegativeDepth: boolean
   sortOrder: number
 }
 
@@ -24,6 +25,7 @@ export function toWellProbeTypeDTO(row: {
   tablogsAlias: string | null
   graphic: string | null
   recordDepthTo: boolean
+  allowNegativeDepth: boolean
 }): WellProbeTypeDTO {
   return {
     id: row.optionKey,
@@ -31,6 +33,7 @@ export function toWellProbeTypeDTO(row: {
     tablogsAlias: row.tablogsAlias,
     graphic: row.graphic,
     recordDepthTo: row.recordDepthTo,
+    allowNegativeDepth: row.allowNegativeDepth,
   }
 }
 
@@ -41,6 +44,7 @@ function fieldsFromDto(option: WellProbeTypeDTO, sortOrder: number) {
     tablogsAlias: option.tablogsAlias?.trim() || null,
     graphic: option.graphic?.trim() || null,
     recordDepthTo: option.recordDepthTo ?? true,
+    allowNegativeDepth: option.allowNegativeDepth ?? false,
     sortOrder,
   }
 }
@@ -68,6 +72,7 @@ export async function upsertTemplate(
       tablogsAlias: fields.tablogsAlias,
       graphic: fields.graphic,
       recordDepthTo: fields.recordDepthTo,
+      allowNegativeDepth: fields.allowNegativeDepth,
       sortOrder: fields.sortOrder,
     },
     create: {
@@ -128,6 +133,7 @@ export async function createUserWellProbeTypesFromTemplates(
       tablogsAlias: template.tablogsAlias,
       graphic: template.graphic,
       recordDepthTo: template.recordDepthTo,
+      allowNegativeDepth: template.allowNegativeDepth,
       sortOrder: template.sortOrder,
     })),
   })
@@ -232,6 +238,7 @@ export async function updateUserWellProbeType(
       tablogsAlias: fields.tablogsAlias,
       graphic: fields.graphic,
       recordDepthTo: fields.recordDepthTo,
+      allowNegativeDepth: fields.allowNegativeDepth,
       ...(sortOrder !== undefined ? { sortOrder } : {}),
       ...(fields.optionKey !== optionKey.trim() ? { optionKey: fields.optionKey } : {}),
     },

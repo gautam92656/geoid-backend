@@ -17,6 +17,10 @@ import { seedCoreDefectTypeTemplates } from "./coreDefectTypeTemplates"
 import { seedApertureColorTemplates } from "./apertureColorTemplates"
 import { seedApertureMineralTemplates } from "./apertureMineralTemplates"
 import { seedInfillMaterialTemplates } from "./infillMaterialTemplates"
+import { seedSurfaceShapeTemplates } from "./surfaceShapeTemplates"
+import { seedSurfaceRoughnessTemplates } from "./surfaceRoughnessTemplates"
+import { seedDefectOpennessTemplates } from "./defectOpennessTemplates"
+import { seedDefectCoatingTemplates } from "./defectCoatingTemplates"
 import { seedRemarkTypeTemplates } from "./remarkTypeTemplates"
 import { seedRemarksQuickNoteTemplates } from "./remarksQuickNoteTemplates"
 import { seedDrillingTypeTemplates } from "./drillingTypeTemplates"
@@ -69,6 +73,10 @@ async function main() {
   await seedApertureColorTemplates(prisma)
   await seedApertureMineralTemplates(prisma)
   await seedInfillMaterialTemplates(prisma)
+  await seedSurfaceShapeTemplates(prisma)
+  await seedSurfaceRoughnessTemplates(prisma)
+  await seedDefectOpennessTemplates(prisma)
+  await seedDefectCoatingTemplates(prisma)
   await seedRemarkTypeTemplates(prisma)
   await seedRemarksQuickNoteTemplates(prisma)
   await seedDrillingTypeTemplates(prisma)

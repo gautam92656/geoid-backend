@@ -1,0 +1,5 @@
+[
+  { "id": "open", "name": "Open", "code": "OP" },
+  { "id": "closed", "name": "Closed", "code": "CL" },
+  { "id": "infilled", "name": "Infilled", "code": "IN" }
+]
