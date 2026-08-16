@@ -293,6 +293,7 @@ export type WellProbeTypeDTO = {
   tablogsAlias?: string | null
   graphic?: string | null
   recordDepthTo?: boolean
+  allowNegativeDepth?: boolean
 }
 
 export function parseWellProbeTypeDTO(
@@ -327,6 +328,13 @@ export function parseWellProbeTypeDTO(
         ? true
         : asBool(value.recordDepthTo) || asBool(value.record_depth_to)
     })(),
+    allowNegativeDepth: (() => {
+      const unset =
+        value.allowNegativeDepth === undefined && value.allow_negative_depth === undefined
+      return unset
+        ? false
+        : asBool(value.allowNegativeDepth) || asBool(value.allow_negative_depth)
+    })(),
   }
 }
 
@@ -352,6 +360,7 @@ export type WellBackfillTypeDTO = {
   name: string
   tablogsAlias?: string | null
   graphic?: string | null
+  allowNegativeDepth?: boolean
 }
 
 export function parseWellBackfillTypeDTO(
@@ -379,6 +388,13 @@ export function parseWellBackfillTypeDTO(
       asNullableString(value.tablogs_alias) ??
       asNullableString(value.alias),
     graphic: asNullableString(value.graphic),
+    allowNegativeDepth: (() => {
+      const unset =
+        value.allowNegativeDepth === undefined && value.allow_negative_depth === undefined
+      return unset
+        ? false
+        : asBool(value.allowNegativeDepth) || asBool(value.allow_negative_depth)
+    })(),
   }
 }
 

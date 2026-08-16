@@ -1,0 +1,7 @@
+[
+  { "id": "planar", "name": "Planar", "code": "PL" },
+  { "id": "curved", "name": "Curved", "code": "CU" },
+  { "id": "undulating", "name": "Undulating", "code": "UN" },
+  { "id": "stepped", "name": "Stepped", "code": "ST" },
+  { "id": "irregular", "name": "Irregular", "code": "IR" }
+]

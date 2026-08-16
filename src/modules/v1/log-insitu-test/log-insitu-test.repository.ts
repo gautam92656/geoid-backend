@@ -6,6 +6,7 @@ export type CreateLogInsituTestInput = {
   userId: number
   projectId: number
   logId: number
+  sampleId?: number | null
   depthFrom: string
   depthTo?: string
   testTypeId: string
@@ -28,6 +29,7 @@ export type LogInsituTestListFilters = {
   limit: number
   includeDeleted?: boolean
   onlyDeleted?: boolean
+  sampleId?: number
   search?: string
   sortBy?: string
   sortOrder?: "asc" | "desc"
@@ -49,6 +51,12 @@ function buildData(data: UpdateLogInsituTestInput): Prisma.LogInsituTestUpdateIn
   if (data.comments !== undefined) result.comments = normalizeOptionalString(data.comments)
   if (data.resultValues !== undefined) result.resultValues = data.resultValues
   if (data.sortOrder !== undefined) result.sortOrder = data.sortOrder
+  if (data.sampleId !== undefined) {
+    result.sample =
+      data.sampleId === null
+        ? { disconnect: true }
+        : { connect: { id: data.sampleId } }
+  }
 
   return result as Prisma.LogInsituTestUpdateInput
 }
@@ -72,6 +80,7 @@ export async function findAll(filters: LogInsituTestListFilters) {
     userId: filters.userId,
     projectId: filters.projectId,
     logId: filters.logId,
+    ...(filters.sampleId != null ? { sampleId: filters.sampleId } : {}),
     ...(filters.onlyDeleted
       ? { deletedAt: { not: null } }
       : filters.includeDeleted
@@ -138,6 +147,7 @@ export async function create(data: CreateLogInsituTestInput) {
       userId: data.userId,
       projectId: data.projectId,
       logId: data.logId,
+      sampleId: data.sampleId ?? null,
       depthFrom: data.depthFrom.trim(),
       depthTo: data.depthTo?.trim() ?? "",
       testTypeId: data.testTypeId.trim(),
@@ -174,5 +184,16 @@ export async function restore(id: number, userId: number, projectId: number, log
 export async function findLogForUser(logId: number, userId: number, projectId: number) {
   return prisma.log.findFirst({
     where: { id: logId, userId, projectId },
+  })
+}
+
+export async function findSampleForLog(
+  sampleId: number,
+  userId: number,
+  projectId: number,
+  logId: number
+) {
+  return prisma.logSample.findFirst({
+    where: { id: sampleId, userId, projectId, logId, deletedAt: null },
   })
 }

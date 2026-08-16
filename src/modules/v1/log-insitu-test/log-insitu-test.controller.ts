@@ -64,6 +64,14 @@ export async function list(req: Request, res: Response, next: NextFunction): Pro
   if (value.onlyDeleted === "true") onlyDeleted = true
   else if (value.onlyDeleted === "false") onlyDeleted = false
 
+  const sampleIdRaw = value.sampleId
+  const sampleId =
+    sampleIdRaw == null || sampleIdRaw === ""
+      ? undefined
+      : typeof sampleIdRaw === "number"
+        ? sampleIdRaw
+        : parseId(String(sampleIdRaw)) ?? undefined
+
   const data = await testService.list({
     userId,
     projectId: ids.projectId,
@@ -72,6 +80,7 @@ export async function list(req: Request, res: Response, next: NextFunction): Pro
     limit: value.limit,
     includeDeleted,
     onlyDeleted,
+    sampleId,
     search: value.search,
     sortBy: value.sortBy,
     sortOrder: value.sortOrder,

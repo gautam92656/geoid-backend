@@ -8,6 +8,7 @@ type TemplateRow = {
   name: string
   tablogsAlias: string | null
   graphic: string | null
+  allowNegativeDepth: boolean
   sortOrder: number
 }
 
@@ -22,12 +23,14 @@ export function toWellBackfillTypeDTO(row: {
   name: string
   tablogsAlias: string | null
   graphic: string | null
+  allowNegativeDepth: boolean
 }): WellBackfillTypeDTO {
   return {
     id: row.optionKey,
     name: row.name,
     tablogsAlias: row.tablogsAlias,
     graphic: row.graphic,
+    allowNegativeDepth: row.allowNegativeDepth,
   }
 }
 
@@ -37,6 +40,7 @@ function fieldsFromDto(option: WellBackfillTypeDTO, sortOrder: number) {
     name: option.name.trim(),
     tablogsAlias: option.tablogsAlias?.trim() || null,
     graphic: option.graphic?.trim() || null,
+    allowNegativeDepth: option.allowNegativeDepth ?? false,
     sortOrder,
   }
 }
@@ -63,6 +67,7 @@ export async function upsertTemplate(
       name: fields.name,
       tablogsAlias: fields.tablogsAlias,
       graphic: fields.graphic,
+      allowNegativeDepth: fields.allowNegativeDepth,
       sortOrder: fields.sortOrder,
     },
     create: {
@@ -122,6 +127,7 @@ export async function createUserWellBackfillTypesFromTemplates(
       name: template.name,
       tablogsAlias: template.tablogsAlias,
       graphic: template.graphic,
+      allowNegativeDepth: template.allowNegativeDepth,
       sortOrder: template.sortOrder,
     })),
   })
@@ -225,6 +231,7 @@ export async function updateUserWellBackfillType(
       name: fields.name,
       tablogsAlias: fields.tablogsAlias,
       graphic: fields.graphic,
+      allowNegativeDepth: fields.allowNegativeDepth,
       ...(sortOrder !== undefined ? { sortOrder } : {}),
       ...(fields.optionKey !== optionKey.trim() ? { optionKey: fields.optionKey } : {}),
     },

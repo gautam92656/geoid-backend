@@ -10,6 +10,7 @@ model UserWellProbeType {
   tablogsAlias              String? @map("tablogs_alias") @db.VarChar(100)
   graphic                   String? @db.VarChar(255)
   recordDepthTo             Boolean @default(true) @map("record_depth_to")
+  allowNegativeDepth        Boolean @default(false) @map("allow_negative_depth")
   sortOrder          Int     @default(0) @map("sort_order")
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)

@@ -21,7 +21,22 @@ import faqRoutes from "../modules/v1/faq/faq.routes"
 import logRoutes from "../modules/v1/log/log.routes"
 import logSubsurfaceLayerRoutes from "../modules/v1/log-subsurface-layer/log-subsurface-layer.routes"
 import logInsituTestRoutes from "../modules/v1/log-insitu-test/log-insitu-test.routes"
+import logLabTestRoutes from "../modules/v1/log-lab-test/log-lab-test.routes"
 import logRemarkRoutes from "../modules/v1/log-remark/log-remark.routes"
+import logSampleRoutes from "../modules/v1/log-sample/log-sample.routes"
+import logDrillingObservationRoutes from "../modules/v1/log-drilling-observation/log-drilling-observation.routes"
+import logDrillingMethodRoutes from "../modules/v1/log-drilling-method/log-drilling-method.routes"
+import logDrillingResistanceRoutes from "../modules/v1/log-drilling-resistance/log-drilling-resistance.routes"
+import logDrillingCasingRoutes from "../modules/v1/log-drilling-casing/log-drilling-casing.routes"
+import logWaterObservationRoutes from "../modules/v1/log-water-observation/log-water-observation.routes"
+import logWellLogRoutes from "../modules/v1/log-well-log/log-well-log.routes"
+import logWellCoverRoutes from "../modules/v1/log-well-cover/log-well-cover.routes"
+import logWellProbeRoutes from "../modules/v1/log-well-probe/log-well-probe.routes"
+import logWellBackfillRoutes from "../modules/v1/log-well-backfill/log-well-backfill.routes"
+import logWellCasingRoutes from "../modules/v1/log-well-casing/log-well-casing.routes"
+import logWellCasingTopRoutes from "../modules/v1/log-well-casing-top/log-well-casing-top.routes"
+import logRqdTcrRoutes from "../modules/v1/log-rqd-tcr/log-rqd-tcr.routes"
+import logCoreDefectRoutes from "../modules/v1/log-core-defect/log-core-defect.routes"
 import logConfigurationRoutes from "../modules/v1/log-configuration/log-configuration.routes"
 import logConfigurationTemplateRoutes from "../modules/v1/log-configuration-template/log-configuration-template.routes"
 import configModuleRoutes from "../modules/v1/config-module/config-module.routes"
@@ -62,7 +77,74 @@ router.use("/log-report-templates", setLanguage, logReportTemplateRoutes)
 router.use("/offices", setLanguage, officeRoutes)
 router.use("/projects/:projectId/logs/:logId/subsurfaces", setLanguage, logSubsurfaceLayerRoutes)
 router.use("/projects/:projectId/logs/:logId/insitu-tests", setLanguage, logInsituTestRoutes)
+router.use("/projects/:projectId/logs/:logId/lab-tests", setLanguage, logLabTestRoutes)
 router.use("/projects/:projectId/logs/:logId/remarks", setLanguage, logRemarkRoutes)
+router.use("/projects/:projectId/logs/:logId/samples", setLanguage, logSampleRoutes)
+router.use(
+  "/projects/:projectId/logs/:logId/drilling-observations",
+  setLanguage,
+  logDrillingObservationRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/drilling-methods",
+  setLanguage,
+  logDrillingMethodRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/drilling-resistances",
+  setLanguage,
+  logDrillingResistanceRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/drilling-casings",
+  setLanguage,
+  logDrillingCasingRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/water-observations",
+  setLanguage,
+  logWaterObservationRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-logs",
+  setLanguage,
+  logWellLogRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-covers",
+  setLanguage,
+  logWellCoverRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-probes",
+  setLanguage,
+  logWellProbeRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-backfills",
+  setLanguage,
+  logWellBackfillRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-casings",
+  setLanguage,
+  logWellCasingRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/well-casing-tops",
+  setLanguage,
+  logWellCasingTopRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/rqd-tcrs",
+  setLanguage,
+  logRqdTcrRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/core-defects",
+  setLanguage,
+  logCoreDefectRoutes
+)
 router.use("/projects/:projectId/logs", setLanguage, logRoutes)
 router.use("/projects/:projectId/status-history", setLanguage, projectStatusHistoryRoutes)
 router.use("/projects", setLanguage, projectRoutes)

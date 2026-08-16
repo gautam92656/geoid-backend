@@ -1,0 +1,22 @@
+/// Per-configuration Core Logging defect coatings (copied from common templates on first use).
+model UserDefectCoating {
+  id                 Int     @id @default(autoincrement())
+  userId             Int     @map("user_id")
+  logConfigurationId Int     @map("log_configuration_id")
+  moduleSlug         String  @map("module_slug") @db.VarChar(100)
+  optionKey          String  @map("option_key") @db.VarChar(100)
+  sourceTemplateId   Int?    @map("source_template_id")
+  name               String  @db.VarChar(200)
+  code               String? @db.VarChar(100)
+  sortOrder          Int     @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  logConfiguration LogConfiguration @relation(fields: [logConfigurationId], references: [id], onDelete: Cascade)
+
+  @@unique([logConfigurationId, moduleSlug, optionKey], map: "user_defect_coating_config_key")
+  @@index([userId, logConfigurationId, moduleSlug, sortOrder], map: "user_defect_coating_user_config_idx")
+  @@map("user_defect_coatings")
+}

@@ -19,6 +19,10 @@ export const createLogInsituTestSchema = Joi.object({
   results: optionalTrimmed(RESULTS_MAX_LENGTH),
   comments: optionalTrimmed(COMMENTS_MAX_LENGTH),
   resultValues: resultValuesSchema,
+  sampleId: Joi.alternatives()
+    .try(Joi.number().integer().min(1), Joi.string().trim().pattern(/^\d+$/))
+    .optional()
+    .allow(null, ""),
   sortOrder: Joi.number().integer().min(0).optional(),
 })
 
@@ -30,6 +34,9 @@ export const updateLogInsituTestSchema = Joi.object({
   results: optionalTrimmed(RESULTS_MAX_LENGTH),
   comments: optionalTrimmed(COMMENTS_MAX_LENGTH),
   resultValues: resultValuesSchema,
+  sampleId: Joi.alternatives()
+    .try(Joi.number().integer().min(1), Joi.string().trim().pattern(/^\d+$/), Joi.valid(null))
+    .optional(),
   sortOrder: Joi.number().integer().min(0).optional(),
 }).min(1)
 
@@ -38,6 +45,9 @@ export const listLogInsituTestsQuerySchema = Joi.object({
   limit: Joi.number().integer().min(1).max(MAX_LIMIT).default(DEFAULT_LIMIT),
   includeDeleted: Joi.string().valid("true", "false").optional(),
   onlyDeleted: Joi.string().valid("true", "false").optional(),
+  sampleId: Joi.alternatives()
+    .try(Joi.number().integer().min(1), Joi.string().trim().pattern(/^\d+$/))
+    .optional(),
   search: Joi.string().trim().optional(),
   sortBy: Joi.string()
     .valid(

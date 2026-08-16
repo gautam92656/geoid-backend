@@ -1,0 +1,31 @@
+model LogRqdTcr {
+  id                  Int       @id @default(autoincrement())
+  userId              Int       @map("user_id")
+  projectId           Int       @map("project_id")
+  logId               Int       @map("log_id")
+  depthFrom           String    @default("") @map("depth_from") @db.VarChar(50)
+  depthTo             String    @default("") @map("depth_to") @db.VarChar(50)
+  startDate           String    @default("") @map("start_date") @db.VarChar(50)
+  startTime           String    @default("") @map("start_time") @db.VarChar(50)
+  endDate             String    @default("") @map("end_date") @db.VarChar(50)
+  endTime             String    @default("") @map("end_time") @db.VarChar(50)
+  corePieceLength     String    @default("") @map("core_piece_length") @db.VarChar(50)
+  rqdPercent          String    @map("rqd_percent") @db.VarChar(50)
+  coreLossLength      String    @map("core_loss_length") @db.VarChar(50)
+  coreRecoveryLength  String    @map("core_recovery_length") @db.VarChar(50)
+  tcrPercent          String    @map("tcr_percent") @db.VarChar(50)
+  photoName           String    @default("") @map("photo_name") @db.VarChar(255)
+  sortOrder           Int       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  log     Log     @relation(fields: [logId], references: [id], onDelete: Cascade)
+
+  @@index([logId, deletedAt, sortOrder])
+  @@index([projectId, logId])
+  @@map("log_rqd_tcrs")
+}

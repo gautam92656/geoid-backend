@@ -254,6 +254,58 @@ export const saveInfillMaterialsBodySchema = Joi.alternatives().try(
   Joi.array().items(infillMaterialSchema).max(MODULE_OPTIONS_MAX_COUNT)
 )
 
+export const surfaceShapeSchema = Joi.object({
+  id: Joi.string().trim().max(100).required(),
+  name: Joi.string().trim().max(MODULE_OPTION_NAME_MAX_LENGTH).required(),
+  code: Joi.string().trim().max(100).allow(null, "").optional(),
+}).unknown(true)
+
+export const saveSurfaceShapesBodySchema = Joi.alternatives().try(
+  Joi.object({
+    options: Joi.array().items(surfaceShapeSchema).max(MODULE_OPTIONS_MAX_COUNT).required(),
+  }),
+  Joi.array().items(surfaceShapeSchema).max(MODULE_OPTIONS_MAX_COUNT)
+)
+
+export const surfaceRoughnessSchema = Joi.object({
+  id: Joi.string().trim().max(100).required(),
+  name: Joi.string().trim().max(MODULE_OPTION_NAME_MAX_LENGTH).required(),
+  code: Joi.string().trim().max(100).allow(null, "").optional(),
+}).unknown(true)
+
+export const saveSurfaceRoughnessesBodySchema = Joi.alternatives().try(
+  Joi.object({
+    options: Joi.array().items(surfaceRoughnessSchema).max(MODULE_OPTIONS_MAX_COUNT).required(),
+  }),
+  Joi.array().items(surfaceRoughnessSchema).max(MODULE_OPTIONS_MAX_COUNT)
+)
+
+export const defectOpennessSchema = Joi.object({
+  id: Joi.string().trim().max(100).required(),
+  name: Joi.string().trim().max(MODULE_OPTION_NAME_MAX_LENGTH).required(),
+  code: Joi.string().trim().max(100).allow(null, "").optional(),
+}).unknown(true)
+
+export const saveDefectOpennessesBodySchema = Joi.alternatives().try(
+  Joi.object({
+    options: Joi.array().items(defectOpennessSchema).max(MODULE_OPTIONS_MAX_COUNT).required(),
+  }),
+  Joi.array().items(defectOpennessSchema).max(MODULE_OPTIONS_MAX_COUNT)
+)
+
+export const defectCoatingSchema = Joi.object({
+  id: Joi.string().trim().max(100).required(),
+  name: Joi.string().trim().max(MODULE_OPTION_NAME_MAX_LENGTH).required(),
+  code: Joi.string().trim().max(100).allow(null, "").optional(),
+}).unknown(true)
+
+export const saveDefectCoatingsBodySchema = Joi.alternatives().try(
+  Joi.object({
+    options: Joi.array().items(defectCoatingSchema).max(MODULE_OPTIONS_MAX_COUNT).required(),
+  }),
+  Joi.array().items(defectCoatingSchema).max(MODULE_OPTIONS_MAX_COUNT)
+)
+
 export const coreLoggingOptionKeyParamValidationSchema = Joi.object({
   moduleSlug: moduleSlugParamSchema.required(),
   optionKey: Joi.string().trim().max(100).required(),
@@ -540,6 +592,7 @@ export const wellProbeTypeSchema = Joi.object({
   tablogsAlias: Joi.string().trim().max(100).allow(null, "").optional(),
   graphic: Joi.string().trim().max(255).allow(null, "").optional(),
   recordDepthTo: Joi.boolean().optional(),
+  allowNegativeDepth: Joi.boolean().optional(),
 }).unknown(true)
 
 export const saveWellProbeTypesBodySchema = Joi.alternatives().try(
@@ -554,6 +607,7 @@ export const wellBackfillTypeSchema = Joi.object({
   name: Joi.string().trim().max(MODULE_OPTION_NAME_MAX_LENGTH).required(),
   tablogsAlias: Joi.string().trim().max(100).allow(null, "").optional(),
   graphic: Joi.string().trim().max(255).allow(null, "").optional(),
+  allowNegativeDepth: Joi.boolean().optional(),
 }).unknown(true)
 
 export const saveWellBackfillTypesBodySchema = Joi.alternatives().try(
