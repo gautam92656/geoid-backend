@@ -10,7 +10,7 @@ import { toGroupedList, toLogReportTemplateDTO } from "./log-report-template.map
 import * as repo from "./log-report-template.repository"
 
 const DEFAULT_SEED = [
-  { name: "Marsh Template Gen 2", logType: "borelog" as const, isDefault: true },
+  { name: "Log Report", logType: "borelog" as const, isDefault: true },
   { name: "Corelog Default", logType: "corelog" as const, isDefault: true },
 ]
 

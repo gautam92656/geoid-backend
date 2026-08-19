@@ -34,10 +34,57 @@
       "vertical_text": true
     },
     {
-      "text": "Water",
-      "code": "water",
+      "text": "DCP Graph",
+      "code": "dcp graph",
       "hidden": false,
       "visibility": true,
+      "width": 12,
+      "column_type": "chart",
+      "column_data_source": {
+        "group": "",
+        "value": ""
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": false,
+      "chart_type": "bar_chart",
+      "line_type": "solid",
+      "line_color": "#83BEEC",
+      "fill_color": "#83BEEC",
+      "axis_bounds_min": 0,
+      "axis_bounds_max": 10,
+      "axis_units_minor": 1,
+      "axis_units_major": 2,
+      "axis_label": true,
+      "hide_chart_name_graphic": true,
+      "text_visibility": true,
+      "chart_data": [
+        {
+          "chart_type": "scatter_line_chart",
+          "column_data_source": {
+            "group": "all_testings",
+            "value": "DCP"
+          },
+          "fill_color": "#83BEEC",
+          "line_color": "#83BEEC",
+          "line_type": "solid_around",
+          "symbol_type": "circle",
+          "symbol_color": "#83BEEC",
+          "axis_bounds_min": 0,
+          "axis_bounds_max": 25,
+          "axis_units_minor": 5,
+          "axis_units_major": 2,
+          "axis_label": true,
+          "line_visibility": true,
+          "symbol_visibility": true
+        }
+      ]
+    },
+    {
+      "text": "Water",
+      "code": "water",
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "fontSize": 8,
       "enableWaterStrikesEdit": true,
@@ -78,8 +125,8 @@
       "text": "Depth (ft)",
       "text_imperial": "Depth (ft)",
       "code": "depth_ft",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "scale",
       "column_data_source": {
@@ -195,8 +242,8 @@
     {
       "text": "Consistency",
       "code": "consistency",
-      "hidden": true,
-      "visibility": false,
+      "hidden": false,
+      "visibility": true,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -212,8 +259,8 @@
     {
       "text": "Samples",
       "code": "samples",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "default_column": true,
@@ -229,8 +276,8 @@
     {
       "text": "Testing",
       "code": "testing",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "default_column": true,
@@ -246,8 +293,8 @@
     {
       "text": "Well Diagram",
       "code": "well diagram",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 11,
       "pattern_width": 60,
       "show_well_name": true,
@@ -269,8 +316,8 @@
     {
       "text": "Remarks",
       "code": "remarks",
-      "hidden": true,
-      "visibility": false,
+      "hidden": false,
+      "visibility": true,
       "width": 5,
       "column_type": "text",
       "default_column": true,
