@@ -287,8 +287,14 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
     cell({
       row: 0,
       col: 0,
-      type: "text",
-      content: "Water",
+      type: "legend",
+      content: "water_observations",
+      legendTypes: ["water_observations"],
+      legendVisibility: "used-only",
+      legendColumnDefs: [
+        { content: "graphic", widthPct: 35 },
+        { content: "label", widthPct: 65 },
+      ],
       fontSize: "5.5pt",
       fontBold: true,
       fontFamily: REPORT_FONT_FAMILY,
