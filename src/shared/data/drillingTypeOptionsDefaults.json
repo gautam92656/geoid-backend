@@ -4,7 +4,7 @@
     "name": "Auger",
     "tablogsAlias": "auger",
     "logKind": "bore",
-    "graphic": "graphic01.jpg",
+    "graphic": "graphic02.jpg",
     "enableRecoveryField": false,
     "enableWindowedWindowless": false,
     "waterAdded": false
@@ -14,7 +14,7 @@
     "name": "Washbore",
     "tablogsAlias": "washbore",
     "logKind": "bore",
-    "graphic": "graphic02.jpg",
+    "graphic": "graphic09.jpg",
     "enableRecoveryField": false,
     "enableWindowedWindowless": false,
     "waterAdded": false

@@ -7,16 +7,52 @@ import {
   readBuilderConfigurationCatalog,
 } from "./log-report-template.defaults"
 import { toGroupedList, toLogReportTemplateDTO } from "./log-report-template.mapper"
+import { normalizeLogReportTemplateConfig } from "./log-report-template.normalize"
+import {
+  getLogReportCatalog,
+  toLogReportCatalogPayload,
+} from "./log-report-template.catalog.service"
 import * as repo from "./log-report-template.repository"
 
 const DEFAULT_SEED = [
-  { name: "Marsh Template Gen 2", logType: "borelog" as const, isDefault: true },
+  { name: "Log Report", logType: "borelog" as const, isDefault: true },
   { name: "Corelog Default", logType: "corelog" as const, isDefault: true },
 ]
 
+async function persistNormalizedConfig(
+  userId: number,
+  template: Awaited<ReturnType<typeof repo.findAllForUser>>[number]
+) {
+  const catalog = await getLogReportCatalog()
+  const normalized = normalizeLogReportTemplateConfig(template.config, template.logType, {
+    dcpGraph: catalog.dcpGraph,
+  })
+  if (!normalized.changed) return template
+
+  // Re-read before write so a concurrent builder save is not overwritten by
+  // a stale list/get normalize pass.
+  const latest = await repo.findByIdForUser(template.id, userId)
+  if (!latest || latest.deletedAt) return template
+  if (latest.updatedAt.getTime() !== template.updatedAt.getTime()) {
+    const latestNormalized = normalizeLogReportTemplateConfig(latest.config, latest.logType, {
+      dcpGraph: catalog.dcpGraph,
+    })
+    if (!latestNormalized.changed) return latest
+    return repo.update(latest.id, userId, { config: latestNormalized.config })
+  }
+
+  return repo.update(template.id, userId, { config: normalized.config })
+}
+
 async function ensureSeedTemplates(userId: number) {
   const count = await repo.countForUser(userId)
-  if (count > 0) return
+  if (count > 0) {
+    const existing = await repo.findAllForUser(userId)
+    for (const template of existing) {
+      await persistNormalizedConfig(userId, template)
+    }
+    return
+  }
 
   for (const [index, seed] of DEFAULT_SEED.entries()) {
     await repo.create({
@@ -49,13 +85,19 @@ export async function getOne(userId: number, id: number) {
   if (!template || template.deletedAt) {
     throw new NotFoundError("Log report template not found")
   }
-  return toLogReportTemplateDTO(template)
+  const normalized = await persistNormalizedConfig(userId, template)
+  return toLogReportTemplateDTO(normalized)
 }
 
 export async function getBuilderConfiguration() {
   return {
     data: readBuilderConfigurationCatalog(),
   }
+}
+
+export async function getCatalog() {
+  const catalog = await getLogReportCatalog()
+  return toLogReportCatalogPayload(catalog)
 }
 
 export async function create(
@@ -74,9 +116,12 @@ export async function create(
     throw new ConflictError("A template with this name already exists for this log type.")
   }
 
+  const catalog = await getLogReportCatalog()
   const config = isEmptyConfig(input.config)
     ? createDefaultConfig(input.logType)
-    : (input.config as Prisma.InputJsonValue)
+    : normalizeLogReportTemplateConfig(input.config, input.logType, {
+        dcpGraph: catalog.dcpGraph,
+      }).config
 
   if (input.isDefault) {
     await repo.clearDefaultForLogType(userId, input.logType)
@@ -121,7 +166,18 @@ export async function update(
     await repo.clearDefaultForLogType(userId, nextLogType, id)
   }
 
-  const updated = await repo.update(id, userId, input)
+  const catalog = await getLogReportCatalog()
+  const payload =
+    input.config === undefined
+      ? input
+      : {
+          ...input,
+          config: normalizeLogReportTemplateConfig(input.config, nextLogType, {
+            dcpGraph: catalog.dcpGraph,
+          }).config,
+        }
+
+  const updated = await repo.update(id, userId, payload)
   return toLogReportTemplateDTO(updated)
 }
 

@@ -38,6 +38,7 @@ model Log {
   endDepth          String?   @map("end_depth") @db.VarChar(50)
   finishingReason   String?   @map("finishing_reason") @db.VarChar(200)
   finishingComment  String?   @map("finishing_comment")
+  scaleLogReport    Boolean   @default(false) @map("scale_log_report")
   coordinateSystem  String?   @map("coordinate_system") @db.VarChar(100)
   latitude          String?   @db.VarChar(50)
   longitude         String?   @db.VarChar(50)
@@ -83,6 +84,7 @@ model Log {
   wellCasingTops        LogWellCasingTop[]
   rqdTcrs               LogRqdTcr[]
   coreDefects           LogCoreDefect[]
+  finishLogs            LogFinishLog[]
 
   @@unique([projectId, logNumber])
   @@map("logs")

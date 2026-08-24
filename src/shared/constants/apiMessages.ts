@@ -89,6 +89,10 @@ export const API_MESSAGES = {
   LOG_CORE_DEFECT_UPDATED: "Core defect updated successfully.",
   LOG_CORE_DEFECT_DELETED: "Core defect deleted successfully.",
   LOG_CORE_DEFECT_RESTORED: "Core defect restored successfully.",
+  LOG_FINISH_LOG_ADDED: "Finish log added successfully.",
+  LOG_FINISH_LOG_UPDATED: "Finish log updated successfully.",
+  LOG_FINISH_LOG_DELETED: "Finish log deleted successfully.",
+  LOG_FINISH_LOG_RESTORED: "Finish log restored successfully.",
 
   EQUIPMENT_ADDED: "Equipment added successfully.",
   EQUIPMENT_UPDATED: "Equipment updated successfully.",
@@ -110,6 +114,7 @@ export const API_MESSAGES = {
   LOG_REPORT_TEMPLATE_DELETED: "Log report template deleted successfully.",
   LOG_REPORT_TEMPLATE_LISTED: "Log template retrieved successfully",
   LOG_REPORT_BUILDER_CONFIG: "Template builder configuration retrieved successfully",
+  LOG_REPORT_CATALOG: "Log report catalog retrieved successfully",
 
   LOG_CONFIGURATION_ADDED: "Log configuration added successfully.",
   LOG_CONFIGURATION_UPDATED: "Log configuration updated successfully.",

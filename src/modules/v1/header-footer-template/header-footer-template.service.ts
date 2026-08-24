@@ -5,8 +5,12 @@ import {
   BORELOG_FOOTER_TEMPLATE_SEED,
   BORELOG_HEADER_TEMPLATE_SEED,
   BORELOG_TEMPLATE_SEED_VERSION,
+  CORELOG_FOOTER_TEMPLATE_SEED,
+  CORELOG_HEADER_TEMPLATE_SEED,
   createBorelogFooterTemplateContent,
   createBorelogHeaderTemplateContent,
+  createCorelogFooterTemplateContent,
+  createCorelogHeaderTemplateContent,
   getBorelogSeedVersion,
 } from "./borelog-template.defaults"
 import {
@@ -98,10 +102,16 @@ async function ensureSitePlanTemplate(userId: number) {
   })
 }
 
+function isUserModifiedContent(content: unknown): boolean {
+  const source = asRecord(asRecord(content)?.source)
+  return source?.userModified === true
+}
+
 /**
  * Ensure Borelog Header/Footer Template 1 exist (sample Geotechnical Log PDF layout).
  * Creates when missing. Upgrades seed layouts when seedVersion is behind
  * (header branding bands; footer legend without page numbers).
+ * Never overwrite templates the user has already edited.
  */
 async function ensureBorelogTemplates(userId: number) {
   const header = await repo.findByNameKindForUser(
@@ -121,6 +131,7 @@ async function ensureBorelogTemplates(userId: number) {
     const existing = await repo.findByIdForUser(header.id, userId)
     if (
       existing &&
+      !isUserModifiedContent(existing.content) &&
       getBorelogSeedVersion(existing.content) < BORELOG_TEMPLATE_SEED_VERSION
     ) {
       await repo.update(header.id, userId, {
@@ -146,6 +157,7 @@ async function ensureBorelogTemplates(userId: number) {
     const existing = await repo.findByIdForUser(footer.id, userId)
     if (
       existing &&
+      !isUserModifiedContent(existing.content) &&
       getBorelogSeedVersion(existing.content) < BORELOG_TEMPLATE_SEED_VERSION
     ) {
       await repo.update(footer.id, userId, {
@@ -155,9 +167,64 @@ async function ensureBorelogTemplates(userId: number) {
   }
 }
 
+async function ensureCorelogTemplates(userId: number) {
+  const header = await repo.findByNameKindForUser(
+    userId,
+    CORELOG_HEADER_TEMPLATE_SEED.name,
+    CORELOG_HEADER_TEMPLATE_SEED.kind
+  )
+  if (!header) {
+    await repo.create({
+      userId,
+      name: CORELOG_HEADER_TEMPLATE_SEED.name,
+      kind: CORELOG_HEADER_TEMPLATE_SEED.kind,
+      reportType: CORELOG_HEADER_TEMPLATE_SEED.reportType,
+      content: createCorelogHeaderTemplateContent(),
+    })
+  } else {
+    const existing = await repo.findByIdForUser(header.id, userId)
+    if (
+      existing &&
+      !isUserModifiedContent(existing.content) &&
+      getBorelogSeedVersion(existing.content) < BORELOG_TEMPLATE_SEED_VERSION
+    ) {
+      await repo.update(header.id, userId, {
+        content: createCorelogHeaderTemplateContent(),
+      })
+    }
+  }
+
+  const footer = await repo.findByNameKindForUser(
+    userId,
+    CORELOG_FOOTER_TEMPLATE_SEED.name,
+    CORELOG_FOOTER_TEMPLATE_SEED.kind
+  )
+  if (!footer) {
+    await repo.create({
+      userId,
+      name: CORELOG_FOOTER_TEMPLATE_SEED.name,
+      kind: CORELOG_FOOTER_TEMPLATE_SEED.kind,
+      reportType: CORELOG_FOOTER_TEMPLATE_SEED.reportType,
+      content: createCorelogFooterTemplateContent(),
+    })
+  } else {
+    const existing = await repo.findByIdForUser(footer.id, userId)
+    if (
+      existing &&
+      !isUserModifiedContent(existing.content) &&
+      getBorelogSeedVersion(existing.content) < BORELOG_TEMPLATE_SEED_VERSION
+    ) {
+      await repo.update(footer.id, userId, {
+        content: createCorelogFooterTemplateContent(),
+      })
+    }
+  }
+}
+
 async function ensureSeededTemplates(userId: number) {
   await ensureSitePlanTemplate(userId)
   await ensureBorelogTemplates(userId)
+  await ensureCorelogTemplates(userId)
 }
 
 export async function list(filters: repo.HeaderFooterTemplateListFilters) {

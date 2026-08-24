@@ -34,10 +34,91 @@
       "vertical_text": true
     },
     {
-      "text": "Water",
-      "code": "water",
+      "text": "DCP Graph",
+      "code": "column_1734655921756",
       "hidden": false,
       "visibility": true,
+      "width": 12,
+      "column_type": "chart",
+      "column_data_source": {
+        "group": "",
+        "value": ""
+      },
+      "default_column": false,
+      "fontSize": 8,
+      "name_vertical": false,
+      "chart_type": "bar_chart",
+      "line_type": "solid",
+      "line_color": "#83BEEC",
+      "fill_color": "#83BEEC",
+      "axis_bounds_min": 0,
+      "axis_bounds_max": 10,
+      "axis_units_minor": 1,
+      "axis_units_major": 2,
+      "axis_label": true,
+      "hide_chart_name_graphic": true,
+      "text_visibility": true,
+      "displayType": "Chart",
+      "chart_data": [
+        {
+          "chart_type": "scatter_line_chart",
+          "column_data_source": {
+            "group": "all_testings",
+            "value": "DCP"
+          },
+          "fill_color": "#83BEEC",
+          "line_color": "#83BEEC",
+          "line_type": "solid_around",
+          "chart_transparency_width": "20",
+          "chart_layer": "bottom",
+          "symbol_type": "circle",
+          "symbol_color": "#83BEEC",
+          "axis_bounds_min": 0,
+          "axis_bounds_max": "25",
+          "axis_units_minor": "5",
+          "axis_units_major": 2,
+          "axis_label": true,
+          "hide_chart_name_graphic": true,
+          "text_visibility": true,
+          "code": "column_1734655921756",
+          "selectedMultiChartOptions": [
+            {
+              "name": "DCP",
+              "code": "column_1734655921756",
+              "group_code": "all_testings",
+              "chart_type": "scatter_line_chart",
+              "column_data_source": {
+                "group": "all_testings",
+                "value": "DCP"
+              },
+              "fill_color": "#83BEEC",
+              "line_color": "#83BEEC",
+              "line_type": "solid_around",
+              "chart_transparency_width": "20",
+              "chart_layer": "bottom",
+              "symbol_type": "symbol_01",
+              "symbol_color": "#000000",
+              "axis_bounds_min": 0,
+              "axis_bounds_max": "25",
+              "axis_units_minor": "5",
+              "axis_units_major": 2,
+              "axis_label": true,
+              "text": "DCP Graph",
+              "line_visibility": true,
+              "symbol_visibility": true
+            }
+          ],
+          "line_visibility": true,
+          "symbol_visibility": true,
+          "axis_order": 0
+        }
+      ]
+    },
+    {
+      "text": "Water",
+      "code": "water",
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "fontSize": 8,
       "enableWaterStrikesEdit": true,
@@ -78,8 +159,8 @@
       "text": "Depth (ft)",
       "text_imperial": "Depth (ft)",
       "code": "depth_ft",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "scale",
       "column_data_source": {
@@ -158,23 +239,6 @@
       "vertical_text": false
     },
     {
-      "text": "Moisture",
-      "code": "moisture",
-      "hidden": false,
-      "visibility": true,
-      "width": 5,
-      "column_type": "text",
-      "column_data_source": {
-        "group": "all_subsurface_profiles",
-        "value": "moisture"
-      },
-      "default_column": true,
-      "fontSize": 8,
-      "name_vertical": true,
-      "vertical_text": false,
-      "name_repeat": false
-    },
-    {
       "text": "Material Description",
       "code": "material description",
       "hidden": false,
@@ -195,8 +259,8 @@
     {
       "text": "Consistency",
       "code": "consistency",
-      "hidden": true,
-      "visibility": false,
+      "hidden": false,
+      "visibility": true,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -210,10 +274,27 @@
       "name_repeat": false
     },
     {
-      "text": "Samples",
-      "code": "samples",
+      "text": "Moisture",
+      "code": "moisture",
       "hidden": false,
       "visibility": true,
+      "width": 5,
+      "column_type": "text",
+      "column_data_source": {
+        "group": "all_subsurface_profiles",
+        "value": "moisture"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": false,
+      "name_repeat": false
+    },
+    {
+      "text": "Samples",
+      "code": "samples",
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "default_column": true,
@@ -229,8 +310,8 @@
     {
       "text": "Testing",
       "code": "testing",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "default_column": true,
@@ -246,8 +327,8 @@
     {
       "text": "Well Diagram",
       "code": "well diagram",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 11,
       "pattern_width": 60,
       "show_well_name": true,
@@ -269,9 +350,9 @@
     {
       "text": "Remarks",
       "code": "remarks",
-      "hidden": true,
-      "visibility": false,
-      "width": 5,
+      "hidden": false,
+      "visibility": true,
+      "width": 10,
       "column_type": "text",
       "default_column": true,
       "column_separation": true,
@@ -378,7 +459,7 @@
       "code": "drilling method",
       "hidden": false,
       "visibility": true,
-      "width": 5,
+      "width": 4,
       "column_type": "text",
       "column_data_source": {
         "group": "all_drilling_methods",
@@ -388,14 +469,37 @@
       "fontSize": 8,
       "name_vertical": true,
       "show_arrows": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
+    },
+    {
+      "text": "Depth (m)",
+      "text_imperial": "Depth (m)",
+      "code": "depth",
+      "hidden": false,
+      "visibility": true,
+      "width": 4,
+      "column_type": "scale",
+      "column_data_source": {
+        "group": "all_scales",
+        "value": "depth"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": true,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true,
+      "include_depth": true,
+      "shaded_column": true,
+      "flexible_line_borders": false
     },
     {
       "text": "Water",
       "code": "water",
       "hidden": false,
       "visibility": true,
-      "width": 5,
+      "width": 4,
       "fontSize": 8,
       "enableWaterStrikesEdit": true,
       "waterStrikesOffset": 30,
@@ -411,31 +515,34 @@
       "name_vertical": true,
       "text_graphic_layout_type": "text_horizontal_bottom",
       "material_text_align_type": "text_align_center",
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
-      "text": "Depth (m)",
-      "text_imperial": "Depth (m)",
-      "code": "depth",
+      "text": "Material Description",
+      "code": "material description",
       "hidden": false,
       "visibility": true,
-      "width": 5,
-      "column_type": "scale",
+      "width": 29,
+      "column_type": "text",
       "column_data_source": {
-        "group": "all_scales",
-        "value": "depth"
+        "group": "all_subsurface_profiles",
+        "value": "materialDescription"
       },
       "default_column": true,
       "fontSize": 8,
+      "text_vertical_align": "top",
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "material_text_align_type": "text_align_center",
+      "text_wrap": true
     },
     {
       "text": "Depth (ft)",
       "text_imperial": "Depth (ft)",
       "code": "depth_ft",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "scale",
       "column_data_source": {
@@ -445,13 +552,15 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true
     },
     {
       "text": "Soil Origin",
       "code": "soil origin",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -461,13 +570,14 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Graphic Log",
       "code": "graphic log",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "graphic",
       "column_data_source": {
@@ -482,8 +592,8 @@
     {
       "text": "Classification Code",
       "code": "classification code",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -494,24 +604,6 @@
       "fontSize": 8,
       "name_vertical": true,
       "vertical_text": false
-    },
-    {
-      "text": "Material Description",
-      "code": "material description",
-      "hidden": false,
-      "visibility": true,
-      "width": 24,
-      "column_type": "text",
-      "column_data_source": {
-        "group": "all_subsurface_profiles",
-        "value": "materialDescription"
-      },
-      "default_column": true,
-      "fontSize": 8,
-      "text_vertical_align": "top",
-      "name_vertical": true,
-      "vertical_text": false,
-      "as_above_separator_line": "dotted_line"
     },
     {
       "text": "Weathering",
@@ -528,7 +620,8 @@
       "fontSize": 8,
       "name_vertical": true,
       "as_above": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Estimated Strength",
@@ -565,13 +658,14 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "RQD% and TCR%",
       "code": "rqd and tcr",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -581,7 +675,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Defect Graphic",
@@ -605,7 +700,7 @@
       "code": "defect spacing",
       "hidden": false,
       "visibility": true,
-      "width": 8,
+      "width": 10,
       "column_type": "graphic",
       "column_data_source": {
         "group": null,
@@ -635,7 +730,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Defect Description",
@@ -652,7 +748,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Well Diagram",
@@ -663,10 +760,8 @@
       "pattern_width": 60,
       "show_well_name": true,
       "show_well": true,
-      "well_width": 50,
+      "well_width": 25,
       "show_well_type": true,
-      "show_regular_casing_spacing": true,
-      "regular_casing_spacing_width": 50,
       "column_type": "graphic",
       "column_data_source": {
         "group": "all_wells",
@@ -695,27 +790,10 @@
       "column_static_columns": false
     },
     {
-      "text": "Testing",
-      "code": "testing",
-      "hidden": true,
-      "visibility": false,
-      "width": 8,
-      "column_type": "text",
-      "default_column": true,
-      "column_separation": true,
-      "flexible_line_borders": true,
-      "shaded_column": false,
-      "fontSize": 8,
-      "column_data_source": "",
-      "name_vertical": true,
-      "vertical_text": false,
-      "column_static_columns": false
-    },
-    {
       "text": "RQD",
       "code": "rqd",
-      "hidden": true,
-      "visibility": false,
+      "hidden": false,
+      "visibility": true,
       "width": 5,
       "column_type": "text",
       "default_column": true,
@@ -724,7 +802,45 @@
       "column_data_source": {
         "group": null,
         "value": "rqd_defects"
-      }
+      },
+      "text_wrap": true
+    },
+    {
+      "text": "Core Rec.%",
+      "code": "core rec",
+      "hidden": false,
+      "visibility": true,
+      "width": 5,
+      "column_type": "text",
+      "default_column": false,
+      "name_vertical": true,
+      "fontSize": 8,
+      "column_data_source": {
+        "group": "all_core_log",
+        "value": "tcr_defects"
+      },
+      "column_static_columns": false,
+      "text_wrap": true
+    },
+    {
+      "text": "Testing",
+      "code": "testing",
+      "hidden": false,
+      "visibility": true,
+      "width": 11,
+      "column_type": "text",
+      "default_column": true,
+      "column_separation": true,
+      "flexible_line_borders": true,
+      "shaded_column": false,
+      "fontSize": 8,
+      "column_data_source": "UCS",
+      "name_vertical": true,
+      "vertical_text": false,
+      "column_static_columns": false,
+      "text_wrap": true,
+      "isParent": false,
+      "isParentDisabled": true
     },
     {
       "text": "Elevation (m)",
@@ -741,7 +857,9 @@
       "width": 8,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true
     },
     {
       "text": "Elevation/Depth (m)",
@@ -1004,7 +1122,7 @@
       "code": "drilling method",
       "hidden": false,
       "visibility": true,
-      "width": 5,
+      "width": 4,
       "column_type": "text",
       "column_data_source": {
         "group": "all_drilling_methods",
@@ -1014,14 +1132,37 @@
       "fontSize": 8,
       "name_vertical": true,
       "show_arrows": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
+    },
+    {
+      "text": "Depth (m)",
+      "text_imperial": "Depth (m)",
+      "code": "depth",
+      "hidden": false,
+      "visibility": true,
+      "width": 4,
+      "column_type": "scale",
+      "column_data_source": {
+        "group": "all_scales",
+        "value": "depth"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": true,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true,
+      "include_depth": true,
+      "shaded_column": true,
+      "flexible_line_borders": false
     },
     {
       "text": "Water",
       "code": "water",
       "hidden": false,
       "visibility": true,
-      "width": 5,
+      "width": 4,
       "fontSize": 8,
       "enableWaterStrikesEdit": true,
       "waterStrikesOffset": 30,
@@ -1037,13 +1178,52 @@
       "name_vertical": true,
       "text_graphic_layout_type": "text_horizontal_bottom",
       "material_text_align_type": "text_align_center",
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
+    },
+    {
+      "text": "Material Description",
+      "code": "material description",
+      "hidden": false,
+      "visibility": true,
+      "width": 29,
+      "column_type": "text",
+      "column_data_source": {
+        "group": "all_subsurface_profiles",
+        "value": "materialDescription"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "text_vertical_align": "top",
+      "name_vertical": true,
+      "vertical_text": false,
+      "material_text_align_type": "text_align_center",
+      "text_wrap": true
+    },
+    {
+      "text": "Depth (ft)",
+      "text_imperial": "Depth (ft)",
+      "code": "depth_ft",
+      "hidden": true,
+      "visibility": false,
+      "width": 5,
+      "column_type": "scale",
+      "column_data_source": {
+        "group": "all_scales",
+        "value": "depth"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": false,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true
     },
     {
       "text": "Soil Origin",
       "code": "soil origin",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -1053,13 +1233,14 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Graphic Log",
       "code": "graphic log",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "graphic",
       "column_data_source": {
@@ -1074,8 +1255,8 @@
     {
       "text": "Classification Code",
       "code": "classification code",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -1086,24 +1267,6 @@
       "fontSize": 8,
       "name_vertical": true,
       "vertical_text": false
-    },
-    {
-      "text": "Material Description",
-      "code": "material description",
-      "hidden": false,
-      "visibility": true,
-      "width": 24,
-      "column_type": "text",
-      "column_data_source": {
-        "group": "all_subsurface_profiles",
-        "value": "materialDescription"
-      },
-      "default_column": true,
-      "fontSize": 8,
-      "text_vertical_align": "top",
-      "name_vertical": true,
-      "vertical_text": false,
-      "as_above_separator_line": "dotted_line"
     },
     {
       "text": "Weathering",
@@ -1120,7 +1283,8 @@
       "fontSize": 8,
       "name_vertical": true,
       "as_above": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Estimated Strength",
@@ -1157,13 +1321,14 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "RQD% and TCR%",
       "code": "rqd and tcr",
-      "hidden": false,
-      "visibility": true,
+      "hidden": true,
+      "visibility": false,
       "width": 5,
       "column_type": "text",
       "column_data_source": {
@@ -1173,7 +1338,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Defect Graphic",
@@ -1197,7 +1363,7 @@
       "code": "defect spacing",
       "hidden": false,
       "visibility": true,
-      "width": 8,
+      "width": 10,
       "column_type": "graphic",
       "column_data_source": {
         "group": null,
@@ -1227,7 +1393,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Defect Description",
@@ -1244,7 +1411,8 @@
       "default_column": true,
       "fontSize": 8,
       "name_vertical": true,
-      "vertical_text": false
+      "vertical_text": false,
+      "text_wrap": true
     },
     {
       "text": "Well Diagram",
@@ -1255,14 +1423,135 @@
       "pattern_width": 60,
       "show_well_name": true,
       "show_well": true,
-      "well_width": 50,
+      "well_width": 25,
       "show_well_type": true,
-      "show_regular_casing_spacing": true,
-      "regular_casing_spacing_width": 50,
       "column_type": "graphic",
       "column_data_source": {
         "group": "all_wells",
         "value": "well_diagram_backfill_logs"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": false
+    },
+    {
+      "text": "Samples",
+      "code": "samples",
+      "hidden": true,
+      "visibility": false,
+      "width": 8,
+      "column_type": "text",
+      "default_column": true,
+      "column_separation": true,
+      "flexible_line_borders": true,
+      "shaded_column": false,
+      "fontSize": 8,
+      "column_data_source": "",
+      "name_vertical": true,
+      "vertical_text": false,
+      "column_static_columns": false
+    },
+    {
+      "text": "RQD",
+      "code": "rqd",
+      "hidden": false,
+      "visibility": true,
+      "width": 5,
+      "column_type": "text",
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": true,
+      "column_data_source": {
+        "group": null,
+        "value": "rqd_defects"
+      },
+      "text_wrap": true
+    },
+    {
+      "text": "Core Rec.%",
+      "code": "core rec",
+      "hidden": false,
+      "visibility": true,
+      "width": 5,
+      "column_type": "text",
+      "default_column": false,
+      "name_vertical": true,
+      "fontSize": 8,
+      "column_data_source": {
+        "group": "all_core_log",
+        "value": "tcr_defects"
+      },
+      "column_static_columns": false,
+      "text_wrap": true
+    },
+    {
+      "text": "Testing",
+      "code": "testing",
+      "hidden": false,
+      "visibility": true,
+      "width": 11,
+      "column_type": "text",
+      "default_column": true,
+      "column_separation": true,
+      "flexible_line_borders": true,
+      "shaded_column": false,
+      "fontSize": 8,
+      "column_data_source": "UCS",
+      "name_vertical": true,
+      "vertical_text": false,
+      "column_static_columns": false,
+      "text_wrap": true,
+      "isParent": false,
+      "isParentDisabled": true
+    },
+    {
+      "text": "Elevation (m)",
+      "text_imperial": "Elevation (ft)",
+      "code": "elevation",
+      "column_type": "scale",
+      "column_data_source": {
+        "group": "all_scales",
+        "value": "elevation"
+      },
+      "default_column": true,
+      "hidden": true,
+      "visibility": false,
+      "width": 8,
+      "fontSize": 8,
+      "name_vertical": true,
+      "vertical_text": false,
+      "text_wrap": true,
+      "show_subsurface_profile_depths": true
+    },
+    {
+      "text": "Elevation/Depth (m)",
+      "text_imperial": "Elevation/Depth (ft)",
+      "code": "elevation/depth",
+      "hidden": true,
+      "visibility": false,
+      "width": 5,
+      "column_type": "scale",
+      "column_data_source": {
+        "group": "all_scales",
+        "value": "elevation/depth"
+      },
+      "default_column": true,
+      "fontSize": 8,
+      "name_vertical": false,
+      "vertical_text": false
+    },
+    {
+      "text": "Blows per 150 mm",
+      "text_imperial": "Blows per 6 in",
+      "code": "blows",
+      "hidden": true,
+      "visibility": false,
+      "width": 25,
+      "column_type": "text",
+      "column_data_source": {
+        "group": "all_blows",
+        "value": "blows_pre_testings"
       },
       "default_column": true,
       "fontSize": 8,

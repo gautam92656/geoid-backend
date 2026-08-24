@@ -10,6 +10,7 @@ router.use(requireAuth)
 // Static paths before /:id
 router.get("/", asyncHandler(logReportTemplateController.list))
 router.get("/builder-configuration", asyncHandler(logReportTemplateController.builderConfiguration))
+router.get("/catalog", asyncHandler(logReportTemplateController.catalog))
 router.post("/reorder", asyncHandler(logReportTemplateController.reorder))
 router.post("/", asyncHandler(logReportTemplateController.create))
 router.get("/:id", asyncHandler(logReportTemplateController.getOne))

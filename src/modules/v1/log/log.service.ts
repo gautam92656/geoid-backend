@@ -2,6 +2,10 @@ import type { LogStatus, LogType } from "../../../generated/prisma/client"
 import { ConflictError } from "../../../shared/errors/ConflictError"
 import { NotFoundError } from "../../../shared/errors/NotFoundError"
 import { ValidationError } from "../../../shared/errors/ValidationError"
+import {
+  assertCoordinatesForRequirement,
+  resolveCoordinateRequirementForUser,
+} from "../log-configuration/log-configuration.coordinateRequirement"
 import * as projectRepo from "../project/project.repository"
 import * as repo from "./log.repository"
 
@@ -87,6 +91,7 @@ function toDTO(log: NonNullable<Awaited<ReturnType<typeof repo.findByIdForUser>>
     endDepth: log.endDepth ?? "",
     finishingReason: log.finishingReason ?? "",
     finishingComment: log.finishingComment ?? "",
+    scaleLogReport: log.scaleLogReport ?? false,
     coordinateSystem: log.coordinateSystem ?? "",
     latitude: log.latitude ?? "",
     longitude: log.longitude ?? "",
@@ -149,6 +154,12 @@ export async function create(
     }
   }
 
+  const coordinateRequirement = await resolveCoordinateRequirementForUser(
+    userId,
+    input.logConfigId
+  )
+  assertCoordinatesForRequirement(coordinateRequirement, input.latitude, input.longitude)
+
   const log = await repo.create({
     ...input,
     userId,
@@ -182,6 +193,16 @@ export async function update(
       throw new ValidationError("Proposed borelog not found")
     }
   }
+
+  const nextLogConfigId =
+    input.logConfigId !== undefined ? input.logConfigId : existing.logConfigId
+  const nextLatitude = input.latitude !== undefined ? input.latitude : existing.latitude
+  const nextLongitude = input.longitude !== undefined ? input.longitude : existing.longitude
+  const coordinateRequirement = await resolveCoordinateRequirementForUser(
+    userId,
+    nextLogConfigId
+  )
+  assertCoordinatesForRequirement(coordinateRequirement, nextLatitude, nextLongitude)
 
   const updated = await repo.update(id, userId, projectId, {
     ...input,

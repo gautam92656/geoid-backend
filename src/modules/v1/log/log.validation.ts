@@ -2,7 +2,6 @@ import Joi from "joi"
 import {
   DEFAULT_LIMIT,
   DEFAULT_PAGE,
-  FINISHING_REASONS,
   LOG_ANGLE_MAX_LENGTH,
   LOG_CONFIG_ID_MAX_LENGTH,
   LOG_COORDINATE_SYSTEM_MAX_LENGTH,
@@ -54,9 +53,10 @@ const baseLogFields = {
   finishingReason: Joi.string()
     .trim()
     .max(LOG_FINISHING_REASON_MAX_LENGTH)
-    .valid(...FINISHING_REASONS, "")
+    .allow("")
     .optional(),
   finishingComment: Joi.string().trim().allow("").optional(),
+  scaleLogReport: Joi.boolean().optional(),
   coordinateSystem: Joi.string().trim().max(LOG_COORDINATE_SYSTEM_MAX_LENGTH).allow("").optional(),
   latitude: Joi.string().trim().max(LOG_COORDINATE_VALUE_MAX_LENGTH).allow("").optional(),
   longitude: Joi.string().trim().max(LOG_COORDINATE_VALUE_MAX_LENGTH).allow("").optional(),
@@ -95,9 +95,10 @@ export const updateLogSchema = Joi.object({
   finishingReason: Joi.string()
     .trim()
     .max(LOG_FINISHING_REASON_MAX_LENGTH)
-    .valid(...FINISHING_REASONS, "")
+    .allow("")
     .optional(),
   finishingComment: Joi.string().trim().allow("").optional(),
+  scaleLogReport: Joi.boolean().optional(),
   coordinateSystem: Joi.string().trim().max(LOG_COORDINATE_SYSTEM_MAX_LENGTH).allow("").optional(),
   latitude: Joi.string().trim().max(LOG_COORDINATE_VALUE_MAX_LENGTH).allow("").optional(),
   longitude: Joi.string().trim().max(LOG_COORDINATE_VALUE_MAX_LENGTH).allow("").optional(),

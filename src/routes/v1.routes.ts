@@ -37,6 +37,7 @@ import logWellCasingRoutes from "../modules/v1/log-well-casing/log-well-casing.r
 import logWellCasingTopRoutes from "../modules/v1/log-well-casing-top/log-well-casing-top.routes"
 import logRqdTcrRoutes from "../modules/v1/log-rqd-tcr/log-rqd-tcr.routes"
 import logCoreDefectRoutes from "../modules/v1/log-core-defect/log-core-defect.routes"
+import logFinishLogRoutes from "../modules/v1/log-finish-log/log-finish-log.routes"
 import logConfigurationRoutes from "../modules/v1/log-configuration/log-configuration.routes"
 import logConfigurationTemplateRoutes from "../modules/v1/log-configuration-template/log-configuration-template.routes"
 import configModuleRoutes from "../modules/v1/config-module/config-module.routes"
@@ -144,6 +145,11 @@ router.use(
   "/projects/:projectId/logs/:logId/core-defects",
   setLanguage,
   logCoreDefectRoutes
+)
+router.use(
+  "/projects/:projectId/logs/:logId/finish-logs",
+  setLanguage,
+  logFinishLogRoutes
 )
 router.use("/projects/:projectId/logs", setLanguage, logRoutes)
 router.use("/projects/:projectId/status-history", setLanguage, projectStatusHistoryRoutes)

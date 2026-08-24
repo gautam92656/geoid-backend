@@ -1,0 +1,26 @@
+model LogFinishLog {
+  id               Int       @id @default(autoincrement())
+  userId           Int       @map("user_id")
+  projectId        Int       @map("project_id")
+  logId            Int       @map("log_id")
+  finishTypeId     String    @map("finish_type_id") @db.VarChar(100)
+  finishTypeName   String    @map("finish_type_name") @db.VarChar(200)
+  completedDate    DateTime? @map("completed_date") @db.Date
+  endDepth         String    @default("") @map("end_depth") @db.VarChar(50)
+  comments         String    @default("")
+  scaleLogReport   Boolean   @default(false) @map("scale_log_report")
+  sortOrder        Int       @default(0) @map("sort_order")
+
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  user    User    @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  log     Log     @relation(fields: [logId], references: [id], onDelete: Cascade)
+
+  @@index([logId, deletedAt, sortOrder])
+  @@index([projectId, logId])
+  @@index([userId, logId])
+  @@map("log_finish_logs")
+}
