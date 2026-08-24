@@ -38,6 +38,7 @@ import { seedWellDefaultWellIdTemplates } from "./wellDefaultWellIdTemplates"
 import { seedSampleTypeTemplates } from "./sampleTypeTemplates"
 import { seedLabTestTypeTemplates } from "./labTestTypeTemplates"
 import { seedLabTestPresetTemplates } from "./labTestPresetTemplates"
+import { seedLogReportCatalog } from "./logReportCatalog"
 import { seedLogs } from "./logs"
 import { seedProjects } from "./projects"
 import { seedSuppliers } from "./suppliers"
@@ -94,6 +95,7 @@ async function main() {
   await seedSampleTypeTemplates(prisma)
   await seedLabTestTypeTemplates(prisma)
   await seedLabTestPresetTemplates(prisma)
+  await seedLogReportCatalog(prisma)
   console.log("Seed completed successfully")
 }
 

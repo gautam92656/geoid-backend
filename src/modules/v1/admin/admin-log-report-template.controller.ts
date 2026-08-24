@@ -1,35 +1,21 @@
 import type { Request, Response, NextFunction } from "express"
 import type { LogReportTemplateLogType } from "../../../generated/prisma/client"
-import type { AuthedRequest } from "../../../types/auth"
 import { HTTP_STATUS } from "../../../shared/constants"
 import { API_MESSAGES } from "../../../shared/constants/apiMessages"
 import { ValidationError } from "../../../shared/errors/ValidationError"
 import { successResponse } from "../../../shared/utils/apiResponse"
-import * as logReportTemplateService from "./log-report-template.service"
+import * as logReportTemplateService from "../log-report-template/log-report-template.service"
 import {
   createLogReportTemplateSchema,
   listLogReportTemplatesQuerySchema,
   reorderLogReportTemplatesSchema,
   updateLogReportTemplateSchema,
-} from "./log-report-template.validation"
+} from "../log-report-template/log-report-template.validation"
+import { parsePositiveInt, resolveTargetUserId } from "./admin-target-user"
 
-function parseId(req: Request): number | null {
-  const id = parseInt(String(req.params.id), 10)
-  return Number.isNaN(id) || id < 1 ? null : id
-}
-
-function getUserId(req: Request): number | null {
-  const userId = (req as AuthedRequest).user?.sub
-  return typeof userId === "number" && userId > 0 ? userId : null
-}
-
-/** Tablogs: GET /log-template/list — user-scoped grouped templates. */
 export async function list(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
   const { error, value } = listLogReportTemplatesQuerySchema.validate(req.query, {
     abortEarly: false,
@@ -40,7 +26,6 @@ export async function list(req: Request, res: Response, next: NextFunction): Pro
     return
   }
 
-  // Default: Tablogs-style grouped payload for the manage modal / builder bootstrap.
   if (value.grouped !== "false") {
     const data = await logReportTemplateService.listGrouped(userId)
     successResponse(res, data, API_MESSAGES.LOG_REPORT_TEMPLATE_LISTED, HTTP_STATUS.OK)
@@ -64,49 +49,23 @@ export async function list(req: Request, res: Response, next: NextFunction): Pro
   successResponse(res, data, API_MESSAGES.LOG_REPORT_TEMPLATE_LISTED, HTTP_STATUS.OK)
 }
 
-/** Tablogs: GET /log-template/builder-configuration */
-export async function builderConfiguration(
-  _req: Request,
-  res: Response,
-  _next: NextFunction
-): Promise<void> {
-  const data = await logReportTemplateService.getBuilderConfiguration()
-  successResponse(res, data, API_MESSAGES.LOG_REPORT_BUILDER_CONFIG, HTTP_STATUS.OK)
-}
-
-/** Common consistency / moisture / DCP graph defaults from the seeded catalog. */
-export async function catalog(
-  _req: Request,
-  res: Response,
-  _next: NextFunction
-): Promise<void> {
-  const data = await logReportTemplateService.getCatalog()
-  successResponse(res, data, API_MESSAGES.LOG_REPORT_CATALOG, HTTP_STATUS.OK)
-}
-
-/** Tablogs: GET /log-template/edit/:id */
 export async function getOne(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
-  const id = parseId(req)
+  const id = parsePositiveInt(req.params.id)
   if (!id) {
     next(new ValidationError("Invalid ID"))
     return
   }
+
   const data = await logReportTemplateService.getOne(userId, id)
   successResponse(res, data, undefined, HTTP_STATUS.OK)
 }
 
 export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
   const { error, value } = createLogReportTemplateSchema.validate(req.body, { abortEarly: false })
   if (error) {
@@ -126,13 +85,10 @@ export async function create(req: Request, res: Response, next: NextFunction): P
 }
 
 export async function update(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
-  const id = parseId(req)
+  const id = parsePositiveInt(req.params.id)
   if (!id) {
     next(new ValidationError("Invalid ID"))
     return
@@ -157,27 +113,22 @@ export async function update(req: Request, res: Response, next: NextFunction): P
 }
 
 export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
-  const id = parseId(req)
+  const id = parsePositiveInt(req.params.id)
   if (!id) {
     next(new ValidationError("Invalid ID"))
     return
   }
+
   const data = await logReportTemplateService.remove(userId, id)
   successResponse(res, data, API_MESSAGES.LOG_REPORT_TEMPLATE_DELETED, HTTP_STATUS.OK)
 }
 
 export async function reorder(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const userId = getUserId(req)
-  if (!userId) {
-    next(new ValidationError("Unauthorized"))
-    return
-  }
+  const userId = await resolveTargetUserId(req, next)
+  if (!userId) return
 
   const { error, value } = reorderLogReportTemplatesSchema.validate(req.body, { abortEarly: false })
   if (error) {
@@ -185,6 +136,6 @@ export async function reorder(req: Request, res: Response, next: NextFunction): 
     return
   }
 
-  const data = await logReportTemplateService.reorder(userId, value.orderedIds)
-  successResponse(res, data, API_MESSAGES.LOG_REPORT_TEMPLATE_UPDATED, HTTP_STATUS.OK)
+  await logReportTemplateService.reorder(userId, value.orderedIds)
+  successResponse(res, { ok: true }, API_MESSAGES.LOG_REPORT_TEMPLATE_UPDATED, HTTP_STATUS.OK)
 }

@@ -17,6 +17,7 @@ export type CreateLogInput = {
   endDepth?: string
   finishingReason?: string
   finishingComment?: string
+  scaleLogReport?: boolean
   coordinateSystem?: string
   latitude?: string
   longitude?: string
@@ -158,6 +159,7 @@ export async function create(data: CreateLogInput) {
       endDepth: trimOrNull(data.endDepth),
       finishingReason: trimOrNull(data.finishingReason),
       finishingComment: trimOrNull(data.finishingComment),
+      scaleLogReport: Boolean(data.scaleLogReport),
       coordinateSystem: trimOrNull(data.coordinateSystem),
       latitude: trimOrNull(data.latitude),
       longitude: trimOrNull(data.longitude),
@@ -197,6 +199,7 @@ export async function update(
   if (data.endDepth !== undefined) payload.endDepth = trimOrNull(data.endDepth)
   if (data.finishingReason !== undefined) payload.finishingReason = trimOrNull(data.finishingReason)
   if (data.finishingComment !== undefined) payload.finishingComment = trimOrNull(data.finishingComment)
+  if (data.scaleLogReport !== undefined) payload.scaleLogReport = Boolean(data.scaleLogReport)
   if (data.coordinateSystem !== undefined) {
     payload.coordinateSystem = trimOrNull(data.coordinateSystem)
   }

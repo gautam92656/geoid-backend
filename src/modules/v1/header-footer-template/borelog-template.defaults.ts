@@ -36,7 +36,7 @@ function cell(input: CellInput) {
     imageFit: input.imageFit ?? "contain",
     backgroundColor: "transparent",
     fontColor: "#000000",
-    fontFamily: input.fontFamily ?? "sans-serif",
+    fontFamily: input.fontFamily ?? "Arial, Helvetica, sans-serif",
     fontSize: input.fontSize ?? "8pt",
     fontBold: Boolean(input.fontBold),
     fontItalic: false,
@@ -106,7 +106,7 @@ function emptyFrameCell() {
 }
 
 /** Bump when default Borelog header/footer layout changes so existing seeds can be upgraded. */
-export const BORELOG_TEMPLATE_SEED_VERSION = 3
+export const BORELOG_TEMPLATE_SEED_VERSION = 13
 
 const NO_CELL_BORDER = {
   borderTop: false,
@@ -114,6 +114,14 @@ const NO_CELL_BORDER = {
   borderBottom: false,
   borderLeft: false,
 } as const
+
+/** Same stack as the log report sheet — keep header rows visually consistent. */
+const REPORT_FONT_FAMILY = "Arial, Helvetica, sans-serif"
+
+/** Label/value line for header meta row (colon alignment rendered by report sheet CSS). */
+function metaLine(label: string, value: string, _labelWidth?: number): string {
+  return `${label} : ${value}`
+}
 
 /**
  * Borelog Header Template 1 — matches sample Geotechnical Log PDF header:
@@ -133,49 +141,50 @@ export function createBorelogHeaderTemplateContent(): Prisma.InputJsonValue {
       verticalAlign: "middle",
       padding: 6,
       ...NO_CELL_BORDER,
-      borderBottom: true,
     }),
     cell({
       row: 0,
       col: 1,
       type: "text",
-      content: "{{company.name}}\nPhone: {{company.phone}}",
+      content: "{{company.name}}\n\nPhone: {{company.phone}}",
       fontSize: "10pt",
       fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       textAlign: "left",
       verticalAlign: "middle",
       padding: 6,
       ...NO_CELL_BORDER,
-      borderBottom: true,
     }),
     cell({
       row: 0,
       col: 2,
       type: "text",
-      content: "Geotechnical Log - Borehole\n{{log.bh_no}}",
-      fontSize: "12pt",
+      content: "Geotechnical Log - Borehole\n\n{{log.bh_no}}",
+      fontSize: "11pt",
       fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       textAlign: "left",
       verticalAlign: "middle",
       padding: 6,
       ...NO_CELL_BORDER,
-      borderBottom: true,
     }),
     cell({
       row: 1,
       col: 0,
       type: "text",
       content: [
-        "UTM :",
-        "Easting (m) : {{location.easting}}",
-        "Northing (m) : {{location.northing}}",
-        "Ground Elevation : {{location.elevation}}",
-        "Total Depth : {{log.total_depth}}",
+        metaLine("UTM", "{{location.utm}}", 17),
+        metaLine("Easting (m)", "{{location.easting}}", 17),
+        metaLine("Northing (m)", "{{location.northing}}", 17),
+        metaLine("Ground Elevation", "{{location.elevation}}", 17),
+        metaLine("Total Depth", "{{log.total_depth}}", 17),
       ].join("\n"),
-      fontSize: "7.5pt",
+      fontSize: "5.5pt",
+      fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       textAlign: "left",
       verticalAlign: "top",
-      padding: 5,
+      padding: 4,
       ...NO_CELL_BORDER,
     }),
     cell({
@@ -183,16 +192,18 @@ export function createBorelogHeaderTemplateContent(): Prisma.InputJsonValue {
       col: 1,
       type: "text",
       content: [
-        "Drill Rig : {{log.equipment}}",
-        "Driller Supplier : {{log.driller}}",
-        "Logged By : {{log.logged_by}}",
-        "Reviewed By : {{log.reviewed_by}}",
-        "Date : {{log.date_drilled}}",
+        metaLine("Drill Rig", "{{log.equipment}}", 16),
+        metaLine("Driller Supplier", "{{log.driller}}", 16),
+        metaLine("Logged By", "{{log.logged_by}}", 16),
+        metaLine("Reviewed By", "{{log.reviewed_by}}", 16),
+        metaLine("Date", "{{log.date_drilled}}", 16),
       ].join("\n"),
-      fontSize: "7.5pt",
+      fontSize: "5.5pt",
+      fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       textAlign: "left",
       verticalAlign: "top",
-      padding: 5,
+      padding: 4,
       ...NO_CELL_BORDER,
     }),
     cell({
@@ -200,16 +211,18 @@ export function createBorelogHeaderTemplateContent(): Prisma.InputJsonValue {
       col: 2,
       type: "text",
       content: [
-        "Job Number : {{project.number}}",
-        "Client : {{project.client}}",
-        "Project : {{project.name}}",
-        "Location : {{project.location}}",
-        "Loc Comment :",
+        metaLine("Job Number", "{{project.number}}", 11),
+        metaLine("Client", "{{project.client}}", 11),
+        metaLine("Project", "{{project.name}}", 11),
+        metaLine("Location", "{{project.location}}", 11),
+        metaLine("Loc Comment", "{{log.location_comment}}", 11),
       ].join("\n"),
-      fontSize: "7.5pt",
+      fontSize: "5.5pt",
+      fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       textAlign: "left",
       verticalAlign: "top",
-      padding: 5,
+      padding: 4,
       ...NO_CELL_BORDER,
     }),
   ]
@@ -227,7 +240,7 @@ export function createBorelogHeaderTemplateContent(): Prisma.InputJsonValue {
     sections: {
       header: {
         enabled: true,
-        heightMm: 48,
+        heightMm: 44,
         rows: 2,
         cols: 3,
         columnWidths: [0.22, 0.33, 0.45],
@@ -276,8 +289,9 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
       col: 0,
       type: "text",
       content: "Water",
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
       fontBold: true,
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -293,8 +307,9 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
         "SW : Slightly weathered",
         "FR : Fresh",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
       fontBold: false,
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -303,13 +318,14 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
       type: "text",
       content: [
         "Altering",
-        "XA : Extremely alterated",
-        "DA : Distinctly alterated",
-        "HA : Highly alterated",
-        "MA : Moderately alterated",
-        "SA : Slightly alterated",
+        "XA : Extremely altered",
+        "DA : Distinctly altered",
+        "HA : Highly altered",
+        "MA : Moderately altered",
+        "SA : Slightly altered",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -330,7 +346,8 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
         "M : Moist",
         "W : Wet",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -345,7 +362,8 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
         "D : Dense",
         "VD : Very dense",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -361,7 +379,8 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
         "VH : Very high",
         "XH : Extremely high",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
     cell({
@@ -372,12 +391,13 @@ export function createBorelogFooterTemplateContent(): Prisma.InputJsonValue {
         "Tests&Results",
         "U50 : Undisturbed 50mm diam tube.",
         "D : Disturbed sample.",
-        "SPT : Standard Penetration Test, N = number of blows to drive 50mm sampler 300mm with a 63.6kg hammer falling 762mm.",
+        "SPT : Standard Penetration Test, N = number of blows to drive 50mm sampler 300mm with a 63.5kg hammer falling 762mm.",
         "PP : Hand penetrometer estimate of unconfined compressive strength, kPa.",
         "S : Vane shear value kPa.",
         "DCP : Dynamic Cone Penetrometer test.",
       ].join("\n"),
-      fontSize: "6.5pt",
+      fontSize: "5.5pt",
+      fontFamily: REPORT_FONT_FAMILY,
       padding: 3,
     }),
   ]
@@ -443,6 +463,52 @@ export const BORELOG_FOOTER_TEMPLATE_SEED = {
   name: "Borelog Footer Template 1",
   kind: "footer" as const,
   reportType: "borelog" as const,
+}
+
+function withCorelogSource(
+  content: Prisma.InputJsonValue,
+  seed: { name: string; tablogsType: "header" | "footer" }
+): Prisma.InputJsonValue {
+  const record = content as Record<string, unknown>
+  const source = (record.source as Record<string, unknown>) ?? {}
+  return {
+    ...record,
+    source: {
+      ...source,
+      name: seed.name,
+      tablogsType: seed.tablogsType,
+      reportType: "corelog",
+      seedVersion: BORELOG_TEMPLATE_SEED_VERSION,
+    },
+  }
+}
+
+/** Same layout as Borelog Header Template 1 — used as the default corelog header. */
+export function createCorelogHeaderTemplateContent(): Prisma.InputJsonValue {
+  return withCorelogSource(createBorelogHeaderTemplateContent(), {
+    name: "Corelog Header Template 1",
+    tablogsType: "header",
+  })
+}
+
+/** Same layout as Borelog Footer Template 1 — used as the default corelog footer. */
+export function createCorelogFooterTemplateContent(): Prisma.InputJsonValue {
+  return withCorelogSource(createBorelogFooterTemplateContent(), {
+    name: "Corelog Footer Template 1",
+    tablogsType: "footer",
+  })
+}
+
+export const CORELOG_HEADER_TEMPLATE_SEED = {
+  name: "Corelog Header Template 1",
+  kind: "header" as const,
+  reportType: "corelog" as const,
+}
+
+export const CORELOG_FOOTER_TEMPLATE_SEED = {
+  name: "Corelog Footer Template 1",
+  kind: "footer" as const,
+  reportType: "corelog" as const,
 }
 
 export function getBorelogSeedVersion(content: unknown): number {

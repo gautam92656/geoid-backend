@@ -4,6 +4,8 @@ import { requireAuth } from "../../../shared/middleware/auth.middleware"
 import { requireSuperAdmin } from "../../../shared/middleware/superAdmin.middleware"
 import * as adminUserController from "./admin-user.controller"
 import * as adminLogConfigurationController from "./admin-log-configuration.controller"
+import * as adminLogReportTemplateController from "./admin-log-report-template.controller"
+import * as adminHeaderFooterTemplateController from "./admin-header-footer-template.controller"
 
 const router = Router()
 
@@ -42,6 +44,52 @@ router.patch(
 router.delete(
   "/users/:userId/log-configurations/:id",
   asyncHandler(adminLogConfigurationController.remove)
+)
+
+router.get(
+  "/users/:userId/log-report-templates",
+  asyncHandler(adminLogReportTemplateController.list)
+)
+router.post(
+  "/users/:userId/log-report-templates/reorder",
+  asyncHandler(adminLogReportTemplateController.reorder)
+)
+router.post(
+  "/users/:userId/log-report-templates",
+  asyncHandler(adminLogReportTemplateController.create)
+)
+router.get(
+  "/users/:userId/log-report-templates/:id",
+  asyncHandler(adminLogReportTemplateController.getOne)
+)
+router.patch(
+  "/users/:userId/log-report-templates/:id",
+  asyncHandler(adminLogReportTemplateController.update)
+)
+router.delete(
+  "/users/:userId/log-report-templates/:id",
+  asyncHandler(adminLogReportTemplateController.remove)
+)
+
+router.get(
+  "/users/:userId/header-footer-templates",
+  asyncHandler(adminHeaderFooterTemplateController.list)
+)
+router.post(
+  "/users/:userId/header-footer-templates",
+  asyncHandler(adminHeaderFooterTemplateController.create)
+)
+router.get(
+  "/users/:userId/header-footer-templates/:id",
+  asyncHandler(adminHeaderFooterTemplateController.getOne)
+)
+router.patch(
+  "/users/:userId/header-footer-templates/:id",
+  asyncHandler(adminHeaderFooterTemplateController.update)
+)
+router.delete(
+  "/users/:userId/header-footer-templates/:id",
+  asyncHandler(adminHeaderFooterTemplateController.remove)
 )
 
 export default router

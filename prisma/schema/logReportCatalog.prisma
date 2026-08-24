@@ -1,0 +1,35 @@
+/// Common log-report field codes (consistency / density / moisture).
+/// Seeded so a database restore always has the Tablogs-aligned abbreviations.
+model LogReportFieldCode {
+  id        Int      @id @default(autoincrement())
+  group     String   @db.VarChar(50)
+  code      String   @db.VarChar(50)
+  name      String   @db.VarChar(200)
+  aliases   Json     @default("[]")
+  sortOrder Int      @default(0) @map("sort_order")
+  active    Boolean  @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([group, code], map: "log_report_field_codes_group_code_key")
+  @@index([group, sortOrder], map: "log_report_field_codes_group_sort_idx")
+  @@map("log_report_field_codes")
+}
+
+/// Common log-report chart defaults (DCP Graph axis, symbol, data source).
+model LogReportChartDefault {
+  id               Int     @id @default(autoincrement())
+  chartKey         String  @unique @map("chart_key") @db.VarChar(100)
+  columnCode       String  @map("column_code") @db.VarChar(100)
+  columnText       String  @map("column_text") @db.VarChar(200)
+  dataSourceGroup  String  @map("data_source_group") @db.VarChar(100)
+  dataSourceValue  String  @map("data_source_value") @db.VarChar(100)
+  config           Json    @default("{}")
+  active           Boolean @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("log_report_chart_defaults")
+}

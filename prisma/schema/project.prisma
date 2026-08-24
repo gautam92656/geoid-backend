@@ -61,6 +61,7 @@ model Project {
   wellCasingTops       LogWellCasingTop[]
   rqdTcrs              LogRqdTcr[]
   coreDefects          LogCoreDefect[]
+  finishLogs           LogFinishLog[]
   statusHistory        ProjectStatusHistory[]
 
   @@unique([userId, projectNo])

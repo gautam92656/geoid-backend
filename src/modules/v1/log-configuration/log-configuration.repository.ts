@@ -122,6 +122,18 @@ export async function findByNameForUser(userId: number, name: string, excludeId?
 }
 
 export async function create(data: CreateLogConfigurationInput) {
+  const enabledModules =
+    data.enabledModules !== undefined
+      ? serializeEnabledModuleIds(data.enabledModules)
+      : undefined
+  const moduleSettings =
+    data.moduleSettings !== undefined || enabledModules !== undefined
+      ? serializeConfigModuleSettings(
+          data.moduleSettings ?? {},
+          enabledModules ?? parseEnabledModuleIds(data.enabledModules)
+        )
+      : undefined
+
   return prisma.logConfiguration.create({
     data: {
       userId: data.userId,
@@ -139,6 +151,26 @@ export async function create(data: CreateLogConfigurationInput) {
       measurementSystem: data.measurementSystem,
       dateFormat: data.dateFormat,
       elevationUnit: data.elevationUnit,
+      ...(data.projectDetailFields !== undefined
+        ? {
+            projectDetailFields: serializeProjectDetailFieldsEnabled({
+              enabled: parseProjectDetailFieldsEnabled(data.projectDetailFields),
+            }),
+          }
+        : {}),
+      ...(data.logDetailFields !== undefined
+        ? {
+            logDetailFields: serializeLogDetailFieldsEnabled({
+              enabled: parseLogDetailFieldsEnabled(data.logDetailFields),
+            }),
+          }
+        : {}),
+      ...(enabledModules !== undefined
+        ? { enabledModules: enabledModules as Prisma.InputJsonValue }
+        : {}),
+      ...(moduleSettings !== undefined
+        ? { moduleSettings: moduleSettings as Prisma.InputJsonValue }
+        : {}),
     },
   })
 }

@@ -2,6 +2,10 @@ import { ConflictError } from "../../../shared/errors/ConflictError"
 import { NotFoundError } from "../../../shared/errors/NotFoundError"
 import { ValidationError } from "../../../shared/errors/ValidationError"
 import * as clientRepo from "../client/client.repository"
+import {
+  assertCoordinatesForRequirement,
+  resolveCoordinateRequirementForUser,
+} from "../log-configuration/log-configuration.coordinateRequirement"
 import * as logConfigRepo from "../log-configuration/log-configuration.repository"
 import * as historyRepo from "./project-status-history.repository"
 import { toDTO, toProjectStatus } from "./project.mapper"
@@ -61,6 +65,12 @@ export async function create(userId: number, input: Omit<repo.CreateProjectInput
 
   await assertClientForUser(userId, input.clientId)
 
+  const coordinateRequirement = await resolveCoordinateRequirementForUser(
+    userId,
+    input.logConfigId
+  )
+  assertCoordinatesForRequirement(coordinateRequirement, input.latitude, input.longitude)
+
   const project = await repo.create({
     ...input,
     userId,
@@ -93,6 +103,16 @@ export async function update(userId: number, id: number, input: repo.UpdateProje
   if (input.clientId !== undefined && input.clientId !== null) {
     await assertClientForUser(userId, input.clientId)
   }
+
+  const nextLogConfigId =
+    input.logConfigId !== undefined ? input.logConfigId : existing.logConfigId
+  const nextLatitude = input.latitude !== undefined ? input.latitude : existing.latitude
+  const nextLongitude = input.longitude !== undefined ? input.longitude : existing.longitude
+  const coordinateRequirement = await resolveCoordinateRequirementForUser(
+    userId,
+    nextLogConfigId
+  )
+  assertCoordinatesForRequirement(coordinateRequirement, nextLatitude, nextLongitude)
 
   const nextStatus =
     input.status !== undefined ? toProjectStatus(input.status) : undefined

@@ -50,7 +50,7 @@ export function createDefaultConfig(logType: LogReportTemplateLogType): Prisma.I
       name_text_align_type: "text_align_center",
       name_text_vertical_align: "middle",
     },
-    depth_per_page: 2,
+    depth_per_page: logType === "corelog" ? 1 : 2,
     text_config: { fontFamily: "sans-serif" },
     templatePageSizeId: "A4",
     template_page_size: "A4",

@@ -3,6 +3,8 @@ import {
   parseWorkflowSettings,
   type WorkflowSettings,
 } from "../../../shared/constants/configModuleSettings"
+import { applyLogReportFieldCodesToSteps } from "../../../shared/constants/logReportFieldCodes"
+import { getLogReportCatalog } from "../log-report-template/log-report-template.catalog.service"
 import { REMOVED_CONFIG_MODULE_SLUGS } from "../../../shared/constants/configModuleCatalog"
 import {
   getModuleWorkflowDefaults,
@@ -60,29 +62,52 @@ export async function ensureWorkflowTemplate(moduleSlug: string) {
   const existing = await workflowRepo.findTemplateByModuleSlug(moduleSlug)
   const defaults = templatePayloadFromDefaults(moduleSlug)
 
+  let record = existing
   if (!existing) {
-    return workflowRepo.upsertTemplate(moduleSlug, defaults)
+    record = await workflowRepo.upsertTemplate(moduleSlug, defaults)
+  } else {
+    const needsSteps = isEmptySteps(existing.steps) && !isEmptySteps(defaults.steps)
+    const needsCodes =
+      isEmptyClassificationCodes(existing.classificationCodes) &&
+      !isEmptyClassificationCodes(defaults.classificationCodes)
+
+    if (needsSteps || needsCodes) {
+      record = await workflowRepo.upsertTemplate(moduleSlug, {
+        ...defaults,
+        steps: needsSteps ? defaults.steps : existing.steps,
+        classificationCodes: needsCodes ? defaults.classificationCodes : existing.classificationCodes,
+      })
+    }
   }
 
-  const needsSteps = isEmptySteps(existing.steps) && !isEmptySteps(defaults.steps)
-  const needsCodes =
-    isEmptyClassificationCodes(existing.classificationCodes) &&
-    !isEmptyClassificationCodes(defaults.classificationCodes)
+  if (!record) {
+    throw new NotFoundError("Module workflow template not found")
+  }
 
-  if (needsSteps || needsCodes) {
-    return workflowRepo.upsertTemplate(moduleSlug, {
-      ...defaults,
-      steps: needsSteps ? defaults.steps : existing.steps,
-      classificationCodes: needsCodes ? defaults.classificationCodes : existing.classificationCodes,
+  const dto = await withFieldCodes(workflowRepo.toWorkflowDTO(record))
+  if (JSON.stringify(workflowRepo.toWorkflowDTO(record).steps) !== JSON.stringify(dto.steps)) {
+    record = await workflowRepo.upsertTemplate(moduleSlug, {
+      name: dto.name,
+      enabled: dto.enabled,
+      applyClassificationRules: dto.applyClassificationRules,
+      ignoreParentLegacySettings: dto.ignoreParentLegacySettings,
+      steps: dto.steps,
+      classificationCodes: dto.classificationCodes,
     })
   }
 
-  return existing
+  return record
+}
+
+async function withFieldCodes(workflow: WorkflowSettings): Promise<WorkflowSettings> {
+  const catalog = await getLogReportCatalog()
+  const patched = applyLogReportFieldCodesToSteps(workflow.steps, catalog.fieldCodes)
+  return patched.changed ? { ...workflow, steps: patched.steps } : workflow
 }
 
 export async function getWorkflowTemplate(moduleSlug: string) {
   const template = await ensureWorkflowTemplate(moduleSlug)
-  return workflowRepo.toWorkflowDTO(template)
+  return withFieldCodes(workflowRepo.toWorkflowDTO(template))
 }
 
 /** Returns the config-scoped workflow for a module. Creates a copy from the common template when missing. */
@@ -137,7 +162,17 @@ export async function getUserWorkflow(
   moduleSlug: string
 ) {
   const record = await ensureUserWorkflow(userId, logConfigurationId, moduleSlug)
-  return workflowRepo.toWorkflowDTO(record)
+  const dto = await withFieldCodes(workflowRepo.toWorkflowDTO(record))
+  if (JSON.stringify(workflowRepo.toWorkflowDTO(record).steps) !== JSON.stringify(dto.steps)) {
+    const { ownerUserId, logConfigurationId: configId } = await assertAccessibleLogConfiguration(
+      userId,
+      logConfigurationId
+    )
+    await workflowRepo.updateUserWorkflow(ownerUserId, configId, moduleSlug, {
+      steps: dto.steps,
+    })
+  }
+  return dto
 }
 
 export async function saveUserWorkflow(
@@ -150,7 +185,7 @@ export async function saveUserWorkflow(
     throw new NotFoundError("Module workflow not found")
   }
 
-  const parsed = parseWorkflowSettings(workflow)
+  const parsed = await withFieldCodes(parseWorkflowSettings(workflow))
   const { ownerUserId, logConfigurationId: configId } = await assertAccessibleLogConfiguration(
     userId,
     logConfigurationId
