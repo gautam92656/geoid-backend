@@ -2,6 +2,7 @@ import Joi from "joi"
 import {
   USER_NAME_MAX_LENGTH,
   USER_EMAIL_MAX_LENGTH,
+  USER_COMPANY_NAME_MAX_LENGTH,
   USER_COMPANY_LOGO_URL_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
   OTP_CODE_LENGTH,
@@ -119,10 +120,13 @@ export const changePasswordSchema = Joi.object({
 })
 
 export const updateProfileSchema = Joi.object({
+  firstName: Joi.string().trim().min(1).max(USER_NAME_MAX_LENGTH).optional(),
+  lastName: Joi.string().trim().min(1).max(USER_NAME_MAX_LENGTH).optional(),
+  email: Joi.string().trim().lowercase().email().max(USER_EMAIL_MAX_LENGTH).optional(),
   companyLogoUrl: Joi.string()
     .trim()
     .max(USER_COMPANY_LOGO_URL_MAX_LENGTH)
     .allow("", null)
     .optional(),
-  companyName: Joi.string().trim().max(USER_NAME_MAX_LENGTH).allow("", null).optional(),
+  companyName: Joi.string().trim().max(USER_COMPANY_NAME_MAX_LENGTH).allow("", null).optional(),
 }).min(1)
