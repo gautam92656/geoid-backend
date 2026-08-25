@@ -161,6 +161,19 @@ export async function findByProjectNoForUser(
   return projects.find((project) => project.projectNo.trim().toLowerCase() === normalized) ?? null
 }
 
+/** Includes archived/deleted rows — used when avoiding @@unique([userId, projectNo]) collisions. */
+export async function findAnyByProjectNoForUser(userId: number, projectNo: string) {
+  const normalized = projectNo.trim().toLowerCase()
+  if (!normalized) return null
+
+  const projects = await prisma.project.findMany({
+    where: { userId },
+    select: { id: true, projectNo: true },
+  })
+
+  return projects.find((project) => project.projectNo.trim().toLowerCase() === normalized) ?? null
+}
+
 export async function create(data: CreateProjectInput) {
   return prisma.project.create({
     data: {

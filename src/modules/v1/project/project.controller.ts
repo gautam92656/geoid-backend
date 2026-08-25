@@ -115,6 +115,23 @@ export async function create(req: Request, res: Response, next: NextFunction): P
   successResponse(res, data, API_MESSAGES.PROJECT_ADDED, HTTP_STATUS.CREATED)
 }
 
+export async function copy(req: Request, res: Response, next: NextFunction): Promise<void> {
+  const userId = getUserId(req)
+  if (!userId) {
+    next(new ValidationError("Unauthorized"))
+    return
+  }
+
+  const id = parseId(req)
+  if (!id) {
+    next(new ValidationError("Invalid ID"))
+    return
+  }
+
+  const data = await projectService.copy(userId, id)
+  successResponse(res, data, API_MESSAGES.PROJECT_COPIED, HTTP_STATUS.CREATED)
+}
+
 export async function update(req: Request, res: Response, next: NextFunction): Promise<void> {
   const userId = getUserId(req)
   if (!userId) {

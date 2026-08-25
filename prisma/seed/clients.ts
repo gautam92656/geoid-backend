@@ -32,7 +32,7 @@ const CLIENTS = [
   },
   {
     id: 4,
-    companyName: "GeoID Engineering",
+    companyName: "GeoLog Engineering",
     companyContact: "Michael Torres",
     email: "michael@geoid.com.au",
     phone: "+61 445 678 901",

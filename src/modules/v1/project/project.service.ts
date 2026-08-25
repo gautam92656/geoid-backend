@@ -7,9 +7,35 @@ import {
   resolveCoordinateRequirementForUser,
 } from "../log-configuration/log-configuration.coordinateRequirement"
 import * as logConfigRepo from "../log-configuration/log-configuration.repository"
+import * as copyRepo from "./project-copy.repository"
 import * as historyRepo from "./project-status-history.repository"
 import { toDTO, toProjectStatus } from "./project.mapper"
 import * as repo from "./project.repository"
+
+const COPY_PROJECT_NO_SUFFIX = " - copy"
+const PROJECT_NO_MAX_LENGTH = 50
+
+function buildCopyProjectNo(projectNo: string, index?: number): string {
+  const suffix = index == null || index <= 1 ? COPY_PROJECT_NO_SUFFIX : ` - copy ${index}`
+  const maxBaseLength = PROJECT_NO_MAX_LENGTH - suffix.length
+  const base = projectNo.trim().slice(0, Math.max(0, maxBaseLength))
+  return `${base}${suffix}`
+}
+
+async function resolveUniqueCopyProjectNo(
+  userId: number,
+  sourceProjectNo: string
+): Promise<string> {
+  let index = 1
+  while (index < 1000) {
+    const candidate = buildCopyProjectNo(sourceProjectNo, index)
+    const duplicate = await repo.findAnyByProjectNoForUser(userId, candidate)
+    if (!duplicate) return candidate
+    index += 1
+  }
+
+  throw new ConflictError("Unable to generate a unique project number for the copy.")
+}
 
 export { STATUS_LABELS, toDTO, toProjectStatus } from "./project.mapper"
 
@@ -129,6 +155,15 @@ export async function update(userId: number, id: number, input: repo.UpdateProje
   }
 
   return toDTO(updated)
+}
+
+export async function copy(userId: number, id: number) {
+  const source = await copyRepo.findSourceForCopy(userId, id)
+  if (!source) throw new NotFoundError("Project not found")
+
+  const projectNo = await resolveUniqueCopyProjectNo(userId, source.projectNo)
+  const created = await copyRepo.deepCopyProject(source, userId, projectNo)
+  return toDTO(created)
 }
 
 export async function archive(userId: number, id: number) {

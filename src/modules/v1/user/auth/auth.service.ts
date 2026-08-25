@@ -229,6 +229,9 @@ export async function changePassword(userId: number, input: ChangePasswordInput,
 }
 
 export type UpdateProfileInput = {
+  firstName?: string
+  lastName?: string
+  email?: string
   companyLogoUrl?: string | null
   companyName?: string | null
 }
@@ -248,13 +251,27 @@ export async function updateProfile(
     return trimmed || null
   }
 
+  if (input.email && input.email.toLowerCase() !== user.email.toLowerCase()) {
+    const duplicate = await userRepository.findByEmail(input.email)
+    if (duplicate && duplicate.id !== userId) {
+      throw new ValidationError(t(lang, "profile.email_in_use"))
+    }
+  }
+
+  const nextCompanyName =
+    input.companyName !== undefined ? normalize(input.companyName) ?? null : user.companyName
+  if (user.role === "user" && !nextCompanyName) {
+    throw new ValidationError("Company name is required.")
+  }
+
   const updated = await userRepository.update(userId, {
+    ...(input.firstName !== undefined ? { firstName: input.firstName.trim() } : {}),
+    ...(input.lastName !== undefined ? { lastName: input.lastName.trim() } : {}),
+    ...(input.email !== undefined ? { email: input.email.trim().toLowerCase() } : {}),
     ...(input.companyLogoUrl !== undefined
       ? { companyLogoUrl: normalize(input.companyLogoUrl) ?? null }
       : {}),
-    ...(input.companyName !== undefined
-      ? { companyName: normalize(input.companyName) ?? null }
-      : {}),
+    ...(input.companyName !== undefined ? { companyName: nextCompanyName } : {}),
   })
 
   return {
