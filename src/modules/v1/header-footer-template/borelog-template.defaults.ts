@@ -139,7 +139,7 @@ export function createBorelogHeaderTemplateContent(): Prisma.InputJsonValue {
       imageFit: "contain",
       textAlign: "center",
       verticalAlign: "middle",
-      padding: 6,
+      padding: 2,
       ...NO_CELL_BORDER,
     }),
     cell({
